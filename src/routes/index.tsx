@@ -1448,6 +1448,11 @@ function Process({ t, language }: LocalizedSectionProps) {
             })}
           </ol>
         </div>
+        <p
+          className={`mt-5 md:mt-12 border-t border-rule pt-4 md:pt-7 text-[13.8px] md:text-[14.5px] leading-[1.8] md:leading-[1.95] text-ink/70 ${englishMobile}`}
+        >
+          {t.process.note}
+        </p>
       </div>
     </section>
   );
