@@ -1,6 +1,24 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { ArrowUpLeft, ArrowUpRight, Check, Mail, Menu, MessageCircle, X } from "lucide-react";
+import {
+  ArrowUpLeft,
+  ArrowUpRight,
+  BadgeCheck,
+  Building2,
+  Check,
+  Clock3,
+  Handshake,
+  Layers,
+  Mail,
+  Menu,
+  MessageCircle,
+  RefreshCcw,
+  SearchCheck,
+  ShieldCheck,
+  SlidersHorizontal,
+  Users,
+  X,
+} from "lucide-react";
 import logoImage from "@/assets/first-advance-logo-light-transparent.png";
 
 /* Premium Saudi architecture photography */
@@ -831,7 +849,7 @@ function Hero({ t, language }: LocalizedSectionProps) {
           </span>
         </h1>
 
-        <p className="mt-6 md:mt-10 text-[14px] md:text-[16px] leading-[1.85] md:leading-[2] text-paper/84 max-w-[34rem] md:max-w-2xl">
+        <p className="mt-5 md:mt-10 text-[14px] md:text-[16px] leading-[1.78] md:leading-[2] text-paper/84 max-w-[34rem] md:max-w-2xl max-md:border max-md:border-paper/15 max-md:bg-navy-deep/45 max-md:px-4 max-md:py-3.5 max-md:backdrop-blur-sm">
           {t.hero.body}
         </p>
 
@@ -890,17 +908,17 @@ function Intro({ t, language }: LocalizedSectionProps) {
   const englishMobile = mobileEnglishFlow(language);
 
   return (
-    <section className="bg-canvas border-b border-rule">
-      <div className="container-x py-10 md:py-28 grid md:grid-cols-12 gap-10 items-end">
+    <section className="bg-canvas border-b border-rule max-md:bg-navy-deep">
+      <div className="container-x py-8 md:py-28 grid md:grid-cols-12 gap-10 items-end">
         <div className="md:col-span-2 hidden md:flex items-center">
           <span className="block h-px w-full max-w-24 bg-accent-gold/55" />
         </div>
         <p
-          className={`md:col-span-10 font-serif text-[clamp(1.24rem,6.1vw,1.48rem)] md:text-[clamp(1.35rem,2.2vw,1.9rem)] leading-[1.62] md:leading-[1.55] text-navy-deep max-md:border max-md:border-rule max-md:bg-paper/70 max-md:px-5 max-md:py-6 ${englishMobile}`}
+          className={`md:col-span-10 font-serif text-[clamp(1.16rem,5.6vw,1.36rem)] md:text-[clamp(1.35rem,2.2vw,1.9rem)] leading-[1.58] md:leading-[1.55] text-navy-deep max-md:text-paper max-md:border max-md:border-paper/10 max-md:bg-paper/[0.04] max-md:px-5 max-md:py-5 ${englishMobile}`}
         >
           <span aria-hidden className="mb-5 block h-px w-16 bg-accent-gold md:hidden" />
           {t.intro.lead}
-          <span className="text-muted-ink">{t.intro.muted}</span>
+          <span className="text-muted-ink max-md:text-paper/70">{t.intro.muted}</span>
           {t.intro.tail}
         </p>
       </div>
@@ -913,24 +931,31 @@ function About({ t, language }: LocalizedSectionProps) {
   const englishMobile = mobileEnglishFlow(language);
 
   return (
-    <section id="about" className="relative bg-stone overflow-hidden">
-      <div className="container-x py-12 md:py-32 grid md:grid-cols-12 gap-8 md:gap-16">
+    <section id="about" className="relative bg-stone overflow-hidden max-md:bg-canvas">
+      <div className="container-x py-9 md:py-32 grid md:grid-cols-12 gap-6 md:gap-16">
         <div
-          className={`md:col-span-6 md:pt-10 relative z-10 max-md:border max-md:border-rule max-md:bg-paper/65 max-md:p-5 ${englishMobile}`}
+          className={`md:col-span-6 md:pt-10 relative z-10 max-md:border-0 max-md:bg-transparent max-md:p-0 ${englishMobile}`}
         >
-          <SectionKicker label={t.about.kicker} />
-          <h2 className="mt-3.5 md:mt-5 text-[clamp(1.46rem,6.8vw,1.84rem)] md:text-[clamp(1.6rem,2.5vw,2.15rem)] leading-[1.32] md:leading-[1.35] font-semibold text-navy-deep">
-            {t.about.title}
-          </h2>
-          <div className="mt-5 md:mt-8 space-y-3.5 md:space-y-5 text-[14.5px] md:text-[15.5px] leading-[1.85] md:leading-[2] text-ink/80 max-w-lg">
+          <div className="max-md:bg-stone max-md:border max-md:border-rule max-md:px-4 max-md:py-4">
+            <SectionKicker label={t.about.kicker} />
+            <h2 className="mt-3.5 md:mt-5 text-[clamp(1.36rem,6.2vw,1.68rem)] md:text-[clamp(1.6rem,2.5vw,2.15rem)] leading-[1.28] md:leading-[1.35] font-semibold text-navy-deep">
+              {t.about.title}
+            </h2>
+          </div>
+          <div className="mt-3 md:mt-8 space-y-3 md:space-y-5 text-[14px] md:text-[15.5px] leading-[1.76] md:leading-[2] text-ink/80 max-w-lg">
             {t.about.paragraphs.map((paragraph) => (
-              <p key={paragraph}>{paragraph}</p>
+              <p
+                key={paragraph}
+                className="max-md:bg-paper max-md:border max-md:border-rule max-md:px-4 max-md:py-3.5"
+              >
+                {paragraph}
+              </p>
             ))}
           </div>
         </div>
 
         <div className="md:col-span-6 relative">
-          <div className="relative h-[315px] sm:h-[420px] md:h-[720px] overflow-hidden">
+          <div className="relative h-[255px] sm:h-[320px] md:h-[720px] overflow-hidden">
             <img
               src={boardroom}
               alt={t.about.imageAlt}
@@ -950,7 +975,7 @@ function Principles({ t, language }: LocalizedSectionProps) {
 
   return (
     <section className="relative bg-navy-deep text-paper overflow-hidden">
-      <div className="relative container-x py-10 md:py-32">
+      <div className="relative container-x py-8 md:py-32">
         <div className={`max-w-2xl ${englishMobile}`}>
           <SectionKicker label={t.principles.kicker} light />
           <h2 className="mt-3.5 text-[clamp(1.42rem,6.6vw,1.78rem)] md:text-[clamp(1.5rem,2.2vw,1.9rem)] leading-[1.34] md:leading-[1.4] font-semibold text-paper">
@@ -958,20 +983,24 @@ function Principles({ t, language }: LocalizedSectionProps) {
           </h2>
         </div>
 
-        <div className="mt-6 md:mt-16 grid md:grid-cols-2 gap-px bg-paper/10 border border-paper/10">
-          <div className={`bg-navy-deep p-6 md:p-12 relative overflow-hidden ${englishMobile}`}>
+        <div className="mt-5 md:mt-16 grid md:grid-cols-2 gap-px bg-paper/10 border border-paper/10 max-md:gap-3 max-md:border-0 max-md:bg-transparent">
+          <div
+            className={`bg-navy-deep p-5 md:p-12 relative overflow-hidden max-md:border max-md:border-paper/10 max-md:bg-navy ${englishMobile}`}
+          >
             <div className="relative z-10 text-accent-gold text-[11px] mb-4 md:mb-6">
               {t.principles.visionLabel}
             </div>
-            <p className="relative z-10 text-[clamp(1rem,4.8vw,1.12rem)] md:text-[clamp(1.05rem,1.4vw,1.25rem)] leading-[1.76] md:leading-[1.85] text-paper max-w-md">
+            <p className="relative z-10 text-[0.96rem] md:text-[clamp(1.05rem,1.4vw,1.25rem)] leading-[1.7] md:leading-[1.85] text-paper max-w-md">
               {t.principles.vision}
             </p>
           </div>
-          <div className={`bg-navy-deep p-6 md:p-12 relative overflow-hidden ${englishMobile}`}>
+          <div
+            className={`bg-navy-deep p-5 md:p-12 relative overflow-hidden max-md:border max-md:border-paper/10 max-md:bg-navy ${englishMobile}`}
+          >
             <div className="relative z-10 text-accent-gold text-[11px] mb-4 md:mb-6">
               {t.principles.missionLabel}
             </div>
-            <p className="relative z-10 text-[clamp(1rem,4.8vw,1.12rem)] md:text-[clamp(1.05rem,1.4vw,1.25rem)] leading-[1.76] md:leading-[1.85] text-paper max-w-md">
+            <p className="relative z-10 text-[0.96rem] md:text-[clamp(1.05rem,1.4vw,1.25rem)] leading-[1.7] md:leading-[1.85] text-paper max-w-md">
               {t.principles.mission}
             </p>
           </div>
@@ -1001,37 +1030,39 @@ function ServicesShowcase({ t, language }: LocalizedSectionProps) {
   }));
 
   return (
-    <section id="services" className="bg-canvas border-t border-rule">
-      <div className="container-x pt-10 md:pt-32 pb-6 md:pb-10">
+    <section id="services" className="bg-canvas border-t border-rule max-md:bg-stone">
+      <div className="container-x pt-8 md:pt-32 pb-4 md:pb-10">
         <div className="grid md:grid-cols-12 gap-5 md:gap-10 items-end">
           <div className={`md:col-span-7 ${englishMobile}`}>
             <SectionKicker label={t.services.kicker} />
-            <h2 className="mt-3.5 text-[clamp(1.46rem,6.8vw,1.84rem)] md:text-[clamp(1.6rem,2.5vw,2.15rem)] leading-[1.32] md:leading-[1.35] font-semibold text-navy-deep">
+            <h2 className="mt-3.5 text-[clamp(1.38rem,6.3vw,1.68rem)] md:text-[clamp(1.6rem,2.5vw,2.15rem)] leading-[1.28] md:leading-[1.35] font-semibold text-navy-deep">
               {t.services.title}
             </h2>
           </div>
           <p
-            className={`md:col-span-4 md:col-start-9 text-[14px] md:text-[14.5px] leading-[1.8] md:leading-[1.95] text-ink/70 max-md:border-t max-md:border-rule max-md:pt-4 ${englishMobile}`}
+            className={`md:col-span-4 md:col-start-9 text-[14px] md:text-[14.5px] leading-[1.8] md:leading-[1.95] text-ink/70 max-md:hidden max-md:border-t max-md:border-rule max-md:pt-4 ${englishMobile}`}
           >
             {t.services.intro}
           </p>
         </div>
       </div>
 
-      <div className="container-x pb-12 md:pb-28 space-y-4 md:space-y-3">
+      <div className="container-x pb-9 md:pb-28 space-y-3 md:space-y-3">
         {services.map((s) => (
           <article
             key={s.n}
             id={`service-${s.n}`}
-            className={`group relative grid md:grid-cols-12 gap-0 bg-paper border border-rule overflow-hidden ${englishMobile}`}
+            className={`group relative grid md:grid-cols-12 gap-0 bg-paper border border-rule overflow-hidden max-md:border-rule-strong ${englishMobile}`}
           >
-            <div className="md:col-span-1 flex md:flex-col items-center justify-between md:justify-start py-3.5 md:pt-8 md:pb-8 px-5 md:px-4 bg-navy-deep text-paper">
+            <div className="md:col-span-1 flex md:flex-col items-center justify-between md:justify-start py-3 md:pt-8 md:pb-8 px-4 md:px-4 bg-navy-deep text-paper max-md:order-2 max-md:min-h-[3rem]">
               <span className="text-[13px] text-accent-gold">{s.n}</span>
+              <span className="md:hidden h-px flex-1 mx-4 bg-paper/14" />
+              <span className="md:hidden text-[11px] text-paper/55">{t.services.kicker}</span>
               <span className="hidden md:block flex-1 w-px bg-paper/15 my-6" />
             </div>
-            <div className="md:col-span-5 p-6 md:p-12 md:pl-10 flex flex-col justify-between">
+            <div className="md:col-span-5 p-4 md:p-12 md:pl-10 flex flex-col justify-between max-md:order-3">
               <div>
-                <h3 className="text-[clamp(1.32rem,6vw,1.65rem)] md:text-[clamp(1.4rem,2vw,1.8rem)] font-semibold text-navy-deep leading-[1.28] md:leading-[1.3] mb-4 md:mb-5">
+                <h3 className="text-[1.16rem] md:text-[clamp(1.4rem,2vw,1.8rem)] font-semibold text-navy-deep leading-[1.28] md:leading-[1.3] mb-3 md:mb-5">
                   {s.title}
                 </h3>
                 {s.desc && (
@@ -1040,11 +1071,11 @@ function ServicesShowcase({ t, language }: LocalizedSectionProps) {
                   </p>
                 )}
               </div>
-              <ul className="mt-7 md:mt-10 grid grid-cols-1 gap-0 border-t border-rule">
+              <ul className="mt-4 md:mt-10 grid grid-cols-1 gap-0 border-t border-rule">
                 {s.items.map((it, j) => (
                   <li
                     key={it}
-                    className="flex items-baseline gap-3 md:gap-4 py-2.5 md:py-3 border-b border-rule text-[13.5px] md:text-[14px] text-navy-deep"
+                    className="flex items-baseline gap-3 md:gap-4 py-2 md:py-3 border-b border-rule text-[13px] md:text-[14px] leading-[1.55] text-navy-deep"
                   >
                     <span className="text-[11px] text-accent-gold w-8">0{j + 1}</span>
                     <span>{it}</span>
@@ -1052,7 +1083,7 @@ function ServicesShowcase({ t, language }: LocalizedSectionProps) {
                 ))}
               </ul>
             </div>
-            <div className="md:col-span-6 relative min-h-[245px] sm:min-h-[320px] md:min-h-[560px] overflow-hidden">
+            <div className="md:col-span-6 relative min-h-[182px] sm:min-h-[220px] md:min-h-[560px] overflow-hidden max-md:order-1">
               <img
                 src={s.img}
                 alt={s.alt}
@@ -1072,25 +1103,58 @@ function ServicesShowcase({ t, language }: LocalizedSectionProps) {
 function WhyUs({ t, language }: LocalizedSectionProps) {
   const englishMobile = mobileEnglishFlow(language);
   const items = t.why.items;
+  const featureIcons = [
+    Layers,
+    Building2,
+    Handshake,
+    Clock3,
+    ShieldCheck,
+    SlidersHorizontal,
+    Users,
+    BadgeCheck,
+    SearchCheck,
+    RefreshCcw,
+  ];
   return (
     <section id="why" className="bg-stone border-t border-rule">
-      <div className="container-x py-10 md:py-32 grid md:grid-cols-12 gap-6 md:gap-16">
+      <div className="container-x py-8 md:py-32 grid md:grid-cols-12 gap-4 md:gap-16">
         <div
-          className={`md:col-span-5 md:sticky md:top-24 self-start max-md:border max-md:border-rule max-md:bg-paper/70 max-md:p-5 ${englishMobile}`}
+          className={`md:col-span-5 md:sticky md:top-24 self-start max-md:border max-md:border-paper/10 max-md:bg-navy-deep max-md:p-5 ${englishMobile}`}
         >
-          <SectionKicker label={t.why.kicker} />
-          <h2 className="mt-3.5 md:mt-5 text-[clamp(1.46rem,6.8vw,1.86rem)] md:text-[clamp(1.7rem,2.6vw,2.2rem)] leading-[1.28] md:leading-[1.3] font-semibold text-navy-deep">
+          <div className="hidden md:block">
+            <SectionKicker label={t.why.kicker} />
+          </div>
+          <div className="md:hidden">
+            <SectionKicker label={t.why.kicker} light />
+          </div>
+          <h2 className="mt-3.5 md:mt-5 text-[clamp(1.38rem,6.3vw,1.68rem)] md:text-[clamp(1.7rem,2.6vw,2.2rem)] leading-[1.26] md:leading-[1.3] font-semibold text-navy-deep max-md:text-paper">
             {t.why.title}
             <span className="block text-accent-gold">{t.why.titleAccent}</span>
           </h2>
-          <div className="mt-5 md:mt-8 border-t border-rule-strong pt-4 md:pt-6 max-w-md">
-            <p className="font-serif text-[15px] md:text-[17px] leading-[1.76] md:leading-[1.85] text-ink/85 italic">
+          <div className="mt-4 md:mt-8 border-t border-rule-strong max-md:border-paper/10 pt-4 md:pt-6 max-w-md">
+            <p className="font-serif text-[14.5px] md:text-[17px] leading-[1.64] md:leading-[1.85] text-ink/85 max-md:text-paper/80 italic">
               {t.why.quote}
             </p>
           </div>
         </div>
+        <ol className={`md:hidden grid grid-cols-1 gap-2.5 ${englishMobile}`}>
+          {items.map((item, i) => {
+            const Icon = featureIcons[i % featureIcons.length];
+            return (
+              <li
+                key={item}
+                className="grid grid-cols-[2.45rem_1fr] gap-3 border border-rule bg-paper px-3.5 py-3.5 text-navy-deep [direction:inherit]"
+              >
+                <span className="flex h-9 w-9 items-center justify-center bg-navy-deep text-accent-gold">
+                  <Icon className="h-4 w-4" strokeWidth={1.8} />
+                </span>
+                <p className="self-center text-[13.5px] font-medium leading-[1.55]">{item}</p>
+              </li>
+            );
+          })}
+        </ol>
         <ol
-          className={`md:col-span-7 border-t border-rule-strong max-md:border max-md:border-rule max-md:bg-canvas max-md:px-5 ${englishMobile}`}
+          className={`hidden md:block md:col-span-7 border-t border-rule-strong max-md:border max-md:border-rule max-md:bg-canvas max-md:px-5 ${englishMobile}`}
         >
           {items.map((t, i) => (
             <li
@@ -1116,16 +1180,29 @@ function CoreValues({ t, language }: LocalizedSectionProps) {
   const englishMobile = mobileEnglishFlow(language);
 
   return (
-    <section id="values" className="bg-canvas border-t border-rule">
-      <div className="container-x py-10 md:py-28">
-        <div className={`max-w-2xl mb-7 md:mb-12 ${englishMobile}`}>
+    <section id="values" className="bg-canvas border-t border-rule max-md:bg-paper">
+      <div className="container-x py-8 md:py-28">
+        <div className={`max-w-2xl mb-5 md:mb-12 ${englishMobile}`}>
           <SectionKicker label={t.values.kicker} />
-          <h2 className="mt-3.5 text-[clamp(1.46rem,6.8vw,1.84rem)] md:text-[clamp(1.6rem,2.5vw,2.15rem)] leading-[1.32] md:leading-[1.35] font-semibold text-navy-deep">
+          <h2 className="mt-3.5 text-[clamp(1.38rem,6.3vw,1.68rem)] md:text-[clamp(1.6rem,2.5vw,2.15rem)] leading-[1.28] md:leading-[1.35] font-semibold text-navy-deep">
             {t.values.title}
           </h2>
         </div>
+        <ul className={`md:hidden grid grid-cols-2 gap-2.5 ${englishMobile}`}>
+          {t.values.items.map((item) => (
+            <li
+              key={item}
+              className="min-h-[5.4rem] border border-rule bg-canvas px-3.5 py-3.5 flex flex-col justify-between"
+            >
+              <span aria-hidden className="h-px w-9 bg-accent-gold" />
+              <div className="text-[0.98rem] font-semibold leading-[1.3] text-navy-deep">
+                {item}
+              </div>
+            </li>
+          ))}
+        </ul>
         <ul
-          className={`grid sm:grid-cols-2 lg:grid-cols-3 gap-px bg-rule border border-rule ${englishMobile}`}
+          className={`hidden md:grid sm:grid-cols-2 lg:grid-cols-3 gap-px bg-rule border border-rule ${englishMobile}`}
         >
           {t.values.items.map((item) => (
             <li key={item} className="bg-paper px-5 py-5 md:px-8 md:py-7">
@@ -1151,10 +1228,10 @@ function Industries({ t, language }: LocalizedSectionProps) {
   return (
     <section
       id="audience"
-      className="bg-navy-deep text-paper py-10 md:py-32 border-t border-paper/10"
+      className="bg-navy-deep text-paper py-8 md:py-32 border-t border-paper/10"
     >
       <div className="container-x">
-        <div className="grid md:grid-cols-12 gap-5 md:gap-10 items-end mb-8 md:mb-14">
+        <div className="grid md:grid-cols-12 gap-5 md:gap-10 items-end mb-5 md:mb-14">
           <div className={`md:col-span-7 ${englishMobile}`}>
             <SectionKicker label={t.industries.kicker} light />
             <h2 className="mt-3.5 text-[clamp(1.46rem,6.8vw,1.84rem)] md:text-[clamp(1.6rem,2.5vw,2.15rem)] leading-[1.32] md:leading-[1.35] font-semibold text-paper">
@@ -1174,7 +1251,7 @@ function Industries({ t, language }: LocalizedSectionProps) {
             <a
               key={s.name}
               href="#contact"
-              className="group relative aspect-[4/3] min-h-[240px] sm:min-h-[260px] md:min-h-[300px] overflow-hidden border border-paper/10 bg-navy-deep focus-visible:outline-accent-gold"
+              className="group relative aspect-[4/3] min-h-[205px] sm:min-h-[230px] md:min-h-[300px] overflow-hidden border border-paper/10 bg-navy-deep focus-visible:outline-accent-gold"
               aria-label={s.name}
             >
               <img
@@ -1205,6 +1282,8 @@ function Industries({ t, language }: LocalizedSectionProps) {
 /* Process, subtle architectural background */
 function Process({ t, language }: LocalizedSectionProps) {
   const englishMobile = mobileEnglishFlow(language);
+  const mobileProcessGrid = "grid-cols-[2.8rem_1fr]";
+  const mobileProcessRail = language === "en" ? "left-[1.38rem]" : "right-[1.38rem]";
   const mobileTimeline =
     language === "en"
       ? "max-md:border-l max-md:border-r-0 max-md:pl-5 max-md:pr-0"
@@ -1224,22 +1303,47 @@ function Process({ t, language }: LocalizedSectionProps) {
   const steps = t.process.steps;
   return (
     <section id="process" className="relative bg-canvas border-t border-rule overflow-hidden">
-      <div className="relative container-x py-10 md:py-32">
+      <div className="relative container-x py-8 md:py-32">
         <div
-          className={`grid md:grid-cols-12 gap-5 md:gap-10 items-end mb-6 md:mb-16 max-md:border max-md:border-rule max-md:bg-paper/70 max-md:p-5 ${englishMobile}`}
+          className={`grid md:grid-cols-12 gap-4 md:gap-10 items-end mb-5 md:mb-16 max-md:border max-md:border-rule max-md:bg-stone max-md:p-4 ${englishMobile}`}
         >
           <div className="md:col-span-6">
             <SectionKicker label={t.process.kicker} />
-            <h2 className="mt-3.5 text-[clamp(1.46rem,6.8vw,1.84rem)] md:text-[clamp(1.6rem,2.5vw,2.15rem)] leading-[1.32] md:leading-[1.35] font-semibold text-navy-deep">
+            <h2 className="mt-3.5 text-[clamp(1.38rem,6.3vw,1.68rem)] md:text-[clamp(1.6rem,2.5vw,2.15rem)] leading-[1.28] md:leading-[1.35] font-semibold text-navy-deep">
               {t.process.title}
             </h2>
           </div>
-          <p className="md:col-span-4 md:col-start-9 text-[14px] md:text-[14.5px] leading-[1.8] md:leading-[1.95] text-ink/70 max-md:border-t max-md:border-rule max-md:pt-4">
+          <p className="md:col-span-4 md:col-start-9 text-[13.8px] md:text-[14.5px] leading-[1.7] md:leading-[1.95] text-ink/70 max-md:border-t max-md:border-rule max-md:pt-3.5">
             {t.process.intro}
           </p>
         </div>
 
-        <div className="relative">
+        <div
+          className={`relative md:hidden ${englishMobile}`}
+          dir={language === "en" ? "ltr" : "rtl"}
+        >
+          <div
+            aria-hidden
+            className={`absolute ${mobileProcessRail} top-3 bottom-3 w-px bg-rule-strong`}
+          />
+          <ol className="relative space-y-3">
+            {steps.map((s) => (
+              <li key={s.n} className={`relative grid ${mobileProcessGrid} gap-3`}>
+                <div className="relative z-10 flex h-11 w-11 items-center justify-center bg-navy-deep text-[13px] font-semibold text-accent-gold">
+                  {s.n}
+                </div>
+                <div className="border border-rule bg-paper px-4 py-3.5">
+                  <h3 className="text-[0.98rem] font-semibold leading-[1.45] text-navy-deep">
+                    {s.t}
+                  </h3>
+                  {s.d && <p className="mt-2 text-[13px] leading-[1.7] text-ink/70">{s.d}</p>}
+                </div>
+              </li>
+            ))}
+          </ol>
+        </div>
+
+        <div className="relative hidden md:block">
           <div aria-hidden className={centerRail} />
           <ol className={`space-y-0 max-md:border-rule ${mobileTimeline} ${englishMobile}`}>
             {steps.map((s, i) => {
@@ -1301,11 +1405,11 @@ function Packages({ t, language }: LocalizedSectionProps) {
       id="packages"
       className="relative bg-navy-deep text-paper border-t border-paper/10 overflow-hidden"
     >
-      <div className="relative container-x py-10 md:py-32">
-        <div className="grid md:grid-cols-12 gap-5 md:gap-10 items-end mb-7 md:mb-14">
+      <div className="relative container-x py-8 md:py-32">
+        <div className="grid md:grid-cols-12 gap-5 md:gap-10 items-end mb-5 md:mb-14">
           <div className={`md:col-span-6 ${englishMobile}`}>
             <SectionKicker label={t.packages.kicker} light />
-            <h2 className="mt-3.5 text-[clamp(1.46rem,6.8vw,1.84rem)] md:text-[clamp(1.6rem,2.5vw,2.15rem)] leading-[1.32] md:leading-[1.35] font-semibold text-paper">
+            <h2 className="mt-3.5 text-[clamp(1.38rem,6.3vw,1.68rem)] md:text-[clamp(1.6rem,2.5vw,2.15rem)] leading-[1.28] md:leading-[1.35] font-semibold text-paper">
               {t.packages.title}
             </h2>
           </div>
@@ -1327,7 +1431,7 @@ function Packages({ t, language }: LocalizedSectionProps) {
           {packs.map((p) => (
             <div
               key={p.title}
-              className={`relative grid grid-cols-1 md:grid-cols-[1.1fr_1fr_1fr_1fr] gap-4 md:gap-8 py-5 md:py-10 max-md:overflow-hidden max-md:px-5 border-b border-paper/10 max-md:border max-md:border-paper/10 ${
+              className={`relative grid grid-cols-1 md:grid-cols-[1.1fr_1fr_1fr_1fr] gap-3 md:gap-8 py-4 md:py-10 max-md:overflow-hidden max-md:px-4 border-b border-paper/10 max-md:border max-md:border-paper/10 ${
                 "featured" in p && p.featured ? "bg-paper/[0.04]" : ""
               } ${englishMobile}`}
             >
@@ -1336,7 +1440,7 @@ function Packages({ t, language }: LocalizedSectionProps) {
                   {"featured" in p && p.featured && t.packages.featured && (
                     <div className="text-[10px] text-accent-gold mb-1">{t.packages.featured}</div>
                   )}
-                  <div className="text-[1.04rem] md:text-xl font-semibold text-paper">
+                  <div className="text-[1.02rem] md:text-xl font-semibold text-paper">
                     {p.title}
                   </div>
                 </div>
@@ -1347,7 +1451,7 @@ function Packages({ t, language }: LocalizedSectionProps) {
                 )}
               </div>
               <div className="relative z-10 md:pt-1">
-                <div className="md:hidden text-[10px] text-accent-gold/80 mb-1.5">
+                <div className="md:hidden text-[10px] text-accent-gold/80 mb-1">
                   {t.packages.headers.audience}
                 </div>
                 <div className="text-[13.5px] md:text-[14px] text-paper/90 leading-[1.75] md:leading-[1.8]">
@@ -1355,14 +1459,14 @@ function Packages({ t, language }: LocalizedSectionProps) {
                 </div>
               </div>
               <div className="relative z-10 md:pt-1">
-                <div className="md:hidden text-[10px] text-accent-gold/80 mb-1.5">
+                <div className="md:hidden text-[10px] text-accent-gold/80 mb-1">
                   {t.packages.headers.content}
                 </div>
-                <ul className="space-y-1.5 md:space-y-2">
+                <ul className="space-y-1.5 md:space-y-2 max-md:border-t max-md:border-paper/10 max-md:pt-2.5">
                   {p.includes.map((it) => (
                     <li
                       key={it}
-                      className="flex items-baseline gap-2 text-[13px] md:text-[13.5px] text-paper/80"
+                      className="flex items-baseline gap-2 text-[13px] md:text-[13.5px] leading-[1.55] text-paper/80"
                     >
                       <Check className="w-3.5 h-3.5 text-accent-gold shrink-0" strokeWidth={2.5} />
                       <span>{it}</span>
@@ -1381,7 +1485,7 @@ function Packages({ t, language }: LocalizedSectionProps) {
                 )}
                 <a
                   href="#contact"
-                  className="inline-flex min-h-11 items-center justify-center gap-2 text-[13px] font-semibold text-paper border-b border-paper hover:text-accent-gold hover:border-accent-gold transition self-start max-md:w-full max-md:border max-md:border-paper/25 max-md:px-4 max-md:py-3"
+                  className="inline-flex min-h-11 items-center justify-center gap-2 text-[13px] font-semibold text-paper border-b border-paper hover:text-accent-gold hover:border-accent-gold transition self-start max-md:w-full max-md:border max-md:border-paper/25 max-md:px-4 max-md:py-2.5"
                 >
                   {t.packages.request} <ActionArrow language={language} className="w-3.5 h-3.5" />
                 </a>
@@ -1391,7 +1495,7 @@ function Packages({ t, language }: LocalizedSectionProps) {
         </div>
 
         <p
-          className={`mt-6 md:mt-8 text-[12px] md:text-[12.5px] text-paper/50 max-w-2xl leading-[1.85] md:leading-[1.9] ${englishMobile}`}
+          className={`mt-5 md:mt-8 text-[12px] md:text-[12.5px] text-paper/55 max-w-2xl leading-[1.75] md:leading-[1.9] max-md:border max-md:border-paper/10 max-md:bg-paper/[0.04] max-md:px-4 max-md:py-3 ${englishMobile}`}
         >
           {t.packages.note}
         </p>
@@ -1407,7 +1511,7 @@ function Contact({ t, language }: LocalizedSectionProps) {
   return (
     <section id="contact" className="relative bg-navy-deep text-paper overflow-hidden">
       <div className="grid lg:grid-cols-12 min-h-[80vh]">
-        <div className="relative lg:col-span-6 min-h-[300px] sm:min-h-[380px] lg:min-h-0">
+        <div className="relative lg:col-span-6 min-h-[300px] sm:min-h-[380px] lg:min-h-0 max-md:min-h-[245px] sm:max-md:min-h-[300px]">
           <img
             src={ctaSunset}
             alt={t.contact.imageAlt}
@@ -1416,18 +1520,18 @@ function Contact({ t, language }: LocalizedSectionProps) {
           />
         </div>
         <div
-          className={`lg:col-span-6 bg-navy px-5 md:px-14 py-12 lg:py-20 flex flex-col justify-center ${englishMobile}`}
+          className={`lg:col-span-6 bg-navy px-5 md:px-14 py-12 lg:py-20 flex flex-col justify-center max-md:py-9 ${englishMobile}`}
         >
           <SectionKicker label={t.contact.kicker} light />
-          <h2 className="mt-4 md:mt-5 text-[clamp(1.55rem,7.2vw,2.05rem)] md:text-[clamp(1.8rem,3vw,2.6rem)] font-semibold leading-[1.18] md:leading-[1.2]">
+          <h2 className="mt-3.5 md:mt-5 text-[clamp(1.42rem,6.7vw,1.82rem)] md:text-[clamp(1.8rem,3vw,2.6rem)] font-semibold leading-[1.18] md:leading-[1.2]">
             {t.contact.title}
             <span className="block text-accent-gold">{t.contact.titleAccent}</span>
           </h2>
-          <p className="mt-5 md:mt-6 max-w-md text-[14px] md:text-[15px] leading-[1.85] md:leading-[2] text-paper/75">
+          <p className="mt-4 md:mt-6 max-w-md text-[13.8px] md:text-[15px] leading-[1.72] md:leading-[2] text-paper/75 max-md:border max-md:border-paper/10 max-md:bg-paper/[0.04] max-md:px-4 max-md:py-3">
             {t.contact.intro}
           </p>
 
-          <div className="mt-7 md:mt-10 divide-y divide-paper/10 border-y border-paper/10">
+          <div className="mt-5 md:mt-10 divide-y divide-paper/10 border-y border-paper/10">
             <ContactRow
               icon={<MessageCircle className="w-4 h-4" />}
               label={t.contact.labels.whatsapp}
@@ -1444,7 +1548,7 @@ function Contact({ t, language }: LocalizedSectionProps) {
             />
           </div>
 
-          <div className="mt-8 md:mt-10 flex flex-col sm:flex-row gap-3">
+          <div className="mt-6 md:mt-10 flex flex-col sm:flex-row gap-3">
             <a
               href={WHATSAPP_LINK}
               target="_blank"
@@ -1515,9 +1619,9 @@ function Footer({ t, language }: LocalizedSectionProps) {
 
   return (
     <footer
-      className={`bg-[oklch(0.15_0.025_168)] text-paper/75 pt-12 md:pt-20 pb-8 md:pb-10 border-t border-paper/10 ${englishMobile}`}
+      className={`bg-[oklch(0.15_0.025_168)] text-paper/75 pt-9 md:pt-20 pb-7 md:pb-10 border-t border-paper/10 ${englishMobile}`}
     >
-      <div className="container-x grid md:grid-cols-12 gap-8 md:gap-10 pb-10 md:pb-14 border-b border-paper/10">
+      <div className="container-x grid md:grid-cols-12 gap-6 md:gap-10 pb-7 md:pb-14 border-b border-paper/10">
         <div className="md:col-span-4">
           <div className="flex items-center">
             <img
@@ -1526,11 +1630,11 @@ function Footer({ t, language }: LocalizedSectionProps) {
               className="w-[142px] md:w-[205px] h-auto object-contain drop-shadow-[0_10px_24px_rgba(0,0,0,0.32)]"
             />
           </div>
-          <p className="mt-5 md:mt-6 text-[13px] md:text-[13.5px] leading-[1.85] md:leading-[1.95] text-paper/55 max-w-sm">
+          <p className="mt-4 md:mt-6 text-[13px] md:text-[13.5px] leading-[1.72] md:leading-[1.95] text-paper/60 max-w-sm">
             {t.footer.desc}
           </p>
         </div>
-        <div className="md:col-span-2">
+        <div className="md:col-span-2 max-md:border-t max-md:border-paper/10 max-md:pt-5">
           <div className="text-[10px] text-accent-gold mb-4">{t.footer.linksTitle}</div>
           <ul className="space-y-1 md:space-y-2.5 text-[13.5px]">
             <li>
@@ -1575,7 +1679,7 @@ function Footer({ t, language }: LocalizedSectionProps) {
             </li>
           </ul>
         </div>
-        <div className="md:col-span-3">
+        <div className="md:col-span-3 max-md:border-t max-md:border-paper/10 max-md:pt-5">
           <div className="text-[10px] text-accent-gold mb-4">{t.footer.serviceTitle}</div>
           <ul className="space-y-1 md:space-y-2.5 text-[13.5px]">
             <li>
@@ -1612,7 +1716,7 @@ function Footer({ t, language }: LocalizedSectionProps) {
             </li>
           </ul>
         </div>
-        <div className="md:col-span-3">
+        <div className="md:col-span-3 max-md:border-t max-md:border-paper/10 max-md:pt-5">
           <div className="text-[10px] text-accent-gold mb-4">{t.footer.contactTitle}</div>
           <ul className="space-y-1 md:space-y-2.5 text-[13.5px]">
             <li className="flex max-lg:min-h-11 gap-2 items-center">
@@ -1626,7 +1730,7 @@ function Footer({ t, language }: LocalizedSectionProps) {
           </ul>
         </div>
       </div>
-      <div className="container-x mt-7 md:mt-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-3 md:gap-4 text-[12px] text-paper/50">
+      <div className="container-x mt-5 md:mt-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-2 md:gap-4 text-[12px] leading-[1.55] text-paper/50">
         <div>
           {new Date().getFullYear()} First Advance. {t.footer.copyright}
         </div>
