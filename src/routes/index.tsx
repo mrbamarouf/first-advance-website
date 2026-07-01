@@ -1094,6 +1094,7 @@ function WhyUs({ t, language }: LocalizedSectionProps) {
 /* Industries, Saudi architecture grid */
 function Industries({ t, language }: LocalizedSectionProps) {
   const englishMobile = mobileEnglishFlow(language);
+  const cardTextAlign = language === "en" ? "items-start text-left" : "items-end text-right";
   const sectorImages = [
     sectorBusiness,
     sectorRealEstate,
@@ -1127,32 +1128,32 @@ function Industries({ t, language }: LocalizedSectionProps) {
         </div>
       </div>
       <div className="relative">
-        <div className="container-x mb-6 md:mb-10">
-          <ul
-            className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 border-t border-paper/10 ${englishMobile}`}
-          >
-            {sectors.map((s) => (
-              <li
-                key={s.name}
-                className="border-b border-paper/10 py-3.5 text-[14px] md:text-[15px] font-semibold leading-tight text-paper"
-              >
-                {s.name}
-              </li>
-            ))}
-          </ul>
-        </div>
         <div className="container-x grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-5">
           {sectors.map((s) => (
-            <div
+            <a
               key={s.name}
-              className="group relative aspect-[4/3] min-h-[220px] sm:min-h-[240px] md:min-h-[260px] overflow-hidden border border-paper/10"
+              href="#contact"
+              className="group relative aspect-[4/3] min-h-[240px] sm:min-h-[260px] md:min-h-[300px] overflow-hidden border border-paper/10 bg-navy-deep focus-visible:outline-accent-gold"
+              aria-label={s.name}
             >
               <img
                 src={s.img}
                 alt={s.tag}
-                className="absolute inset-0 w-full h-full object-cover object-[50%_center] transition-transform duration-[1400ms] group-hover:scale-[1.05]"
+                className="absolute inset-0 w-full h-full object-cover object-[50%_center] transition-transform duration-[1400ms] ease-out group-hover:scale-[1.06]"
               />
-            </div>
+              <div className="absolute inset-0 bg-gradient-to-t from-navy-deep/92 via-navy-deep/36 to-transparent transition-opacity duration-500 group-hover:opacity-95" />
+              <div className="absolute inset-x-0 bottom-0 p-5 md:p-7">
+                <div className={`flex flex-col ${cardTextAlign}`}>
+                  <span aria-hidden className="mb-3 h-px w-10 bg-accent-gold" />
+                  <h3 className="text-[1.08rem] md:text-[1.25rem] font-semibold leading-tight text-paper">
+                    {s.name}
+                  </h3>
+                  <p className="mt-2 max-w-[17rem] text-[12px] md:text-[12.5px] leading-[1.6] text-paper/72">
+                    {s.tag}
+                  </p>
+                </div>
+              </div>
+            </a>
           ))}
         </div>
       </div>
