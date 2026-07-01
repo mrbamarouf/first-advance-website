@@ -1259,6 +1259,7 @@ function Process({ t, language }: LocalizedSectionProps) {
 function Packages({ t, language }: LocalizedSectionProps) {
   const englishMobile = mobileEnglishFlow(language);
   const packs = t.packages.packs;
+  const isEnglish = language === "en";
 
   return (
     <section
@@ -1296,19 +1297,43 @@ function Packages({ t, language }: LocalizedSectionProps) {
               } ${englishMobile}`}
             >
               <div className="relative z-10 md:pr-6">
-                <div className="relative flex items-baseline gap-4 max-md:min-h-[3.2rem] max-md:pl-16">
-                  <span className="font-serif text-[2.45rem] md:text-[3rem] leading-none text-accent-gold max-md:absolute max-md:left-0 max-md:top-[-0.35rem] max-md:text-[5.4rem] max-md:text-accent-gold/12">
-                    {p.roman}
-                  </span>
-                  <div className="relative z-10">
-                    {p.featured && (
-                      <div className="text-[10px] text-accent-gold mb-1">{t.packages.featured}</div>
-                    )}
-                    <div className="text-[1.04rem] md:text-xl font-semibold text-paper">
-                      {p.title}
+                {isEnglish ? (
+                  <div className="relative min-h-[3.85rem] pr-[6.6rem] md:min-h-[4.4rem] md:pr-28">
+                    <span
+                      aria-hidden="true"
+                      data-decorative-roman={p.roman}
+                      className="pointer-events-none absolute right-0 top-[-0.42rem] z-0 w-[5.7rem] text-right font-serif text-[4.65rem] leading-none text-accent-gold/12 md:top-[-0.55rem] md:w-24 md:text-[5rem] md:text-accent-gold/14"
+                    >
+                      {p.roman}
+                    </span>
+                    <div className="relative z-10 pt-1.5 md:pt-2">
+                      {p.featured && (
+                        <div className="text-[10px] text-accent-gold mb-1">
+                          {t.packages.featured}
+                        </div>
+                      )}
+                      <div className="text-[1.04rem] md:text-xl font-semibold text-paper">
+                        {p.title}
+                      </div>
                     </div>
                   </div>
-                </div>
+                ) : (
+                  <div className="relative flex items-baseline gap-4 max-md:min-h-[3.2rem] max-md:pl-16">
+                    <span className="font-serif text-[2.45rem] md:text-[3rem] leading-none text-accent-gold max-md:absolute max-md:left-0 max-md:top-[-0.35rem] max-md:text-[5.4rem] max-md:text-accent-gold/12">
+                      {p.roman}
+                    </span>
+                    <div className="relative z-10">
+                      {p.featured && (
+                        <div className="text-[10px] text-accent-gold mb-1">
+                          {t.packages.featured}
+                        </div>
+                      )}
+                      <div className="text-[1.04rem] md:text-xl font-semibold text-paper">
+                        {p.title}
+                      </div>
+                    </div>
+                  </div>
+                )}
                 <p className="mt-3 md:mt-4 text-[13px] md:text-[13.5px] leading-[1.8] md:leading-[1.85] text-paper/65">
                   {p.desc}
                 </p>
