@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   ArrowUpLeft,
   ArrowUpRight,
@@ -27,19 +27,34 @@ import sectorCommercial from "@/assets/sector-commercial.jpg";
 import sectorServices from "@/assets/sector-services.jpg";
 import sectorEntrepreneurs from "@/assets/sector-entrepreneurs.jpg";
 
+const PAGE_META = {
+  ar: {
+    title: "First Advance، حلول أعمال متكاملة",
+    description:
+      "First Advance، مؤسسة سعودية متخصصة في حلول الأعمال، الخدمات التشغيلية والخدمات العقارية.",
+    ogDescription: "حلول متكاملة في إدارة الأعمال، التشغيل، والخدمات العقارية.",
+  },
+  en: {
+    title: "First Advance, Integrated Business Solutions",
+    description:
+      "First Advance, a Saudi firm specialized in business solutions, operational services, and real estate services.",
+    ogDescription:
+      "Integrated solutions in business management, operations, and real estate services.",
+  },
+} as const;
+
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "First Advance، حلول أعمال متكاملة" },
+      { title: PAGE_META.ar.title },
       {
         name: "description",
-        content:
-          "First Advance، مؤسسة سعودية متخصصة في حلول الأعمال، الخدمات التشغيلية والخدمات العقارية.",
+        content: PAGE_META.ar.description,
       },
-      { property: "og:title", content: "First Advance، حلول أعمال متكاملة" },
+      { property: "og:title", content: PAGE_META.ar.title },
       {
         property: "og:description",
-        content: "حلول متكاملة في إدارة الأعمال، التشغيل، والخدمات العقارية.",
+        content: PAGE_META.ar.ogDescription,
       },
     ],
   }),
@@ -99,7 +114,7 @@ const COPY = {
       stats: [
         { n: "03", t: "ممارسات متكاملة" },
         { n: "06", t: "قطاعات مستهدفة" },
-        { n: "1:1", t: "مسؤولية موحدة" },
+        { n: "واحدة", t: "مسؤولية موحدة" },
       ],
       imageAlt: "قاعة اجتماعات تنفيذية بإطلالة على مدينة الرياض",
     },
@@ -120,7 +135,6 @@ const COPY = {
       cards: [
         {
           n: "01",
-          label: "Business Solutions",
           title: "حلول الأعمال",
           desc: "استشارات وتطوير وتخطيط لبناء أعمال أكثر كفاءة، مع دعم إداري متكامل لرفع الأداء المؤسسي.",
           items: [
@@ -130,11 +144,10 @@ const COPY = {
             "تحسين العمليات",
             "التخطيط الاستراتيجي",
           ],
-          alt: "برج مقر شركة سعودية، Corporate headquarters tower",
+          alt: "برج مقر شركة سعودية",
         },
         {
           n: "02",
-          label: "Operational Services",
           title: "الخدمات التشغيلية",
           desc: "إدارة عمليات محكمة، تنسيق مشاريع، وتحسين مستمر للأداء والدعم التشغيلي اليومي.",
           items: [
@@ -144,11 +157,10 @@ const COPY = {
             "تطوير العمليات",
             "الدعم التشغيلي",
           ],
-          alt: "مركز عمليات، Operations control room",
+          alt: "مركز عمليات",
         },
         {
           n: "03",
-          label: "Real Estate Services",
           title: "الخدمات العقارية",
           desc: "إدارة عقارات وأصول باحترافية، مع تنسيق فرص الاستثمار العقاري وتقديم حلول متكاملة للمطورين والمالكين.",
           items: [
@@ -158,7 +170,7 @@ const COPY = {
             "تنسيق الاستثمار",
             "حلول عقارية متكاملة",
           ],
-          alt: "مشروع عقاري تجاري متعدد الاستخدامات، Commercial development",
+          alt: "مشروع عقاري تجاري متعدد الاستخدامات",
         },
       ],
     },
@@ -181,12 +193,12 @@ const COPY = {
       title: "القطاعات التي نخدمها.",
       intro: "نعمل مع مؤسسات في قطاعات متعددة، مع تكييف الحلول وفق طبيعة النشاط ومرحلة النمو.",
       sectors: [
-        { name: "قطاع الأعمال", tag: "Corporate Tower" },
-        { name: "القطاع العقاري", tag: "Commercial Development" },
-        { name: "قطاع الاستثمار", tag: "Financial District, KAFD" },
-        { name: "القطاع التجاري", tag: "Retail and Commercial" },
-        { name: "قطاع الخدمات", tag: "Infrastructure" },
-        { name: "رواد الأعمال والمنشآت الناشئة", tag: "Modern Office Campus" },
+        { name: "قطاع الأعمال", tag: "برج أعمال" },
+        { name: "القطاع العقاري", tag: "تطوير عقاري تجاري" },
+        { name: "قطاع الاستثمار", tag: "منطقة أعمال مالية" },
+        { name: "القطاع التجاري", tag: "منشأة تجارية" },
+        { name: "قطاع الخدمات", tag: "بنية تحتية" },
+        { name: "رواد الأعمال والمنشآت الناشئة", tag: "مجمع مكاتب حديث" },
       ],
     },
     process: {
@@ -233,7 +245,7 @@ const COPY = {
       note: "جميع الباقات مبنية على تعاقد استشاري مخصص. الأسعار تُحدَّد بعد جلسة تشخيصية مجانية مع فريق First Advance.",
       packs: [
         {
-          roman: "I",
+          roman: "١",
           title: "الباقة الأساسية",
           audience: "المنشآت الصغيرة والناشئة",
           desc: "حلول أساسية لدعم الأعمال وتحسين الأداء اليومي.",
@@ -241,7 +253,7 @@ const COPY = {
           duration: "٣ أشهر",
         },
         {
-          roman: "II",
+          roman: "٢",
           title: "الباقة المتقدمة",
           audience: "المؤسسات المتنامية",
           desc: "حلول تشغيلية وإدارية متكاملة للمؤسسات المتنامية.",
@@ -250,7 +262,7 @@ const COPY = {
           featured: true,
         },
         {
-          roman: "III",
+          roman: "٣",
           title: "الباقة الاحترافية",
           audience: "المؤسسات الكبرى والمشاريع الاستراتيجية",
           desc: "حلول شاملة وإدارة متقدمة للمؤسسات الكبرى والمشاريع الاستراتيجية.",
@@ -343,7 +355,7 @@ const COPY = {
       stats: [
         { n: "03", t: "Integrated Practices" },
         { n: "06", t: "Target Sectors" },
-        { n: "1:1", t: "Unified Responsibility" },
+        { n: "One", t: "Unified Responsibility" },
       ],
       imageAlt: "Executive boardroom overlooking Riyadh",
     },
@@ -366,7 +378,6 @@ const COPY = {
       cards: [
         {
           n: "01",
-          label: "Practice 01",
           title: "Business Solutions",
           desc: "Consulting, development, and planning to build more efficient businesses, with integrated administrative support that strengthens organizational performance.",
           items: [
@@ -380,7 +391,6 @@ const COPY = {
         },
         {
           n: "02",
-          label: "Practice 02",
           title: "Operational Services",
           desc: "Disciplined operations management, project coordination, continuous performance improvement, and daily operational support.",
           items: [
@@ -394,7 +404,6 @@ const COPY = {
         },
         {
           n: "03",
-          label: "Practice 03",
           title: "Real Estate Services",
           desc: "Professional property and asset management, coordination of real estate investment opportunities, and integrated solutions for developers and owners.",
           items: [
@@ -429,12 +438,12 @@ const COPY = {
       intro:
         "We work with organizations across multiple sectors, adapting solutions to each activity, business model, and stage of growth.",
       sectors: [
-        { name: "Corporate Sector", tag: "Corporate Tower" },
-        { name: "Real Estate Sector", tag: "Commercial Development" },
-        { name: "Investment Sector", tag: "Financial District, KAFD" },
-        { name: "Commercial Sector", tag: "Retail and Commercial" },
-        { name: "Services Sector", tag: "Infrastructure" },
-        { name: "Entrepreneurs and Startups", tag: "Modern Office Campus" },
+        { name: "Corporate Sector", tag: "Saudi business tower" },
+        { name: "Real Estate Sector", tag: "Commercial real estate development" },
+        { name: "Investment Sector", tag: "Saudi financial district" },
+        { name: "Commercial Sector", tag: "Commercial facility" },
+        { name: "Services Sector", tag: "Infrastructure project" },
+        { name: "Entrepreneurs and Startups", tag: "Modern office campus" },
       ],
     },
     process: {
@@ -566,6 +575,16 @@ function ActionArrow({ language, className }: { language: Language; className?: 
 function Index() {
   const [language, setLanguage] = useState<Language>("ar");
   const t = COPY[language];
+
+  useEffect(() => {
+    const meta = PAGE_META[language];
+    document.title = meta.title;
+    document.querySelector('meta[name="description"]')?.setAttribute("content", meta.description);
+    document.querySelector('meta[property="og:title"]')?.setAttribute("content", meta.title);
+    document
+      .querySelector('meta[property="og:description"]')
+      ?.setAttribute("content", meta.ogDescription);
+  }, [language]);
 
   return (
     <main
@@ -700,9 +719,12 @@ function LanguageSwitch({
   setLanguage: (language: Language) => void;
   ariaLabel: string;
 }) {
+  const optionLabels =
+    language === "en" ? { en: "English", ar: "Arabic" } : { en: "إنجليزي", ar: "عربي" };
+
   return (
     <div
-      className="inline-flex h-12 w-[112px] items-center border border-paper/20 text-[11px] font-semibold text-paper/70 md:h-12 md:w-[112px] lg:h-9 lg:w-[86px]"
+      className="inline-flex h-12 w-[140px] items-center border border-paper/20 text-[11px] font-semibold text-paper/70 md:h-12 md:w-[140px] lg:h-9 lg:w-[124px]"
       role="group"
       aria-label={ariaLabel}
     >
@@ -716,7 +738,7 @@ function LanguageSwitch({
           }`}
           onClick={() => setLanguage(option)}
         >
-          {option.toUpperCase()}
+          {optionLabels[option]}
         </button>
       ))}
     </div>
@@ -926,9 +948,6 @@ function Principles({ t, language }: LocalizedSectionProps) {
 
         <div className="mt-6 md:mt-16 grid md:grid-cols-2 gap-px bg-paper/10 border border-paper/10">
           <div className={`bg-navy-deep p-6 md:p-12 relative overflow-hidden ${englishMobile}`}>
-            <div className="absolute top-5 left-5 md:top-6 md:left-6 font-serif text-[4rem] md:text-[5rem] leading-none text-accent-gold/25 select-none max-md:top-auto max-md:bottom-[-0.75rem] max-md:left-4 max-md:z-0 max-md:text-[6.5rem] max-md:text-accent-gold/10">
-              I
-            </div>
             <div className="relative z-10 text-accent-gold text-[11px] mb-4 md:mb-6">
               {t.principles.visionLabel}
             </div>
@@ -937,9 +956,6 @@ function Principles({ t, language }: LocalizedSectionProps) {
             </p>
           </div>
           <div className={`bg-navy-deep p-6 md:p-12 relative overflow-hidden ${englishMobile}`}>
-            <div className="absolute top-5 left-5 md:top-6 md:left-6 font-serif text-[4rem] md:text-[5rem] leading-none text-accent-gold/25 select-none max-md:top-auto max-md:bottom-[-0.75rem] max-md:left-4 max-md:z-0 max-md:text-[6.5rem] max-md:text-accent-gold/10">
-              II
-            </div>
             <div className="relative z-10 text-accent-gold text-[11px] mb-4 md:mb-6">
               {t.principles.missionLabel}
             </div>
@@ -1003,9 +1019,6 @@ function ServicesShowcase({ t, language }: LocalizedSectionProps) {
             </div>
             <div className="md:col-span-5 p-6 md:p-12 md:pl-10 flex flex-col justify-between">
               <div>
-                <div className="text-[10.5px] md:text-[11px] text-muted-ink mb-2.5 md:mb-3">
-                  {s.label}
-                </div>
                 <h3 className="text-[clamp(1.32rem,6vw,1.65rem)] md:text-[clamp(1.4rem,2vw,1.8rem)] font-semibold text-navy-deep leading-[1.28] md:leading-[1.3] mb-4 md:mb-5">
                   {s.title}
                 </h3>
@@ -1120,6 +1133,20 @@ function Industries({ t, language }: LocalizedSectionProps) {
         </div>
       </div>
       <div className="relative">
+        <div className="container-x mb-6 md:mb-10">
+          <ul
+            className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 border-t border-paper/10 ${englishMobile}`}
+          >
+            {sectors.map((s) => (
+              <li
+                key={s.name}
+                className="border-b border-paper/10 py-3.5 text-[14px] md:text-[15px] font-semibold leading-tight text-paper"
+              >
+                {s.name}
+              </li>
+            ))}
+          </ul>
+        </div>
         <div className="container-x grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-5">
           {sectors.map((s) => (
             <div
@@ -1133,20 +1160,6 @@ function Industries({ t, language }: LocalizedSectionProps) {
               />
             </div>
           ))}
-        </div>
-        <div className="container-x mt-5 md:mt-8">
-          <ul
-            className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 border-t border-paper/10 ${englishMobile}`}
-          >
-            {sectors.map((s) => (
-              <li
-                key={s.name}
-                className="border-b border-paper/10 py-3.5 text-[14px] md:text-[15px] font-semibold leading-tight text-paper"
-              >
-                {s.name}
-              </li>
-            ))}
-          </ul>
         </div>
       </div>
     </section>
@@ -1598,7 +1611,7 @@ function Footer({ t, language }: LocalizedSectionProps) {
       </div>
       <div className="container-x mt-7 md:mt-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-3 md:gap-4 text-[12px] text-paper/50">
         <div>
-          © {new Date().getFullYear()} First Advance. {t.footer.copyright}
+          {new Date().getFullYear()} First Advance. {t.footer.copyright}
         </div>
         <div>{t.location}</div>
       </div>

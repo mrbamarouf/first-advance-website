@@ -82,7 +82,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         name: "description",
         content:
-          "First Advance (مؤسسة المتقدم الأول), a Saudi consulting house delivering administrative, operational and licensed real-estate services.",
+          "First Advance, a Saudi consulting house delivering administrative, operational and licensed real-estate services.",
       },
       { name: "author", content: "First Advance" },
       { property: "og:title", content: "First Advance, Integrated Business Solutions" },
