@@ -1,16 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import {
-  ArrowUpLeft,
-  ArrowUpRight,
-  Check,
-  Mail,
-  MapPin,
-  Menu,
-  MessageCircle,
-  Phone,
-  X,
-} from "lucide-react";
+import { ArrowUpLeft, ArrowUpRight, Check, Mail, Menu, MessageCircle, X } from "lucide-react";
 import logoImage from "@/assets/first-advance-logo-light-transparent.png";
 
 /* Premium Saudi architecture photography */
@@ -23,23 +13,19 @@ import ctaSunset from "@/assets/cta-jeddah-sunset.jpg";
 import sectorBusiness from "@/assets/sector-business.jpg";
 import sectorRealEstate from "@/assets/sector-realestate.jpg";
 import sectorInvestment from "@/assets/sector-investment.jpg";
-import sectorCommercial from "@/assets/sector-commercial.jpg";
-import sectorServices from "@/assets/sector-services.jpg";
-import sectorEntrepreneurs from "@/assets/sector-entrepreneurs.jpg";
 
 const PAGE_META = {
   ar: {
-    title: "First Advance، حلول أعمال متكاملة",
+    title: "First Advance، حلول أعمال متكاملة وشراكات تصنع النجاح",
     description:
-      "First Advance، مؤسسة سعودية متخصصة في حلول الأعمال، الخدمات التشغيلية والخدمات العقارية.",
-    ogDescription: "حلول متكاملة في إدارة الأعمال، التشغيل، والخدمات العقارية.",
+      "مؤسسة المتقدم الأول لخدمات الأعمال منشأة سعودية متخصصة في تقديم حلول الأعمال والخدمات الإدارية والتشغيلية والخدمات العقارية المرخصة.",
+    ogDescription: "حلول أعمال متكاملة وشراكات تصنع النجاح.",
   },
   en: {
-    title: "First Advance, Integrated Business Solutions",
+    title: "First Advance, Integrated business solutions and partnerships that create success",
     description:
-      "First Advance, a Saudi firm specialized in business solutions, operational services, and real estate services.",
-    ogDescription:
-      "Integrated solutions in business management, operations, and real estate services.",
+      "Al-Mutakadem Al-Awwal Business Services is a Saudi company specializing in business solutions, administrative and operational services, and licensed real estate services.",
+    ogDescription: "Integrated business solutions and partnerships that create success.",
   },
 } as const;
 
@@ -69,481 +55,526 @@ type Language = "ar" | "en";
 
 const COPY = {
   ar: {
-    location: "جدة، المملكة العربية السعودية",
+    location: "حلول أعمال متكاملة وشراكات تصنع النجاح",
     nav: {
       links: [
-        { href: "#about", label: "من نحن" },
+        { href: "#about", label: "مقدمة" },
         { href: "#services", label: "خدماتنا" },
-        { href: "#why", label: "لماذا نحن" },
-        { href: "#industries", label: "القطاعات" },
-        { href: "#process", label: "منهجيتنا" },
-        { href: "#packages", label: "الباقات" },
+        { href: "#why", label: "ما يميزنا" },
+        { href: "#values", label: "قيمنا" },
+        { href: "#audience", label: "جمهورنا" },
+        { href: "#process", label: "أسلوب العمل" },
+        { href: "#packages", label: "عروضنا" },
       ],
-      cta: "طلب استشارة",
+      cta: "Whats App",
       languageLabel: "اللغة",
       languageAria: "تغيير اللغة",
       openMenu: "فتح القائمة",
       closeMenu: "إغلاق القائمة",
     },
     hero: {
-      title: "حلول أعمال متكاملة",
-      subtitlePrefix: "تبني ",
-      subtitleHighlight: "النمو",
-      subtitleSuffix: " وتدير النجاح.",
-      body: "مؤسسة سعودية متخصصة في حلول الأعمال، الخدمات التشغيلية، والخدمات العقارية، نبني للمؤسسات ورواد الأعمال منظومات أكثر كفاءة واستدامة.",
-      primaryCta: "ابدأ معنا",
-      secondaryCta: "استكشف خدماتنا",
+      title: "حلول أعمال متكاملة وشراكات تصنع النجاح",
+      subtitlePrefix: "",
+      subtitleHighlight: "First Advance",
+      subtitleSuffix: "",
+      body: "مؤسسة المتقدم الأول لخدمات الأعمال هي منشأة سعودية متخصصة في تقديم حلول الأعمال والخدمات الإدارية والتشغيلية، إلى جانب تقديم الخدمات العقارية المرخصة، بهدف تمكين الأفراد وقطاع الأعمال من الوصول إلى حلول متكاملة تساهم في رفع الكفاءة وتحقيق النمو المستدام.",
+      primaryCta: "Whats App",
+      secondaryCta: "خدماتنا",
       ledger: [
-        { k: "01", t: "حلول الأعمال", d: "استشارات وتطوير أعمال ودعم إداري." },
-        { k: "02", t: "الخدمات التشغيلية", d: "إدارة العمليات ورفع الأداء." },
-        { k: "03", t: "الخدمات العقارية", d: "إدارة الأصول والاستثمار العقاري." },
+        { k: "01", t: "القطاع العقاري", d: "الوساطة والتسويق العقاري." },
+        { k: "02", t: "القطاع التشغيلي", d: "إدارة وتشغيل المشاريع." },
+        { k: "03", t: "قطاع خدمات الأعمال والإدارة", d: "الاستشارات الإدارية." },
       ],
     },
     intro: {
-      lead: "نؤمن بأن النجاح الحقيقي يبدأ من التخطيط الصحيح، والإدارة الفعالة،",
-      muted: " والتنفيذ الاحترافي، ",
-      tail: "ولهذا نجمع الإدارة، التشغيل، والعقار تحت منظومة واحدة تخدم عميلاً واحداً.",
+      lead: "نحن نوفر لك الوقت والجهد. ",
+      muted: "بدلًا من البحث عن - مساعد - إداري - متخصص - استشاري، ",
+      tail: "لدينا كل ذلك تحت سقف واحد من الفكرة إلى التسليم.",
     },
     about: {
-      kicker: "من نحن",
-      title: "حلول أعمال متكاملة تجمع الإدارة والتشغيل والعقار تحت منظومة واحدة.",
+      kicker: "مقدمة",
+      title: "مؤسسة المتقدم الأول لخدمات الأعمال",
       paragraphs: [
-        "First Advance مؤسسة متخصصة في تقديم حلول الأعمال المتكاملة، تجمع بين الخبرة الإدارية والتشغيلية والخدمات العقارية تحت منظومة واحدة.",
-        "نعمل على تطوير بيئات الأعمال، وتحسين الكفاءة التشغيلية، وتقديم حلول عملية تساعد عملاءنا على تحقيق النمو والاستقرار والاستدامة.",
+        "مؤسسة المتقدم الأول لخدمات الأعمال هي منشأة سعودية متخصصة في تقديم حلول الأعمال والخدمات الإدارية والتشغيلية، إلى جانب تقديم الخدمات العقارية المرخصة، بهدف تمكين الأفراد وقطاع الأعمال من الوصول إلى حلول متكاملة تساهم في رفع الكفاءة وتحقيق النمو المستدام.",
+        "نعمل وفق رؤية تقوم على تقديم خدمات احترافية تجمع بين الخبرة الإدارية والتشغيلية والعقارية، من خلال فريق عمل مؤهل وشراكات استراتيجية متخصصة، بما يضمن تقديم قيمة حقيقية لعملائنا وتحقيق أعلى مستويات الجودة والموثوقية.",
+        "نؤمن بأن نجاح الأعمال يبدأ من وجود شريك موثوق قادر على فهم احتياجات العملاء وتحويل التحديات إلى فرص، ولذلك نسعى إلى تقديم حلول متكاملة تدعم التطور والنمو وتحقق الاستدامة.",
       ],
-      stats: [
-        { n: "03", t: "ممارسات متكاملة" },
-        { n: "06", t: "قطاعات مستهدفة" },
-        { n: "واحدة", t: "مسؤولية موحدة" },
-      ],
+      stats: [],
       imageAlt: "قاعة اجتماعات تنفيذية بإطلالة على مدينة الرياض",
     },
     principles: {
-      kicker: "مبادئنا",
-      title: "رؤية واضحة، رسالة عملية، ومنهج مبني على النتائج.",
+      kicker: "رؤيتنا ورسالتنا",
+      title: "رؤيتنا ورسالتنا",
       visionLabel: "رؤيتنا",
       vision:
-        "أن نكون الشريك الأول للمؤسسات في تطوير الأعمال، ورفع الكفاءة التشغيلية، وتقديم حلول متكاملة تحقق قيمة مستدامة.",
+        "أن نكون الخيار الأول للخدمات الإدارية المتكاملة في المملكة وخارجها، من خلال حلول تركز على الجودة والتكنولوجيا والكفاءة.",
       missionLabel: "رسالتنا",
       mission:
-        "تقديم خدمات احترافية تعتمد على الجودة، والابتكار، والخبرة العملية، لبناء شراكات طويلة المدى مع عملائنا وتحقيق نتائج قابلة للقياس.",
+        "نحن نقدم خدمات إدارية متطورة تساعد المؤسسات على تحقيق أهدافها من خلال أنظمة مرنة واحترافية عالية وتقنيات حديثة.",
     },
     services: {
       kicker: "خدماتنا",
-      title: "ثلاث ممارسات متكاملة، تُقدَّم منفصلة أو مجتمعة بمسؤولية موحدة.",
-      intro: "نعتمد منهجية تنفيذ واحدة أمام العميل، مع فرق متخصصة لكل ممارسة.",
+      title: "خدماتنا",
+      intro: "",
       cards: [
         {
           n: "01",
-          title: "حلول الأعمال",
-          desc: "استشارات وتطوير وتخطيط لبناء أعمال أكثر كفاءة، مع دعم إداري متكامل لرفع الأداء المؤسسي.",
+          title: "القطاع العقاري",
+          desc: "",
           items: [
-            "استشارات الأعمال",
-            "تطوير الأعمال",
-            "الدعم الإداري",
-            "تحسين العمليات",
-            "التخطيط الاستراتيجي",
+            "الوساطة والتسويق العقاري.",
+            "الخدمات العقارية المرخصة.",
+            "الاستشارات العقارية.",
+            "إدارة العلاقات مع المستثمرين والعملاء.",
+            "التسويق والترويج العقاري.",
+            "تقديم الحلول العقارية من خلال الشراكات المتخصصة.",
           ],
-          alt: "برج مقر شركة سعودية",
+          alt: "مشروع عقاري تجاري متعدد الاستخدامات",
         },
         {
           n: "02",
-          title: "الخدمات التشغيلية",
-          desc: "إدارة عمليات محكمة، تنسيق مشاريع، وتحسين مستمر للأداء والدعم التشغيلي اليومي.",
+          title: "القطاع التشغيلي",
+          desc: "",
           items: [
-            "إدارة العمليات",
-            "تنسيق المشاريع",
-            "تحسين الأداء",
-            "تطوير العمليات",
-            "الدعم التشغيلي",
+            "إدارة وتشغيل المشاريع.",
+            "إدارة المواقع والفرق الميدانية.",
+            "متابعة الأداء والتقارير التشغيلية.",
+            "تطوير العمليات وتحسين الكفاءة.",
           ],
           alt: "مركز عمليات",
         },
         {
           n: "03",
-          title: "الخدمات العقارية",
-          desc: "إدارة عقارات وأصول باحترافية، مع تنسيق فرص الاستثمار العقاري وتقديم حلول متكاملة للمطورين والمالكين.",
+          title: "قطاع خدمات الأعمال والإدارة",
+          desc: "",
           items: [
-            "إدارة العقارات",
-            "خدمات عقارية",
-            "دعم الأصول",
-            "تنسيق الاستثمار",
-            "حلول عقارية متكاملة",
+            "الاستشارات الإدارية.",
+            "تطوير الأعمال.",
+            "إعداد السياسات والإجراءات.",
+            "الهيكلة التنظيمية.",
+            "إدارة الموارد البشرية.",
+            "تطوير الأنظمة الإدارية.",
+            "خدمات التشغيل والدعم الإداري.",
+            "إدارة المشاريع.",
           ],
-          alt: "مشروع عقاري تجاري متعدد الاستخدامات",
+          alt: "برج مقر شركة سعودية",
         },
       ],
     },
     why: {
-      kicker: "لماذا First Advance",
-      title: "اختيار موثوق",
-      titleAccent: "لإدارة الأعمال والعمليات والعقارات.",
-      quote: "«نبني علاقات طويلة المدى مع عملائنا، ونقيس نجاحنا بنجاحهم، لا بحجم مشاريعنا.»",
+      kicker: "ما يميزنا",
+      title: "ما يميزنا",
+      titleAccent: "",
+      quote: "نحن نوفر لك الوقت والجهد.",
       items: [
-        "خبرة عملية في تطوير الأعمال والإدارة والتشغيل.",
-        "حلول متكاملة تحت سقف واحد.",
-        "جودة تنفيذ ومعايير احترافية.",
-        "مرونة في تقديم الحلول حسب احتياجات كل عميل.",
-        "شراكات طويلة المدى مبنية على الثقة والنتائج.",
-        "التركيز على الاستدامة والنمو الحقيقي.",
+        "تكامل الخدمات.",
+        "حلول إدارية وعقارية تحت سقف واحد.",
+        "شراكات استراتيجية متخصصة.",
+        "سرعة الاستجابة وإنجاز الأعمال.",
+        "الالتزام بالأنظمة والتشريعات.",
+        "مرونة في تقديم الحلول حسب احتياج العميل.",
+        "فريق يمتلك خبرات تشغيلية وإدارية متنوعة.",
+        "تقديم خدمات مبنية على الجودة والاحترافية.",
+        "فهم احتياجات قطاع الأعمال والسوق العقاري.",
+        "التركيز على بناء علاقات طويلة الأمد مع العملاء.",
       ],
     },
+    values: {
+      kicker: "قيمنا الأساسية",
+      title: "قيمنا الأساسية",
+      items: ["الاحترافية", "الابتكار", "المرونة", "الشفافية", "الالتزام", "التعاون"],
+    },
     industries: {
-      kicker: "القطاعات",
-      title: "القطاعات التي نخدمها.",
-      intro: "نعمل مع مؤسسات في قطاعات متعددة، مع تكييف الحلول وفق طبيعة النشاط ومرحلة النمو.",
+      kicker: "جمهورنا المستهدف",
+      title: "جمهورنا المستهدف",
+      intro: "",
       sectors: [
-        { name: "قطاع الأعمال", tag: "برج أعمال" },
-        { name: "القطاع العقاري", tag: "تطوير عقاري تجاري" },
-        { name: "قطاع الاستثمار", tag: "منطقة أعمال مالية" },
-        { name: "القطاع التجاري", tag: "منشأة تجارية" },
-        { name: "قطاع الخدمات", tag: "بنية تحتية" },
-        { name: "رواد الأعمال والمنشآت الناشئة", tag: "مجمع مكاتب حديث" },
+        { name: "المنشآت الصغيرة", tag: "" },
+        { name: "المنشآت المتوسطة", tag: "" },
+        { name: "منشآت النمو", tag: "" },
       ],
     },
     process: {
-      kicker: "منهجيتنا",
-      title: "من الفهم إلى التنفيذ إلى التطوير.",
-      intro: "منهجية موحدة بأربع مراحل تحكم كل تعاقد، بغض النظر عن حجمه أو قطاعه.",
+      kicker: "أسلوب العمل",
+      title: "أسلوب العمل",
+      intro:
+        "نعتمد في مؤسسة المتقدم الأول لخدمات الأعمال على منهجية عمل احترافية تضمن تقديم خدمات عالية الجودة وتحقيق أفضل النتائج لعملائنا، وذلك من خلال:",
       steps: [
         {
           n: "01",
-          t: "دراسة الاحتياج",
-          d: "نفهم طبيعة النشاط والأهداف والتحديات، ونضع تشخيصاً واضحاً قبل أي توصية.",
+          t: "دراسة احتياجات العميل وفهم أهدافه.",
+          d: "",
         },
         {
           n: "02",
-          t: "بناء الحلول",
-          d: "نصمم حلولاً عملية تناسب احتياجات العميل ومرحلته، مع خطة قابلة للتنفيذ.",
+          t: "تحليل الوضع الحالي وتحديد الفرص والتحديات.",
+          d: "",
         },
         {
           n: "03",
-          t: "التنفيذ",
-          d: "ننفذ الخدمات باحترافية وفق جدول زمني ومسؤولية موحدة أمام العميل.",
+          t: "إعداد الحلول المناسبة والخطط التنفيذية.",
+          d: "",
         },
         {
           n: "04",
-          t: "المتابعة والتطوير",
-          d: "نقيس النتائج ونحسّن الأداء بشكل مستمر لضمان الاستدامة والنمو.",
+          t: "تنفيذ الأعمال وفق معايير واضحة ومؤشرات أداء.",
+          d: "",
+        },
+        {
+          n: "05",
+          t: "المتابعة المستمرة وقياس النتائج.",
+          d: "",
+        },
+        {
+          n: "06",
+          t: "تطوير الحلول وتحسين الأداء بشكل مستمر.",
+          d: "",
         },
       ],
+      note: "ونؤمن بأن الشراكة الحقيقية مع العميل لا تنتهي عند تقديم الخدمة بل تستمر من خلال المتابعة والدعم وتحقيق النتائج المستدامة.",
     },
     packages: {
-      kicker: "باقات الخدمات",
-      title: "خيارات تعاقد استشارية تلائم مرحلة كل مؤسسة.",
-      intro:
-        "تُقدَّم عبر عقود استشارية مخصصة، بمنهجية تنفيذ واحدة ومسؤولية موحدة أمام العميل، دون رسوم اشتراك جاهزة.",
+      kicker: "عروضنا",
+      title: "عروضنا",
+      intro: "",
       headers: {
         package: "الباقة",
-        audience: "الفئة المستهدفة",
-        content: "المحتوى",
-        duration: "المدة المقترحة",
-        durationShort: "المدة",
+        audience: "رقم الباقة",
+        content: "التفاصيل",
+        duration: "التواصل",
+        durationShort: "التواصل",
       },
-      featured: "الأكثر طلباً",
-      request: "طلب هذه الباقة",
-      note: "جميع الباقات مبنية على تعاقد استشاري مخصص. الأسعار تُحدَّد بعد جلسة تشخيصية مجانية مع فريق First Advance.",
+      featured: "",
+      request: "Whats App",
+      note: "يتم تحديد سعر الباقة المختارة بعد دراسة وتحليل المنشأة",
       packs: [
         {
-          title: "الباقة الأساسية",
-          audience: "المنشآت الصغيرة والناشئة",
-          desc: "حلول أساسية لدعم الأعمال وتحسين الأداء اليومي.",
-          includes: ["استشارة تشخيصية", "دعم إداري أساسي", "تحسين عمليات مركّزة"],
-          duration: "٣ أشهر",
+          title: "باقة أساسية",
+          audience: "Package No.1",
+          desc: "",
+          includes: [
+            "ربع سنوي - سنوي",
+            "الشهادات الدورية - الدعم المؤقت",
+            "الحفاظ على الاستمرارية",
+          ],
+          duration: "",
         },
         {
-          title: "الباقة المتقدمة",
-          audience: "المؤسسات المتنامية",
-          desc: "حلول تشغيلية وإدارية متكاملة للمؤسسات المتنامية.",
-          includes: ["تخطيط استراتيجي", "إدارة عمليات مستمرة", "متابعة أداء دورية"],
-          duration: "٦ أشهر",
+          title: "باقة متقدمة",
+          audience: "Package No.2",
+          desc: "",
+          includes: [
+            "سنوي - الشهادات الدورية",
+            "الدعم المستمر - المسؤولية",
+            "الدعم الإداري والاقتراحات",
+          ],
+          duration: "",
           featured: true,
         },
         {
-          title: "الباقة الاحترافية",
-          audience: "المؤسسات الكبرى والمشاريع الاستراتيجية",
-          desc: "حلول شاملة وإدارة متقدمة للمؤسسات الكبرى والمشاريع الاستراتيجية.",
-          includes: ["إدارة متكاملة (أعمال، تشغيل، عقار)", "فريق مخصص", "حوكمة ومتابعة تنفيذية"],
-          duration: "١٢ شهراً أو أكثر",
+          title: "باقة احترافية",
+          audience: "Package No.3",
+          desc: "",
+          includes: [
+            "سنوي - تقديم المشورة التفصيلية",
+            "الدعم المستمر - الخطط الاستراتيجية",
+            "الدعم المالي",
+          ],
+          duration: "",
         },
       ],
     },
     contact: {
       imageAlt: "أفق جدة عند الغروب على الكورنيش",
-      title: "لنبدأ رحلة نجاح",
-      titleAccent: "جديدة.",
-      kicker: "تواصل معنا",
+      title: "شكراً لكم",
+      titleAccent: "",
+      kicker: "Contact Us Via",
       intro:
-        "سواء كنت تبحث عن تطوير أعمالك، أو تحسين عملياتك التشغيلية، أو حلول عقارية متكاملة، فريق First Advance مستعد لبناء الحل المناسب لأهدافك.",
+        "بدلًا من البحث عن - مساعد - إداري - متخصص - استشاري، لدينا كل ذلك تحت سقف واحد من الفكرة إلى التسليم.",
       labels: {
-        whatsapp: "واتساب",
-        email: "البريد الإلكتروني",
-        phone: "اتصال مباشر",
-        location: "المقر",
+        whatsapp: "Whats App",
+        email: "Our Only Email",
       },
-      whatsappCta: "محادثة عبر واتساب",
-      emailCta: "أرسل رسالة",
+      whatsappCta: "Whats App",
+      emailCta: "Our Only Email",
     },
     footer: {
-      desc: "مؤسسة سعودية متخصصة في حلول الأعمال، الخدمات التشغيلية والخدمات العقارية، تجمع الخبرة والتنفيذ الاحترافي تحت منظومة واحدة.",
+      desc: "حلول أعمال متكاملة وشراكات تصنع النجاح",
       linksTitle: "روابط",
       serviceTitle: "خدماتنا",
-      contactTitle: "تواصل معنا",
+      contactTitle: "Contact Us Via",
       home: "الرئيسية",
       copyright: "جميع الحقوق محفوظة.",
     },
   },
   en: {
-    location: "Jeddah, Kingdom of Saudi Arabia",
+    location: "Integrated business solutions and partnerships that create success",
     nav: {
       links: [
-        { href: "#about", label: "About" },
+        { href: "#about", label: "Introduction" },
         { href: "#services", label: "Services" },
-        { href: "#why", label: "Why Us" },
-        { href: "#industries", label: "Sectors" },
-        { href: "#process", label: "Approach" },
+        { href: "#why", label: "What Sets Us Apart" },
+        { href: "#values", label: "Core Values" },
+        { href: "#audience", label: "Target Audience" },
+        { href: "#process", label: "Work Approach" },
         { href: "#packages", label: "Packages" },
       ],
-      cta: "Request Consultation",
+      cta: "Whats App",
       languageLabel: "Language",
       languageAria: "Change language",
       openMenu: "Open menu",
       closeMenu: "Close menu",
     },
     hero: {
-      title: "Integrated Business Solutions",
-      subtitlePrefix: "Building ",
-      subtitleHighlight: "growth",
-      subtitleSuffix: " and managing success.",
-      body: "A Saudi firm specialized in business solutions, operational services, and real estate services, helping organizations and entrepreneurs build more efficient and sustainable systems.",
-      primaryCta: "Start With Us",
-      secondaryCta: "Explore Services",
+      title: "Integrated business solutions and partnerships that create success",
+      subtitlePrefix: "",
+      subtitleHighlight: "First Advance",
+      subtitleSuffix: "",
+      body: "Al-Mutakadem Al-Awwal Business Services is a Saudi company specializing in providing business solutions, administrative and operational services, and licensed real estate services. Our aim is to empower individuals and businesses by providing integrated solutions that contribute to increased efficiency and sustainable growth.",
+      primaryCta: "Whats App",
+      secondaryCta: "Services",
       ledger: [
         {
           k: "01",
-          t: "Business Solutions",
-          d: "Consulting, business development, and administrative support.",
+          t: "Real estate sector",
+          d: "Licensed real estate services.",
         },
         {
           k: "02",
-          t: "Operational Services",
-          d: "Operations management and performance improvement.",
+          t: "Operational sector",
+          d: "Project management and operation.",
         },
         {
           k: "03",
-          t: "Real Estate Services",
-          d: "Asset management and real estate investment support.",
+          t: "Business M.S.S",
+          d: "Management consulting.",
         },
       ],
     },
     intro: {
-      lead: "We believe real success starts with sound planning, effective management,",
-      muted: " and professional execution. ",
-      tail: "That is why we bring business, operations, and real estate under one system for one client.",
+      lead: "We Save Your Time And Energy. ",
+      muted: "Instead of searching for an assistant, administrator, specialist, or consultant - ",
+      tail: "we bring all of that under one roof, with one unified challenge: from concept to delivery",
     },
     about: {
-      kicker: "About Us",
-      title:
-        "Integrated solutions that bring business, operations, and real estate into one system.",
+      kicker: "Introduction",
+      title: "Al-Mutakadem Al-Awwal Business Services",
       paragraphs: [
-        "First Advance specializes in integrated business solutions, combining administrative expertise, operational capability, and real estate services under one coordinated structure.",
-        "We develop business environments, improve operational efficiency, and deliver practical solutions that help clients achieve growth, stability, and sustainability.",
+        "Al-Mutakadem Al-Awwal Business Services is a Saudi company specializing in providing business solutions, administrative and operational services, and licensed real estate services. Our aim is to empower individuals and businesses by providing integrated solutions that contribute to increased efficiency and sustainable growth.",
+        "We operate according to a vision of delivering professional services that combine administrative, operational, and real estate expertise through a qualified team and specialized strategic partnerships. This ensures we deliver genuine value to our clients and achieve the highest levels of quality and reliability.",
+        "We believe that business success begins with a reliable partner capable of understanding client needs and transforming challenges into opportunities. Therefore, we strive to provide integrated solutions that support development, growth, and sustainability.",
       ],
-      stats: [
-        { n: "03", t: "Integrated Practices" },
-        { n: "06", t: "Target Sectors" },
-        { n: "One", t: "Unified Responsibility" },
-      ],
+      stats: [],
       imageAlt: "Executive boardroom overlooking Riyadh",
     },
     principles: {
-      kicker: "Our Principles",
-      title: "Clear vision, practical mission, and an approach built around results.",
+      kicker: "Our Vision And Mission",
+      title: "Our Vision And Mission",
       visionLabel: "Our Vision",
       vision:
-        "To be the first partner for organizations seeking business development, higher operational efficiency, and integrated solutions that create sustainable value.",
+        "To be the leading provider of integrated administrative services in the Kingdom and beyond, through quality, technology-driven, and efficient solutions.",
       missionLabel: "Our Mission",
       mission:
-        "To provide professional services grounded in quality, innovation, and practical expertise, building long term partnerships with clients and delivering measurable outcomes.",
+        "We provide advanced administrative services that help organizations achieve their goals through flexible, highly professional systems and modern technologies.",
     },
     services: {
       kicker: "Our Services",
-      title:
-        "Three integrated practices, delivered separately or together with unified responsibility.",
-      intro:
-        "We use one delivery methodology for the client, supported by specialized teams for each practice.",
+      title: "Our Services",
+      intro: "",
       cards: [
         {
           n: "01",
-          title: "Business Solutions",
-          desc: "Consulting, development, and planning to build more efficient businesses, with integrated administrative support that strengthens organizational performance.",
+          title: "Real estate sector",
+          desc: "",
           items: [
-            "Business Consulting",
-            "Business Development",
-            "Administrative Support",
-            "Process Improvement",
-            "Strategic Planning",
+            "Real estate brokerage and marketing.",
+            "Licensed real estate services.",
+            "Real estate consulting.",
+            "Investor and client relationship management.",
+            "Real estate marketing and promotion.",
+            "Providing real estate solutions through specialized partnerships.",
           ],
-          alt: "Saudi corporate headquarters tower",
+          alt: "Mixed use commercial real estate development",
         },
         {
           n: "02",
-          title: "Operational Services",
-          desc: "Disciplined operations management, project coordination, continuous performance improvement, and daily operational support.",
+          title: "Operational sector",
+          desc: "",
           items: [
-            "Operations Management",
-            "Project Coordination",
-            "Performance Improvement",
-            "Process Development",
-            "Operational Support",
+            "Project management and operation.",
+            "Site and field team management.",
+            "Performance monitoring and operational reporting.",
+            "Process development and efficiency improvement.",
           ],
           alt: "Operations control room",
         },
         {
           n: "03",
-          title: "Real Estate Services",
-          desc: "Professional property and asset management, coordination of real estate investment opportunities, and integrated solutions for developers and owners.",
+          title: "Business M.S.S",
+          desc: "",
           items: [
-            "Property Management",
-            "Real Estate Services",
-            "Asset Support",
-            "Investment Coordination",
-            "Integrated Real Estate Solutions",
+            "Management consulting.",
+            "Business development.",
+            "Policy and procedure development.",
+            "Organizational structuring.",
+            "Human resource management.",
+            "Administrative systems development.",
+            "Operational and administrative support services.",
+            "Project management.",
           ],
-          alt: "Mixed use commercial real estate development",
+          alt: "Saudi corporate headquarters tower",
         },
       ],
     },
     why: {
-      kicker: "Why First Advance",
-      title: "A trusted choice",
-      titleAccent: "for business, operations, and real estate management.",
-      quote:
-        "We build long term relationships with our clients, and measure our success by theirs, not by the size of our projects.",
+      kicker: "What Sets Us Apart",
+      title: "What Sets Us Apart",
+      titleAccent: "",
+      quote: "We Save Your Time And Energy.",
       items: [
-        "Practical expertise in business development, management, and operations.",
-        "Integrated solutions under one roof.",
-        "High quality execution and professional standards.",
-        "Flexible solutions shaped around each client’s needs.",
-        "Long term partnerships built on trust and results.",
-        "A clear focus on sustainability and real growth.",
+        "Integrated services.",
+        "Administrative and real estate solutions under one roof.",
+        "Specialized strategic partnerships.",
+        "Rapid response and efficient work completion.",
+        "Compliance with regulations and legislation.",
+        "Flexible solutions tailored to client needs.",
+        "A team with operational and administrative expertise.",
+        "Providing services based on quality and professionalism.",
+        "Understanding the needs of the business sector.",
+        "Focus on building long-term client relationships.",
+      ],
+    },
+    values: {
+      kicker: "Our Core Values",
+      title: "Our Core Values",
+      items: [
+        "Professionalism",
+        "Innovation",
+        "Flexibility",
+        "Transparency",
+        "Commitment",
+        "Cooperation",
       ],
     },
     industries: {
-      kicker: "Sectors",
-      title: "The sectors we serve.",
-      intro:
-        "We work with organizations across multiple sectors, adapting solutions to each activity, business model, and stage of growth.",
+      kicker: "Our Target Audience",
+      title: "Our Target Audience",
+      intro: "",
       sectors: [
-        { name: "Corporate Sector", tag: "Saudi business tower" },
-        { name: "Real Estate Sector", tag: "Commercial real estate development" },
-        { name: "Investment Sector", tag: "Saudi financial district" },
-        { name: "Commercial Sector", tag: "Commercial facility" },
-        { name: "Services Sector", tag: "Infrastructure project" },
-        { name: "Entrepreneurs and Startups", tag: "Modern office campus" },
+        { name: "Small Businesses", tag: "" },
+        { name: "Medium Businesses", tag: "" },
+        { name: "Business Growth", tag: "" },
       ],
     },
     process: {
-      kicker: "Our Approach",
-      title: "From understanding to execution to continuous development.",
+      kicker: "Work Approach",
+      title: "Work Approach",
       intro:
-        "A unified four stage methodology governs every engagement, regardless of its size or sector.",
+        "At Al-Mutakadem Al-Awwal Business Services, we rely on a professional work methodology that ensures the delivery of high quality services and the achievement of optimal results for our clients. This is accomplished through:",
       steps: [
         {
           n: "01",
-          t: "Needs Assessment",
-          d: "We understand the nature of the business, its goals, and its challenges, then build a clear diagnosis before making any recommendation.",
+          t: "Studying client needs and understanding their objectives.",
+          d: "",
         },
         {
           n: "02",
-          t: "Solution Design",
-          d: "We design practical solutions that fit the client’s needs and stage, supported by an actionable plan.",
+          t: "Analyzing the current situation and identifying opportunities and challenges.",
+          d: "",
         },
         {
           n: "03",
-          t: "Execution",
-          d: "We deliver services professionally according to a clear timeline and one accountable responsibility model.",
+          t: "Developing appropriate solutions and implementation plans.",
+          d: "",
         },
         {
           n: "04",
-          t: "Follow Up and Development",
-          d: "We measure results and improve performance continuously to support sustainability and growth.",
+          t: "Executing work according to clear standards and performance indicators.",
+          d: "",
+        },
+        {
+          n: "05",
+          t: "Continuous monitoring and measurement of results.",
+          d: "",
+        },
+        {
+          n: "06",
+          t: "Continuously developing solutions and improving performance.",
+          d: "",
         },
       ],
+      note: "We believe that a true partnership with a client does not end with the delivery of the service but continues through follow-up, support, and the achievement of sustainable results.",
     },
     packages: {
-      kicker: "Service Packages",
-      title: "Consulting engagement options aligned with each organization’s stage.",
-      intro:
-        "Delivered through tailored consulting agreements, one execution methodology, and unified responsibility before the client, without preset subscription fees.",
+      kicker: "Our Packages",
+      title: "Our Packages",
+      intro: "",
       headers: {
         package: "Package",
-        audience: "Target Audience",
-        content: "Scope",
-        duration: "Suggested Duration",
-        durationShort: "Duration",
+        audience: "Package No.",
+        content: "Details",
+        duration: "Contact",
+        durationShort: "Contact",
       },
-      featured: "Most Requested",
-      request: "Request This Package",
-      note: "All packages are based on tailored consulting engagements. Pricing is defined after a free diagnostic session with the First Advance team.",
+      featured: "",
+      request: "Whats App",
+      note: "The pricing of each selected package is customized following a careful analysis of your business and operational needs.",
       packs: [
         {
-          title: "Essential Package",
-          audience: "Small and emerging businesses",
-          desc: "Core solutions to support the business and improve daily performance.",
+          title: "Baisc",
+          audience: "Package No.1",
+          desc: "",
           includes: [
-            "Diagnostic consultation",
-            "Basic administrative support",
-            "Focused process improvement",
+            "Quarterly - Yearly",
+            "Periodic Certificates - Temporary Support",
+            "Maintaining Continuity",
           ],
-          duration: "3 months",
+          duration: "",
         },
         {
-          title: "Advanced Package",
-          audience: "Growing organizations",
-          desc: "Integrated operational and administrative solutions for growing organizations.",
+          title: "Premium",
+          audience: "Package No.2",
+          desc: "",
           includes: [
-            "Strategic planning",
-            "Ongoing operations management",
-            "Periodic performance follow up",
+            "Yearly - Periodic Certificates",
+            "Continuous Support - Responsible",
+            "Support And Suggestions",
           ],
-          duration: "6 months",
+          duration: "",
           featured: true,
         },
         {
-          title: "Professional Package",
-          audience: "Large organizations and strategic projects",
-          desc: "Comprehensive solutions and advanced management for large organizations and strategic projects.",
+          title: "Professional",
+          audience: "Package No.3",
+          desc: "",
           includes: [
-            "Integrated management (business, operations, real estate)",
-            "Dedicated team",
-            "Governance and executive follow up",
+            "Yearly - Providing Detailed Advice",
+            "Continuous Support - Strategic Plans",
+            "Financial Support",
           ],
-          duration: "12 months or more",
+          duration: "",
         },
       ],
     },
     contact: {
       imageAlt: "Jeddah skyline at sunset along the Corniche",
-      title: "Let’s start a new",
-      titleAccent: "success journey.",
-      kicker: "Contact Us",
+      title: "Thank You",
+      titleAccent: "",
+      kicker: "Contact Us Via",
       intro:
-        "Whether you are developing your business, improving operational performance, or seeking integrated real estate solutions, the First Advance team is ready to build the right solution for your goals.",
+        "Instead of searching for an assistant, administrator, specialist, or consultant - we bring all of that under one roof, with one unified challenge: from concept to delivery",
       labels: {
-        whatsapp: "WhatsApp",
-        email: "Email",
-        phone: "Direct Call",
-        location: "Head Office",
+        whatsapp: "Whats App",
+        email: "Our Only Email",
       },
-      whatsappCta: "Chat on WhatsApp",
-      emailCta: "Send an Email",
+      whatsappCta: "Whats App",
+      emailCta: "Our Only Email",
     },
     footer: {
-      desc: "A Saudi firm specialized in business solutions, operational services, and real estate services, combining expertise and professional execution under one integrated system.",
+      desc: "Integrated business solutions and partnerships that create success",
       linksTitle: "Links",
-      serviceTitle: "Services",
-      contactTitle: "Contact Us",
+      serviceTitle: "Our Services",
+      contactTitle: "Contact Us Via",
       home: "Home",
       copyright: "All rights reserved.",
     },
@@ -593,6 +624,7 @@ function Index() {
       <Principles t={t} language={language} />
       <ServicesShowcase t={t} language={language} />
       <WhyUs t={t} language={language} />
+      <CoreValues t={t} language={language} />
       <Industries t={t} language={language} />
       <Process t={t} language={language} />
       <Packages t={t} language={language} />
@@ -895,11 +927,6 @@ function About({ t, language }: LocalizedSectionProps) {
               <p key={paragraph}>{paragraph}</p>
             ))}
           </div>
-          <div className="mt-6 md:mt-10 grid grid-cols-3 gap-4 md:gap-6 max-w-md border-t border-rule pt-5 md:pt-8">
-            {t.about.stats.map((stat) => (
-              <Stat key={stat.n} n={stat.n} t={stat.t} />
-            ))}
-          </div>
         </div>
 
         <div className="md:col-span-6 relative">
@@ -914,15 +941,6 @@ function About({ t, language }: LocalizedSectionProps) {
         </div>
       </div>
     </section>
-  );
-}
-
-function Stat({ n, t }: { n: string; t: string }) {
-  return (
-    <div>
-      <div className="font-serif text-[1.7rem] md:text-[2rem] leading-none text-navy-deep">{n}</div>
-      <div className="mt-2 text-[11px] md:text-[11.5px] text-muted-ink leading-snug">{t}</div>
-    </div>
   );
 }
 
@@ -1016,9 +1034,11 @@ function ServicesShowcase({ t, language }: LocalizedSectionProps) {
                 <h3 className="text-[clamp(1.32rem,6vw,1.65rem)] md:text-[clamp(1.4rem,2vw,1.8rem)] font-semibold text-navy-deep leading-[1.28] md:leading-[1.3] mb-4 md:mb-5">
                   {s.title}
                 </h3>
-                <p className="text-[14px] md:text-[14.5px] leading-[1.85] md:leading-[2] text-ink/75 max-w-md">
-                  {s.desc}
-                </p>
+                {s.desc && (
+                  <p className="text-[14px] md:text-[14.5px] leading-[1.85] md:leading-[2] text-ink/75 max-w-md">
+                    {s.desc}
+                  </p>
+                )}
               </div>
               <ul className="mt-7 md:mt-10 grid grid-cols-1 gap-0 border-t border-rule">
                 {s.items.map((it, j) => (
@@ -1091,25 +1111,46 @@ function WhyUs({ t, language }: LocalizedSectionProps) {
   );
 }
 
+/* Core values from the official profile */
+function CoreValues({ t, language }: LocalizedSectionProps) {
+  const englishMobile = mobileEnglishFlow(language);
+
+  return (
+    <section id="values" className="bg-canvas border-t border-rule">
+      <div className="container-x py-10 md:py-28">
+        <div className={`max-w-2xl mb-7 md:mb-12 ${englishMobile}`}>
+          <SectionKicker label={t.values.kicker} />
+          <h2 className="mt-3.5 text-[clamp(1.46rem,6.8vw,1.84rem)] md:text-[clamp(1.6rem,2.5vw,2.15rem)] leading-[1.32] md:leading-[1.35] font-semibold text-navy-deep">
+            {t.values.title}
+          </h2>
+        </div>
+        <ul
+          className={`grid sm:grid-cols-2 lg:grid-cols-3 gap-px bg-rule border border-rule ${englishMobile}`}
+        >
+          {t.values.items.map((item) => (
+            <li key={item} className="bg-paper px-5 py-5 md:px-8 md:py-7">
+              <div className="h-px w-10 bg-accent-gold mb-4" />
+              <div className="text-[1.05rem] md:text-xl font-semibold text-navy-deep">{item}</div>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  );
+}
+
 /* Industries, Saudi architecture grid */
 function Industries({ t, language }: LocalizedSectionProps) {
   const englishMobile = mobileEnglishFlow(language);
   const cardTextAlign = language === "en" ? "items-start text-left" : "items-end text-right";
-  const sectorImages = [
-    sectorBusiness,
-    sectorRealEstate,
-    sectorInvestment,
-    sectorCommercial,
-    sectorServices,
-    sectorEntrepreneurs,
-  ];
+  const sectorImages = [sectorBusiness, sectorRealEstate, sectorInvestment];
   const sectors = t.industries.sectors.map((sector, index) => ({
     ...sector,
     img: sectorImages[index],
   }));
   return (
     <section
-      id="industries"
+      id="audience"
       className="bg-navy-deep text-paper py-10 md:py-32 border-t border-paper/10"
     >
       <div className="container-x">
@@ -1287,21 +1328,23 @@ function Packages({ t, language }: LocalizedSectionProps) {
             <div
               key={p.title}
               className={`relative grid grid-cols-1 md:grid-cols-[1.1fr_1fr_1fr_1fr] gap-4 md:gap-8 py-5 md:py-10 max-md:overflow-hidden max-md:px-5 border-b border-paper/10 max-md:border max-md:border-paper/10 ${
-                p.featured ? "bg-paper/[0.04]" : ""
+                "featured" in p && p.featured ? "bg-paper/[0.04]" : ""
               } ${englishMobile}`}
             >
               <div className="relative z-10 md:pr-6">
                 <div className="relative z-10">
-                  {p.featured && (
+                  {"featured" in p && p.featured && t.packages.featured && (
                     <div className="text-[10px] text-accent-gold mb-1">{t.packages.featured}</div>
                   )}
                   <div className="text-[1.04rem] md:text-xl font-semibold text-paper">
                     {p.title}
                   </div>
                 </div>
-                <p className="mt-3 md:mt-4 text-[13px] md:text-[13.5px] leading-[1.8] md:leading-[1.85] text-paper/65">
-                  {p.desc}
-                </p>
+                {p.desc && (
+                  <p className="mt-3 md:mt-4 text-[13px] md:text-[13.5px] leading-[1.8] md:leading-[1.85] text-paper/65">
+                    {p.desc}
+                  </p>
+                )}
               </div>
               <div className="relative z-10 md:pt-1">
                 <div className="md:hidden text-[10px] text-accent-gold/80 mb-1.5">
@@ -1328,12 +1371,14 @@ function Packages({ t, language }: LocalizedSectionProps) {
                 </ul>
               </div>
               <div className="relative z-10 md:pt-1 flex flex-col justify-between gap-4">
-                <div>
-                  <div className="md:hidden text-[10px] text-accent-gold/80 mb-1.5">
-                    {t.packages.headers.durationShort}
+                {p.duration && (
+                  <div>
+                    <div className="md:hidden text-[10px] text-accent-gold/80 mb-1.5">
+                      {t.packages.headers.durationShort}
+                    </div>
+                    <div className="text-[13.5px] md:text-[14px] text-paper/90">{p.duration}</div>
                   </div>
-                  <div className="text-[13.5px] md:text-[14px] text-paper/90">{p.duration}</div>
-                </div>
+                )}
                 <a
                   href="#contact"
                   className="inline-flex min-h-11 items-center justify-center gap-2 text-[13px] font-semibold text-paper border-b border-paper hover:text-accent-gold hover:border-accent-gold transition self-start max-md:w-full max-md:border max-md:border-paper/25 max-md:px-4 max-md:py-3"
@@ -1395,20 +1440,6 @@ function Contact({ t, language }: LocalizedSectionProps) {
               label={t.contact.labels.email}
               value={EMAIL}
               href={`mailto:${EMAIL}`}
-              language={language}
-            />
-            <ContactRow
-              icon={<Phone className="w-4 h-4" />}
-              label={t.contact.labels.phone}
-              value={WHATSAPP_DISPLAY}
-              href={`tel:${WHATSAPP_DISPLAY.replace(/\s/g, "")}`}
-              language={language}
-            />
-            <ContactRow
-              icon={<MapPin className="w-4 h-4" />}
-              label={t.contact.labels.location}
-              value={t.location}
-              href="#"
               language={language}
             />
           </div>
@@ -1528,7 +1559,7 @@ function Footer({ t, language }: LocalizedSectionProps) {
             </li>
             <li>
               <a
-                href="#industries"
+                href="#values"
                 className="max-lg:min-h-11 max-lg:min-w-11 max-lg:flex max-lg:items-center hover:text-accent-gold"
               >
                 {t.nav.links[3].label}
@@ -1536,7 +1567,7 @@ function Footer({ t, language }: LocalizedSectionProps) {
             </li>
             <li>
               <a
-                href="#process"
+                href="#audience"
                 className="max-lg:min-h-11 max-lg:min-w-11 max-lg:flex max-lg:items-center hover:text-accent-gold"
               >
                 {t.nav.links[4].label}
@@ -1585,16 +1616,12 @@ function Footer({ t, language }: LocalizedSectionProps) {
           <div className="text-[10px] text-accent-gold mb-4">{t.footer.contactTitle}</div>
           <ul className="space-y-1 md:space-y-2.5 text-[13.5px]">
             <li className="flex max-lg:min-h-11 gap-2 items-center">
-              <Phone className="w-3.5 h-3.5 text-accent-gold" />
+              <MessageCircle className="w-3.5 h-3.5 text-accent-gold" />
               <span dir="ltr">{WHATSAPP_DISPLAY}</span>
             </li>
             <li className="flex max-lg:min-h-11 gap-2 items-center">
               <Mail className="w-3.5 h-3.5 text-accent-gold" />
               <span dir="ltr">{EMAIL}</span>
-            </li>
-            <li className="flex max-lg:min-h-11 gap-2 items-center">
-              <MapPin className="w-3.5 h-3.5 text-accent-gold" />
-              <span>{t.location}</span>
             </li>
           </ul>
         </div>
