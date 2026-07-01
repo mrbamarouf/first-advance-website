@@ -20,7 +20,6 @@ import corporateTower from "@/assets/plate-corporate-tower.jpg";
 import operationsCenter from "@/assets/plate-operations.jpg";
 import realEstate from "@/assets/plate-realestate.jpg";
 import ctaSunset from "@/assets/cta-jeddah-sunset.jpg";
-import processBg from "@/assets/plate-process-bg.jpg";
 import sectorBusiness from "@/assets/sector-business.jpg";
 import sectorRealEstate from "@/assets/sector-realestate.jpg";
 import sectorInvestment from "@/assets/sector-investment.jpg";
@@ -103,8 +102,6 @@ const COPY = {
         { n: "1:1", t: "مسؤولية موحدة" },
       ],
       imageAlt: "قاعة اجتماعات تنفيذية بإطلالة على مدينة الرياض",
-      badgeLabel: "تأسست في المملكة",
-      badgeText: "مؤسسة سعودية للاستشارات وحلول الأعمال المتكاملة.",
     },
     principles: {
       kicker: "مبادئنا",
@@ -264,7 +261,6 @@ const COPY = {
     },
     contact: {
       imageAlt: "أفق جدة عند الغروب على الكورنيش",
-      imageLabel: "لنبدأ الآن",
       title: "لنبدأ رحلة نجاح",
       titleAccent: "جديدة.",
       kicker: "تواصل معنا",
@@ -350,8 +346,6 @@ const COPY = {
         { n: "1:1", t: "Unified Responsibility" },
       ],
       imageAlt: "Executive boardroom overlooking Riyadh",
-      badgeLabel: "Founded in Saudi Arabia",
-      badgeText: "A Saudi consulting firm for integrated business solutions.",
     },
     principles: {
       kicker: "Our Principles",
@@ -528,7 +522,6 @@ const COPY = {
     },
     contact: {
       imageAlt: "Jeddah skyline at sunset along the Corniche",
-      imageLabel: "Let’s Begin",
       title: "Let’s start a new",
       titleAccent: "success journey.",
       kicker: "Contact Us",
@@ -902,12 +895,6 @@ function About({ t, language }: LocalizedSectionProps) {
               className="absolute inset-0 w-full h-full object-cover object-[48%_center] md:object-center"
             />
           </div>
-          <div
-            className={`absolute bottom-0 right-0 bg-navy-deep text-paper px-5 md:px-7 py-4 md:py-6 max-w-[285px] md:max-w-[300px] shadow-[0_20px_60px_-20px_rgba(0,0,0,0.5)] ${englishMobile}`}
-          >
-            <div className="text-[10px] text-accent-gold mb-2">{t.about.badgeLabel}</div>
-            <div className="text-[13px] md:text-[13.5px] leading-[1.7]">{t.about.badgeText}</div>
-          </div>
         </div>
       </div>
     </section>
@@ -929,16 +916,6 @@ function Principles({ t, language }: LocalizedSectionProps) {
 
   return (
     <section className="relative bg-navy-deep text-paper overflow-hidden">
-      <div aria-hidden className="absolute inset-0 opacity-20">
-        <img
-          src={processBg}
-          alt=""
-          className="absolute inset-0 w-full h-full object-cover"
-          loading="lazy"
-        />
-      </div>
-      <div className="absolute inset-0 bg-gradient-to-b from-navy-deep via-navy-deep/95 to-navy-deep" />
-
       <div className="relative container-x py-10 md:py-32">
         <div className={`max-w-2xl ${englishMobile}`}>
           <SectionKicker label={t.principles.kicker} light />
@@ -1144,35 +1121,32 @@ function Industries({ t, language }: LocalizedSectionProps) {
       </div>
       <div className="relative">
         <div className="container-x grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-5">
-          {sectors.map((s, i) => {
-            const sectorPosition = String(i + 1).padStart(2, "0");
-            const sectorCount =
-              language === "en" ? `${sectorPosition} of 06` : `${sectorPosition} من 06`;
-
-            return (
-              <article
+          {sectors.map((s) => (
+            <div
+              key={s.name}
+              className="group relative aspect-[4/3] min-h-[220px] sm:min-h-[240px] md:min-h-[260px] overflow-hidden border border-paper/10"
+            >
+              <img
+                src={s.img}
+                alt={s.tag}
+                className="absolute inset-0 w-full h-full object-cover object-[50%_center] transition-transform duration-[1400ms] group-hover:scale-[1.05]"
+              />
+            </div>
+          ))}
+        </div>
+        <div className="container-x mt-5 md:mt-8">
+          <ul
+            className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 border-t border-paper/10 ${englishMobile}`}
+          >
+            {sectors.map((s) => (
+              <li
                 key={s.name}
-                className={`relative aspect-[4/3] min-h-[220px] sm:min-h-[240px] md:min-h-[260px] overflow-hidden group border border-paper/10 ${englishMobile}`}
+                className="border-b border-paper/10 py-3.5 text-[14px] md:text-[15px] font-semibold leading-tight text-paper"
               >
-                <img
-                  src={s.img}
-                  alt={s.tag}
-                  className="absolute inset-0 w-full h-full object-cover object-[50%_center] transition-transform duration-[1400ms] group-hover:scale-[1.05]"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-navy-deep via-navy-deep/40 to-transparent" />
-                <div className="absolute inset-0 border border-transparent group-hover:border-accent-gold/60 transition" />
-                <div className="relative h-full flex flex-col justify-between p-5 md:p-7">
-                  <span className="text-[11px] text-accent-gold">{sectorCount}</span>
-                  <div>
-                    <div className="text-[15.5px] md:text-[18px] font-semibold leading-tight text-paper">
-                      {s.name}
-                    </div>
-                    <div className="mt-1.5 text-[12px] text-paper/60">{s.tag}</div>
-                  </div>
-                </div>
-              </article>
-            );
-          })}
+                {s.name}
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </section>
@@ -1201,20 +1175,6 @@ function Process({ t, language }: LocalizedSectionProps) {
   const steps = t.process.steps;
   return (
     <section id="process" className="relative bg-canvas border-t border-rule overflow-hidden">
-      {/* subtle architectural detail, very faint */}
-      <div aria-hidden className="absolute inset-0 opacity-[0.08]">
-        <img
-          src={processBg}
-          alt=""
-          className="absolute inset-0 w-full h-full object-cover"
-          loading="lazy"
-        />
-      </div>
-      <div
-        aria-hidden
-        className="absolute inset-0 bg-gradient-to-b from-canvas via-canvas/85 to-canvas"
-      />
-
       <div className="relative container-x py-10 md:py-32">
         <div
           className={`grid md:grid-cols-12 gap-5 md:gap-10 items-end mb-6 md:mb-16 max-md:border max-md:border-rule max-md:bg-paper/70 max-md:p-5 ${englishMobile}`}
@@ -1292,19 +1252,6 @@ function Packages({ t, language }: LocalizedSectionProps) {
       id="packages"
       className="relative bg-navy-deep text-paper border-t border-paper/10 overflow-hidden"
     >
-      <div aria-hidden className="absolute inset-0 opacity-[0.06]">
-        <img
-          src={processBg}
-          alt=""
-          className="absolute inset-0 w-full h-full object-cover"
-          loading="lazy"
-        />
-      </div>
-      <div
-        aria-hidden
-        className="absolute inset-0 bg-gradient-to-b from-navy-deep via-navy-deep/95 to-navy-deep"
-      />
-
       <div className="relative container-x py-10 md:py-32">
         <div className="grid md:grid-cols-12 gap-5 md:gap-10 items-end mb-7 md:mb-14">
           <div className={`md:col-span-6 ${englishMobile}`}>
@@ -1408,10 +1355,6 @@ function Packages({ t, language }: LocalizedSectionProps) {
 /* Contact, sunset skyline */
 function Contact({ t, language }: LocalizedSectionProps) {
   const englishMobile = mobileEnglishFlow(language);
-  const imageCaptionClass =
-    language === "en"
-      ? "absolute bottom-7 right-5 left-5 md:bottom-10 md:left-10 md:right-auto max-w-md [direction:ltr] text-left"
-      : "absolute bottom-7 right-5 left-5 md:bottom-10 md:right-10 md:left-auto max-w-md";
 
   return (
     <section id="contact" className="relative bg-navy-deep text-paper overflow-hidden">
@@ -1423,20 +1366,16 @@ function Contact({ t, language }: LocalizedSectionProps) {
             loading="lazy"
             className="absolute inset-0 w-full h-full object-cover object-[50%_center]"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-navy-deep/86 via-navy-deep/35 to-transparent lg:bg-gradient-to-l lg:from-navy-deep/80 lg:via-navy-deep/30 lg:to-transparent" />
-          <div className={`${imageCaptionClass} ${englishMobile}`}>
-            <div className="text-accent-gold text-[11px] mb-3 md:mb-4">{t.contact.imageLabel}</div>
-            <h2 className="text-[clamp(1.55rem,7.2vw,2.05rem)] md:text-[clamp(1.8rem,3vw,2.6rem)] font-semibold leading-[1.18] md:leading-[1.2]">
-              {t.contact.title}
-              <span className="block text-accent-gold">{t.contact.titleAccent}</span>
-            </h2>
-          </div>
         </div>
         <div
           className={`lg:col-span-6 bg-navy px-5 md:px-14 py-12 lg:py-20 flex flex-col justify-center ${englishMobile}`}
         >
           <SectionKicker label={t.contact.kicker} light />
-          <p className="mt-4 md:mt-5 max-w-md text-[14px] md:text-[15px] leading-[1.85] md:leading-[2] text-paper/75">
+          <h2 className="mt-4 md:mt-5 text-[clamp(1.55rem,7.2vw,2.05rem)] md:text-[clamp(1.8rem,3vw,2.6rem)] font-semibold leading-[1.18] md:leading-[1.2]">
+            {t.contact.title}
+            <span className="block text-accent-gold">{t.contact.titleAccent}</span>
+          </h2>
+          <p className="mt-5 md:mt-6 max-w-md text-[14px] md:text-[15px] leading-[1.85] md:leading-[2] text-paper/75">
             {t.contact.intro}
           </p>
 
