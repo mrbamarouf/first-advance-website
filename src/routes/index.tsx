@@ -615,27 +615,6 @@ function ActionArrow({ language, className }: { language: Language; className?: 
   return <Icon className={className} />;
 }
 
-function HighlightedStatementText({ text, language }: { text: string; language: Language }) {
-  const keywords =
-    language === "ar"
-      ? ["مساعد", "إداري", "متخصص", "استشاري"]
-      : ["assistant", "administrator", "specialist", "consultant"];
-  const keywordPattern = new RegExp(`(${keywords.join("|")})`, "g");
-
-  return text.split(keywordPattern).map((part, index) =>
-    keywords.includes(part) ? (
-      <span
-        key={`${part}-${index}`}
-        className="mx-1 inline-flex items-baseline bg-accent-gold/14 px-1.5 py-0.5 font-semibold text-accent-gold ring-1 ring-accent-gold/25 md:mx-1.5"
-      >
-        {part}
-      </span>
-    ) : (
-      <span key={`${part}-${index}`}>{part}</span>
-    ),
-  );
-}
-
 function Index() {
   const [language, setLanguage] = useState<Language>("ar");
   const t = COPY[language];
@@ -870,7 +849,7 @@ function Hero({ t, language }: LocalizedSectionProps) {
           </span>
         </h1>
 
-        <p className="mt-5 md:mt-10 text-[14px] md:text-[16px] leading-[1.78] md:leading-[2] text-paper/84 max-w-[34rem] md:max-w-2xl max-md:border max-md:border-paper/15 max-md:bg-navy-deep/45 max-md:px-4 max-md:py-3.5 max-md:backdrop-blur-sm">
+        <p className="mt-5 md:mt-10 text-[14px] md:text-[16px] leading-[1.78] md:leading-[2] text-paper/84 max-w-[34rem] md:max-w-2xl">
           {t.hero.body}
         </p>
 
@@ -927,33 +906,26 @@ function Hero({ t, language }: LocalizedSectionProps) {
 /* Intro, quiet editorial preface */
 function Intro({ t, language }: LocalizedSectionProps) {
   const englishMobile = mobileEnglishFlow(language);
-  const accentSide = language === "en" ? "left-0" : "right-0";
   const quoteSide = language === "en" ? "right-5 md:right-10" : "left-5 md:left-10";
 
   return (
     <section className="bg-canvas border-b border-rule">
       <div className="container-x py-8 md:py-28">
         <div
-          className={`animate-statement-reveal relative mx-auto max-w-4xl overflow-hidden border border-rule bg-paper px-6 py-7 text-center md:px-14 md:py-12 ${englishMobile}`}
+          className={`animate-statement-reveal relative mx-auto max-w-4xl px-2 py-2 text-center md:px-10 ${englishMobile}`}
         >
           <span
             aria-hidden
-            className={`absolute ${accentSide} top-6 bottom-6 w-px bg-accent-gold/70 md:top-10 md:bottom-10`}
-          />
-          <span
-            aria-hidden
             data-quote={language === "en" ? "“" : "”"}
-            className={`absolute ${quoteSide} -top-8 font-serif text-[7rem] leading-none text-accent-gold/[0.13] before:block before:content-[attr(data-quote)] md:-top-10 md:text-[10rem]`}
+            className={`absolute ${quoteSide} -top-10 font-serif text-[7rem] leading-none text-accent-gold/[0.12] before:block before:content-[attr(data-quote)] md:-top-14 md:text-[10rem]`}
           />
           <div className="relative z-10 mx-auto max-w-3xl">
             <span aria-hidden className="mx-auto mb-5 block h-px w-20 bg-accent-gold md:mb-7" />
             <p className="font-serif text-[clamp(1.22rem,5.7vw,1.5rem)] leading-[1.55] text-navy-deep md:text-[clamp(1.35rem,2.2vw,1.9rem)] md:leading-[1.55]">
               <span className="block font-semibold text-navy-deep">{t.intro.lead}</span>
               <span className="mt-3 block text-ink/78 md:mt-4">
-                <HighlightedStatementText
-                  text={`${t.intro.muted}${t.intro.tail}`}
-                  language={language}
-                />
+                {t.intro.muted}
+                {t.intro.tail}
               </span>
             </p>
           </div>
@@ -973,20 +945,15 @@ function About({ t, language }: LocalizedSectionProps) {
         <div
           className={`md:col-span-6 md:pt-10 relative z-10 max-md:border-0 max-md:bg-transparent max-md:p-0 ${englishMobile}`}
         >
-          <div className="max-md:bg-stone max-md:border max-md:border-rule max-md:px-4 max-md:py-4">
+          <div className="max-md:border-b max-md:border-rule max-md:pb-4">
             <SectionKicker label={t.about.kicker} />
             <h2 className="mt-3.5 md:mt-5 text-[clamp(1.36rem,6.2vw,1.68rem)] md:text-[clamp(1.6rem,2.5vw,2.15rem)] leading-[1.28] md:leading-[1.35] font-semibold text-navy-deep">
               {t.about.title}
             </h2>
           </div>
-          <div className="mt-3 md:mt-8 space-y-3 md:space-y-5 text-[14px] md:text-[15.5px] leading-[1.76] md:leading-[2] text-ink/80 max-w-lg">
+          <div className="mt-4 md:mt-8 space-y-4 md:space-y-5 text-[14px] md:text-[15.5px] leading-[1.76] md:leading-[2] text-ink/80 max-w-lg">
             {t.about.paragraphs.map((paragraph) => (
-              <p
-                key={paragraph}
-                className="max-md:bg-paper max-md:border max-md:border-rule max-md:px-4 max-md:py-3.5"
-              >
-                {paragraph}
-              </p>
+              <p key={paragraph}>{paragraph}</p>
             ))}
           </div>
         </div>
@@ -1020,10 +987,8 @@ function Principles({ t, language }: LocalizedSectionProps) {
           </h2>
         </div>
 
-        <div className="mt-5 md:mt-16 grid md:grid-cols-2 gap-px bg-paper/10 border border-paper/10 max-md:gap-3 max-md:border-0 max-md:bg-transparent">
-          <div
-            className={`bg-navy-deep p-5 md:p-12 relative overflow-hidden max-md:border max-md:border-paper/10 max-md:bg-navy ${englishMobile}`}
-          >
+        <div className="mt-6 md:mt-16 grid md:grid-cols-2 gap-8 md:gap-16 border-t border-paper/10 pt-6 md:pt-12">
+          <div className={`relative ${englishMobile}`}>
             <div className="relative z-10 text-accent-gold text-[11px] mb-4 md:mb-6">
               {t.principles.visionLabel}
             </div>
@@ -1031,9 +996,7 @@ function Principles({ t, language }: LocalizedSectionProps) {
               {t.principles.vision}
             </p>
           </div>
-          <div
-            className={`bg-navy-deep p-5 md:p-12 relative overflow-hidden max-md:border max-md:border-paper/10 max-md:bg-navy ${englishMobile}`}
-          >
+          <div className={`relative ${englishMobile}`}>
             <div className="relative z-10 text-accent-gold text-[11px] mb-4 md:mb-6">
               {t.principles.missionLabel}
             </div>
@@ -1558,7 +1521,7 @@ function Packages({ t, language }: LocalizedSectionProps) {
         </div>
 
         <p
-          className={`mt-5 md:mt-8 text-[12px] md:text-[12.5px] text-paper/55 max-w-2xl leading-[1.75] md:leading-[1.9] max-md:border max-md:border-paper/10 max-md:bg-paper/[0.04] max-md:px-4 max-md:py-3 ${englishMobile}`}
+          className={`mt-5 md:mt-8 border-t border-paper/10 pt-4 text-[12px] md:text-[12.5px] text-paper/55 max-w-2xl leading-[1.75] md:leading-[1.9] ${englishMobile}`}
         >
           {t.packages.note}
         </p>
@@ -1590,7 +1553,7 @@ function Contact({ t, language }: LocalizedSectionProps) {
             {t.contact.title}
             <span className="block text-accent-gold">{t.contact.titleAccent}</span>
           </h2>
-          <p className="mt-4 md:mt-6 max-w-md text-[13.8px] md:text-[15px] leading-[1.72] md:leading-[2] text-paper/75 max-md:border max-md:border-paper/10 max-md:bg-paper/[0.04] max-md:px-4 max-md:py-3">
+          <p className="mt-4 md:mt-6 max-w-md border-t border-paper/10 pt-4 text-[13.8px] md:text-[15px] leading-[1.72] md:leading-[2] text-paper/75">
             {t.contact.intro}
           </p>
 
