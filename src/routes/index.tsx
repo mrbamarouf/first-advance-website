@@ -1154,9 +1154,9 @@ function WhyUs({ t, language }: LocalizedSectionProps) {
   ];
   return (
     <section id="why" className="bg-stone border-t border-rule">
-      <div className="container-x py-8 md:py-32 grid md:grid-cols-12 gap-4 md:gap-16">
+      <div className="container-x py-8 md:py-32 grid md:grid-cols-12 gap-4 md:gap-10 lg:gap-14">
         <div
-          className={`md:col-span-5 md:sticky md:top-24 self-start max-md:border max-md:border-paper/10 max-md:bg-navy-deep max-md:p-5 ${englishMobile}`}
+          className={`md:col-span-4 md:sticky md:top-24 self-start max-md:border max-md:border-paper/10 max-md:bg-navy-deep max-md:p-5 md:border md:border-rule md:bg-paper md:p-8 lg:p-10 ${englishMobile}`}
         >
           <div className="hidden md:block">
             <SectionKicker label={t.why.kicker} />
@@ -1190,22 +1190,28 @@ function WhyUs({ t, language }: LocalizedSectionProps) {
             );
           })}
         </ol>
-        <ol
-          className={`hidden md:block md:col-span-7 border-t border-rule-strong max-md:border max-md:border-rule max-md:bg-canvas max-md:px-5 ${englishMobile}`}
-        >
-          {items.map((t, i) => (
-            <li
-              key={t}
-              className="grid grid-cols-12 gap-3 md:gap-4 items-baseline py-4 md:py-6 border-b border-rule"
-            >
-              <span className="col-span-2 font-serif text-[1.65rem] md:text-[2rem] leading-none text-accent-gold">
-                {String(i + 1).padStart(2, "0")}
-              </span>
-              <p className="col-span-10 text-[14.5px] md:text-[16.5px] leading-[1.7] md:leading-[1.75] text-navy-deep font-medium">
-                {t}
-              </p>
-            </li>
-          ))}
+        <ol className={`hidden md:grid md:col-span-8 md:grid-cols-2 gap-3 ${englishMobile}`}>
+          {items.map((item, i) => {
+            const Icon = featureIcons[i % featureIcons.length];
+            return (
+              <li
+                key={item}
+                className="group grid grid-cols-[2.75rem_1fr] gap-4 border border-rule bg-canvas px-5 py-5 text-navy-deep transition hover:border-accent-gold/45 hover:bg-paper"
+              >
+                <span className="flex h-11 w-11 items-center justify-center bg-navy-deep text-accent-gold">
+                  <Icon className="h-4.5 w-4.5" strokeWidth={1.8} />
+                </span>
+                <div>
+                  <span className="block font-serif text-[2rem] leading-none text-accent-gold">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <p className="mt-3 text-[16.5px] leading-[1.75] text-navy-deep font-medium">
+                    {item}
+                  </p>
+                </div>
+              </li>
+            );
+          })}
         </ol>
       </div>
     </section>
