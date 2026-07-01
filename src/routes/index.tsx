@@ -245,7 +245,6 @@ const COPY = {
       note: "جميع الباقات مبنية على تعاقد استشاري مخصص. الأسعار تُحدَّد بعد جلسة تشخيصية مجانية مع فريق First Advance.",
       packs: [
         {
-          roman: "١",
           title: "الباقة الأساسية",
           audience: "المنشآت الصغيرة والناشئة",
           desc: "حلول أساسية لدعم الأعمال وتحسين الأداء اليومي.",
@@ -253,7 +252,6 @@ const COPY = {
           duration: "٣ أشهر",
         },
         {
-          roman: "٢",
           title: "الباقة المتقدمة",
           audience: "المؤسسات المتنامية",
           desc: "حلول تشغيلية وإدارية متكاملة للمؤسسات المتنامية.",
@@ -262,7 +260,6 @@ const COPY = {
           featured: true,
         },
         {
-          roman: "٣",
           title: "الباقة الاحترافية",
           audience: "المؤسسات الكبرى والمشاريع الاستراتيجية",
           desc: "حلول شاملة وإدارة متقدمة للمؤسسات الكبرى والمشاريع الاستراتيجية.",
@@ -491,7 +488,6 @@ const COPY = {
       note: "All packages are based on tailored consulting engagements. Pricing is defined after a free diagnostic session with the First Advance team.",
       packs: [
         {
-          roman: "I",
           title: "Essential Package",
           audience: "Small and emerging businesses",
           desc: "Core solutions to support the business and improve daily performance.",
@@ -503,7 +499,6 @@ const COPY = {
           duration: "3 months",
         },
         {
-          roman: "II",
           title: "Advanced Package",
           audience: "Growing organizations",
           desc: "Integrated operational and administrative solutions for growing organizations.",
@@ -516,7 +511,6 @@ const COPY = {
           featured: true,
         },
         {
-          roman: "III",
           title: "Professional Package",
           audience: "Large organizations and strategic projects",
           desc: "Comprehensive solutions and advanced management for large organizations and strategic projects.",
@@ -1259,7 +1253,6 @@ function Process({ t, language }: LocalizedSectionProps) {
 function Packages({ t, language }: LocalizedSectionProps) {
   const englishMobile = mobileEnglishFlow(language);
   const packs = t.packages.packs;
-  const isEnglish = language === "en";
 
   return (
     <section
@@ -1291,49 +1284,20 @@ function Packages({ t, language }: LocalizedSectionProps) {
         <div className="border-t border-paper/15 md:border-t-0 max-md:space-y-3 max-md:border-t-0">
           {packs.map((p) => (
             <div
-              key={p.roman}
+              key={p.title}
               className={`relative grid grid-cols-1 md:grid-cols-[1.1fr_1fr_1fr_1fr] gap-4 md:gap-8 py-5 md:py-10 max-md:overflow-hidden max-md:px-5 border-b border-paper/10 max-md:border max-md:border-paper/10 ${
                 p.featured ? "bg-paper/[0.04]" : ""
               } ${englishMobile}`}
             >
               <div className="relative z-10 md:pr-6">
-                {isEnglish ? (
-                  <div className="relative min-h-[3.85rem] pr-[6.6rem] md:min-h-[4.4rem] md:pr-28">
-                    <span
-                      aria-hidden="true"
-                      data-decorative-roman={p.roman}
-                      className="pointer-events-none absolute right-0 top-[-0.42rem] z-0 w-[5.7rem] text-right font-serif text-[4.65rem] leading-none text-accent-gold/12 md:top-[-0.55rem] md:w-24 md:text-[5rem] md:text-accent-gold/14"
-                    >
-                      {p.roman}
-                    </span>
-                    <div className="relative z-10 pt-1.5 md:pt-2">
-                      {p.featured && (
-                        <div className="text-[10px] text-accent-gold mb-1">
-                          {t.packages.featured}
-                        </div>
-                      )}
-                      <div className="text-[1.04rem] md:text-xl font-semibold text-paper">
-                        {p.title}
-                      </div>
-                    </div>
+                <div className="relative z-10">
+                  {p.featured && (
+                    <div className="text-[10px] text-accent-gold mb-1">{t.packages.featured}</div>
+                  )}
+                  <div className="text-[1.04rem] md:text-xl font-semibold text-paper">
+                    {p.title}
                   </div>
-                ) : (
-                  <div className="relative flex items-baseline gap-4 max-md:min-h-[3.2rem] max-md:pl-16">
-                    <span className="font-serif text-[2.45rem] md:text-[3rem] leading-none text-accent-gold max-md:absolute max-md:left-0 max-md:top-[-0.35rem] max-md:text-[5.4rem] max-md:text-accent-gold/12">
-                      {p.roman}
-                    </span>
-                    <div className="relative z-10">
-                      {p.featured && (
-                        <div className="text-[10px] text-accent-gold mb-1">
-                          {t.packages.featured}
-                        </div>
-                      )}
-                      <div className="text-[1.04rem] md:text-xl font-semibold text-paper">
-                        {p.title}
-                      </div>
-                    </div>
-                  </div>
-                )}
+                </div>
                 <p className="mt-3 md:mt-4 text-[13px] md:text-[13.5px] leading-[1.8] md:leading-[1.85] text-paper/65">
                   {p.desc}
                 </p>
