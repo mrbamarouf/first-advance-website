@@ -165,6 +165,14 @@
   animation: fade-up 0.7s ease-out both;
 }
 
+@utility animate-statement-reveal {
+  animation: fade-up 0.8s ease-out both;
+  @supports (animation-timeline: view()) {
+    animation-timeline: view();
+    animation-range: entry 0% cover 32%;
+  }
+}
+
 @utility no-scrollbar {
   scrollbar-width: none;
   &::-webkit-scrollbar {

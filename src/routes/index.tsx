@@ -615,6 +615,27 @@ function ActionArrow({ language, className }: { language: Language; className?: 
   return <Icon className={className} />;
 }
 
+function HighlightedStatementText({ text, language }: { text: string; language: Language }) {
+  const keywords =
+    language === "ar"
+      ? ["مساعد", "إداري", "متخصص", "استشاري"]
+      : ["assistant", "administrator", "specialist", "consultant"];
+  const keywordPattern = new RegExp(`(${keywords.join("|")})`, "g");
+
+  return text.split(keywordPattern).map((part, index) =>
+    keywords.includes(part) ? (
+      <span
+        key={`${part}-${index}`}
+        className="mx-1 inline-flex items-baseline bg-accent-gold/14 px-1.5 py-0.5 font-semibold text-accent-gold ring-1 ring-accent-gold/25 md:mx-1.5"
+      >
+        {part}
+      </span>
+    ) : (
+      <span key={`${part}-${index}`}>{part}</span>
+    ),
+  );
+}
+
 function Index() {
   const [language, setLanguage] = useState<Language>("ar");
   const t = COPY[language];
@@ -906,21 +927,37 @@ function Hero({ t, language }: LocalizedSectionProps) {
 /* Intro, quiet editorial preface */
 function Intro({ t, language }: LocalizedSectionProps) {
   const englishMobile = mobileEnglishFlow(language);
+  const accentSide = language === "en" ? "left-0" : "right-0";
+  const quoteSide = language === "en" ? "right-5 md:right-10" : "left-5 md:left-10";
 
   return (
-    <section className="bg-canvas border-b border-rule max-md:bg-navy-deep">
-      <div className="container-x py-8 md:py-28 grid md:grid-cols-12 gap-10 items-end">
-        <div className="md:col-span-2 hidden md:flex items-center">
-          <span className="block h-px w-full max-w-24 bg-accent-gold/55" />
-        </div>
-        <p
-          className={`md:col-span-10 font-serif text-[clamp(1.16rem,5.6vw,1.36rem)] md:text-[clamp(1.35rem,2.2vw,1.9rem)] leading-[1.58] md:leading-[1.55] text-navy-deep max-md:text-paper max-md:border max-md:border-paper/10 max-md:bg-paper/[0.04] max-md:px-5 max-md:py-5 ${englishMobile}`}
+    <section className="bg-canvas border-b border-rule">
+      <div className="container-x py-8 md:py-28">
+        <div
+          className={`animate-statement-reveal relative mx-auto max-w-4xl overflow-hidden border border-rule bg-paper px-6 py-7 text-center md:px-14 md:py-12 ${englishMobile}`}
         >
-          <span aria-hidden className="mb-5 block h-px w-16 bg-accent-gold md:hidden" />
-          {t.intro.lead}
-          <span className="text-muted-ink max-md:text-paper/70">{t.intro.muted}</span>
-          {t.intro.tail}
-        </p>
+          <span
+            aria-hidden
+            className={`absolute ${accentSide} top-6 bottom-6 w-px bg-accent-gold/70 md:top-10 md:bottom-10`}
+          />
+          <span
+            aria-hidden
+            data-quote={language === "en" ? "“" : "”"}
+            className={`absolute ${quoteSide} -top-8 font-serif text-[7rem] leading-none text-accent-gold/[0.13] before:block before:content-[attr(data-quote)] md:-top-10 md:text-[10rem]`}
+          />
+          <div className="relative z-10 mx-auto max-w-3xl">
+            <span aria-hidden className="mx-auto mb-5 block h-px w-20 bg-accent-gold md:mb-7" />
+            <p className="font-serif text-[clamp(1.22rem,5.7vw,1.5rem)] leading-[1.55] text-navy-deep md:text-[clamp(1.35rem,2.2vw,1.9rem)] md:leading-[1.55]">
+              <span className="block font-semibold text-navy-deep">{t.intro.lead}</span>
+              <span className="mt-3 block text-ink/78 md:mt-4">
+                <HighlightedStatementText
+                  text={`${t.intro.muted}${t.intro.tail}`}
+                  language={language}
+                />
+              </span>
+            </p>
+          </div>
+        </div>
       </div>
     </section>
   );
