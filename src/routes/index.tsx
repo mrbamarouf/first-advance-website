@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { ArrowUpLeft, Check, Mail, MapPin, Menu, MessageCircle, Phone, X } from "lucide-react";
-import logoImage from "@/assets/first-advance-logo.png";
+import logoImage from "@/assets/first-advance-logo-light-transparent.png";
 
 /* Premium Saudi architecture photography */
 import heroKafd from "@/assets/hero-riyadh-panorama.jpg";
@@ -77,21 +77,17 @@ function Nav() {
   return (
     <header className="fixed top-0 inset-x-0 z-50">
       <div className="absolute inset-0 bg-navy-deep/85 backdrop-blur-xl border-b border-paper/10" />
-      <div className="relative container-x flex items-center justify-between h-16 md:h-[4.5rem] text-paper">
+      <div className="relative container-x flex h-[4.75rem] items-center justify-between text-paper md:h-[5.5rem] lg:h-24">
         <a
           href="#top"
-          className="flex min-h-11 items-center gap-3"
+          className="flex min-h-11 shrink-0 items-center"
           onClick={() => setIsOpen(false)}
         >
           <img
             src={LOGO}
             alt="First Advance"
-            className="h-9 md:h-10 w-auto rounded-sm bg-paper/90 px-1.5 py-1"
+            className="w-[124px] sm:w-[142px] lg:w-[180px] h-auto object-contain drop-shadow-[0_8px_22px_rgba(0,0,0,0.38)]"
           />
-          <div className="hidden sm:block leading-tight border-r border-paper/20 pr-3">
-            <div className="text-[13px] font-semibold">First Advance</div>
-            <div className="text-[10px] uppercase text-paper/55">Integrated Business Solutions</div>
-          </div>
         </a>
         <nav className="hidden lg:flex items-center gap-8 text-[13px] text-paper/85">
           {links.map((link) => (
@@ -179,7 +175,7 @@ function Hero() {
           src={LOGO}
           alt="First Advance"
           loading="eager"
-          className="h-16 md:h-20 w-auto mb-8 md:mb-10 rounded-sm bg-paper/90 px-2.5 py-2 drop-shadow-[0_4px_24px_rgba(0,0,0,0.55)]"
+          className="w-[148px] sm:w-[170px] md:w-[215px] h-auto mb-8 md:mb-10 object-contain drop-shadow-[0_12px_32px_rgba(0,0,0,0.58)]"
         />
 
         <div className="flex items-center justify-center gap-3 text-accent-gold text-[10px] md:text-[11px] mb-7 md:mb-8 max-w-full">
@@ -936,18 +932,12 @@ function Footer() {
     <footer className="bg-[oklch(0.15_0.025_168)] text-paper/75 pt-16 md:pt-20 pb-10 border-t border-paper/10">
       <div className="container-x grid md:grid-cols-12 gap-10 pb-14 border-b border-paper/10">
         <div className="md:col-span-4">
-          <div className="flex items-center gap-3">
+          <div className="flex items-center">
             <img
               src={LOGO}
               alt="First Advance"
-              className="h-11 w-auto rounded-sm bg-paper/90 px-1.5 py-1"
+              className="w-[150px] md:w-[205px] h-auto object-contain drop-shadow-[0_10px_24px_rgba(0,0,0,0.32)]"
             />
-            <div className="leading-tight border-r border-paper/20 pr-3">
-              <div className="text-paper text-sm font-semibold">First Advance</div>
-              <div className="text-[11px] uppercase text-paper/55">
-                Integrated Business Solutions
-              </div>
-            </div>
           </div>
           <p className="mt-6 text-[13.5px] leading-[1.95] text-paper/55 max-w-sm">
             مؤسسة سعودية متخصصة في حلول الأعمال، الخدمات التشغيلية والخدمات العقارية، تجمع الخبرة

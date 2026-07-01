@@ -10,7 +10,7 @@ import {
 import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
-import logoIcon from "../assets/first-advance-logo.png?url";
+import logoIcon from "../assets/first-advance-logo-light-transparent.png?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 
 function NotFoundComponent() {
