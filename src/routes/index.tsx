@@ -1221,6 +1221,7 @@ function WhyUs({ t, language }: LocalizedSectionProps) {
 /* Core values from the official profile */
 function CoreValues({ t, language }: LocalizedSectionProps) {
   const englishMobile = mobileEnglishFlow(language);
+  const valueIcons = [BadgeCheck, ShieldCheck, Layers, Handshake, SlidersHorizontal, RefreshCcw];
 
   return (
     <section id="values" className="bg-canvas border-t border-rule max-md:bg-paper">
@@ -1244,15 +1245,29 @@ function CoreValues({ t, language }: LocalizedSectionProps) {
             </li>
           ))}
         </ul>
-        <ul
-          className={`hidden md:grid sm:grid-cols-2 lg:grid-cols-3 gap-px bg-rule border border-rule ${englishMobile}`}
-        >
-          {t.values.items.map((item) => (
-            <li key={item} className="bg-paper px-5 py-5 md:px-8 md:py-7">
-              <div className="h-px w-10 bg-accent-gold mb-4" />
-              <div className="text-[1.05rem] md:text-xl font-semibold text-navy-deep">{item}</div>
-            </li>
-          ))}
+        <ul className={`hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-4 ${englishMobile}`}>
+          {t.values.items.map((item, index) => {
+            const Icon = valueIcons[index % valueIcons.length];
+            return (
+              <li
+                key={item}
+                className="group relative min-h-[11.25rem] overflow-hidden border border-rule bg-paper px-7 py-7 transition duration-300 ease-out hover:-translate-y-1 hover:border-accent-gold/50 hover:bg-canvas"
+              >
+                <div className="flex items-start justify-between gap-5">
+                  <span className="flex h-11 w-11 shrink-0 items-center justify-center border border-rule bg-canvas text-accent-gold transition duration-300 group-hover:border-accent-gold/45 group-hover:bg-navy-deep">
+                    <Icon className="h-4.5 w-4.5" strokeWidth={1.7} aria-hidden />
+                  </span>
+                  <span
+                    aria-hidden
+                    className="mt-5 h-px w-12 bg-accent-gold transition duration-300 group-hover:w-16"
+                  />
+                </div>
+                <div className="mt-8 text-start text-[1.12rem] leading-[1.45] md:text-xl font-semibold text-navy-deep">
+                  {item}
+                </div>
+              </li>
+            );
+          })}
         </ul>
       </div>
     </section>
