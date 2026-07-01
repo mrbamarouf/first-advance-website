@@ -1,6 +1,16 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-import { ArrowUpLeft, Check, Mail, MapPin, Menu, MessageCircle, Phone, X } from "lucide-react";
+import {
+  ArrowUpLeft,
+  ArrowUpRight,
+  Check,
+  Mail,
+  MapPin,
+  Menu,
+  MessageCircle,
+  Phone,
+  X,
+} from "lucide-react";
 import logoImage from "@/assets/first-advance-logo-light-transparent.png";
 
 /* Premium Saudi architecture photography */
@@ -21,13 +31,13 @@ import sectorEntrepreneurs from "@/assets/sector-entrepreneurs.jpg";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "First Advance — حلول أعمال متكاملة" },
+      { title: "First Advance، حلول أعمال متكاملة" },
       {
         name: "description",
         content:
-          "First Advance — مؤسسة سعودية متخصصة في حلول الأعمال، الخدمات التشغيلية والخدمات العقارية.",
+          "First Advance، مؤسسة سعودية متخصصة في حلول الأعمال، الخدمات التشغيلية والخدمات العقارية.",
       },
-      { property: "og:title", content: "First Advance — حلول أعمال متكاملة" },
+      { property: "og:title", content: "First Advance، حلول أعمال متكاملة" },
       {
         property: "og:description",
         content: "حلول متكاملة في إدارة الأعمال، التشغيل، والخدمات العقارية.",
@@ -42,30 +52,6 @@ const WHATSAPP_DISPLAY = "+966 556 882 169";
 const WHATSAPP_LINK = "https://wa.me/966556882169";
 const EMAIL = "info@aras.com.sa";
 type Language = "ar" | "en";
-
-const LTR_ISOLATE_START = "\u2066";
-const LTR_ISOLATE_END = "\u2069";
-const LTR_SKIP_KEYS = new Set(["href", "k", "n", "roman"]);
-
-function isolateEnglishCopy<T>(value: T, key?: string): T {
-  if (typeof value === "string") {
-    return (
-      LTR_SKIP_KEYS.has(key ?? "") ? value : `${LTR_ISOLATE_START}${value}${LTR_ISOLATE_END}`
-    ) as T;
-  }
-  if (Array.isArray(value)) {
-    return value.map((item) => isolateEnglishCopy(item)) as T;
-  }
-  if (value && typeof value === "object") {
-    return Object.fromEntries(
-      Object.entries(value).map(([entryKey, entryValue]) => [
-        entryKey,
-        isolateEnglishCopy(entryValue, entryKey),
-      ]),
-    ) as T;
-  }
-  return value;
-}
 
 const COPY = {
   ar: {
@@ -89,8 +75,8 @@ const COPY = {
       title: "حلول أعمال متكاملة",
       subtitlePrefix: "تبني ",
       subtitleHighlight: "النمو",
-      subtitleSuffix: " … وتدير النجاح.",
-      body: "مؤسسة سعودية متخصصة في حلول الأعمال، الخدمات التشغيلية، والخدمات العقارية — نبني للمؤسسات ورواد الأعمال منظومات أكثر كفاءة واستدامة.",
+      subtitleSuffix: " وتدير النجاح.",
+      body: "مؤسسة سعودية متخصصة في حلول الأعمال، الخدمات التشغيلية، والخدمات العقارية، نبني للمؤسسات ورواد الأعمال منظومات أكثر كفاءة واستدامة.",
       primaryCta: "ابدأ معنا",
       secondaryCta: "استكشف خدماتنا",
       ledger: [
@@ -101,7 +87,7 @@ const COPY = {
     },
     intro: {
       lead: "نؤمن بأن النجاح الحقيقي يبدأ من التخطيط الصحيح، والإدارة الفعالة،",
-      muted: " والتنفيذ الاحترافي — ",
+      muted: " والتنفيذ الاحترافي، ",
       tail: "ولهذا نجمع الإدارة، التشغيل، والعقار تحت منظومة واحدة تخدم عميلاً واحداً.",
     },
     about: {
@@ -122,7 +108,7 @@ const COPY = {
     },
     principles: {
       kicker: "مبادئنا",
-      title: "رؤية واضحة، رسالة عملية — ومنهج مبني على النتائج.",
+      title: "رؤية واضحة، رسالة عملية، ومنهج مبني على النتائج.",
       visionLabel: "رؤيتنا",
       vision:
         "أن نكون الشريك الأول للمؤسسات في تطوير الأعمال، ورفع الكفاءة التشغيلية، وتقديم حلول متكاملة تحقق قيمة مستدامة.",
@@ -132,7 +118,7 @@ const COPY = {
     },
     services: {
       kicker: "خدماتنا",
-      title: "ثلاث ممارسات متكاملة — تُقدَّم منفصلة أو مجتمعة، بمسؤولية موحدة.",
+      title: "ثلاث ممارسات متكاملة، تُقدَّم منفصلة أو مجتمعة بمسؤولية موحدة.",
       intro: "نعتمد منهجية تنفيذ واحدة أمام العميل، مع فرق متخصصة لكل ممارسة.",
       cards: [
         {
@@ -147,7 +133,7 @@ const COPY = {
             "تحسين العمليات",
             "التخطيط الاستراتيجي",
           ],
-          alt: "برج مقر شركة سعودية · Corporate headquarters tower",
+          alt: "برج مقر شركة سعودية، Corporate headquarters tower",
         },
         {
           n: "02",
@@ -161,7 +147,7 @@ const COPY = {
             "تطوير العمليات",
             "الدعم التشغيلي",
           ],
-          alt: "مركز عمليات · Operations control room",
+          alt: "مركز عمليات، Operations control room",
         },
         {
           n: "03",
@@ -175,7 +161,7 @@ const COPY = {
             "تنسيق الاستثمار",
             "حلول عقارية متكاملة",
           ],
-          alt: "مشروع عقاري تجاري متعدد الاستخدامات · Commercial development",
+          alt: "مشروع عقاري تجاري متعدد الاستخدامات، Commercial development",
         },
       ],
     },
@@ -183,7 +169,7 @@ const COPY = {
       kicker: "لماذا First Advance",
       title: "اختيار موثوق",
       titleAccent: "لإدارة الأعمال والعمليات والعقارات.",
-      quote: "«نبني علاقات طويلة المدى مع عملائنا، ونقيس نجاحنا بنجاحهم — لا بحجم مشاريعنا.»",
+      quote: "«نبني علاقات طويلة المدى مع عملائنا، ونقيس نجاحنا بنجاحهم، لا بحجم مشاريعنا.»",
       items: [
         "خبرة عملية في تطوير الأعمال والإدارة والتشغيل.",
         "حلول متكاملة تحت سقف واحد.",
@@ -200,8 +186,8 @@ const COPY = {
       sectors: [
         { name: "قطاع الأعمال", tag: "Corporate Tower" },
         { name: "القطاع العقاري", tag: "Commercial Development" },
-        { name: "قطاع الاستثمار", tag: "Financial District · KAFD" },
-        { name: "القطاع التجاري", tag: "Retail & Commercial" },
+        { name: "قطاع الاستثمار", tag: "Financial District, KAFD" },
+        { name: "القطاع التجاري", tag: "Retail and Commercial" },
         { name: "قطاع الخدمات", tag: "Infrastructure" },
         { name: "رواد الأعمال والمنشآت الناشئة", tag: "Modern Office Campus" },
       ],
@@ -237,7 +223,7 @@ const COPY = {
       kicker: "باقات الخدمات",
       title: "خيارات تعاقد استشارية تلائم مرحلة كل مؤسسة.",
       intro:
-        "تُقدَّم عبر عقود استشارية مخصصة، بمنهجية تنفيذ واحدة ومسؤولية موحدة أمام العميل — دون رسوم اشتراك جاهزة.",
+        "تُقدَّم عبر عقود استشارية مخصصة، بمنهجية تنفيذ واحدة ومسؤولية موحدة أمام العميل، دون رسوم اشتراك جاهزة.",
       headers: {
         package: "الباقة",
         audience: "الفئة المستهدفة",
@@ -247,7 +233,7 @@ const COPY = {
       },
       featured: "الأكثر طلباً",
       request: "طلب هذه الباقة",
-      note: "* جميع الباقات مبنية على تعاقد استشاري مخصص. الأسعار تُحدَّد بعد جلسة تشخيصية مجانية مع فريق First Advance.",
+      note: "جميع الباقات مبنية على تعاقد استشاري مخصص. الأسعار تُحدَّد بعد جلسة تشخيصية مجانية مع فريق First Advance.",
       packs: [
         {
           roman: "I",
@@ -271,8 +257,8 @@ const COPY = {
           title: "الباقة الاحترافية",
           audience: "المؤسسات الكبرى والمشاريع الاستراتيجية",
           desc: "حلول شاملة وإدارة متقدمة للمؤسسات الكبرى والمشاريع الاستراتيجية.",
-          includes: ["إدارة متكاملة (أعمال · تشغيل · عقار)", "فريق مخصص", "حوكمة ومتابعة تنفيذية"],
-          duration: "١٢ شهراً+",
+          includes: ["إدارة متكاملة (أعمال، تشغيل، عقار)", "فريق مخصص", "حوكمة ومتابعة تنفيذية"],
+          duration: "١٢ شهراً أو أكثر",
         },
       ],
     },
@@ -283,7 +269,7 @@ const COPY = {
       titleAccent: "جديدة.",
       kicker: "تواصل معنا",
       intro:
-        "سواء كنت تبحث عن تطوير أعمالك، أو تحسين عملياتك التشغيلية، أو حلول عقارية متكاملة — فريق First Advance مستعد لبناء الحل المناسب لأهدافك.",
+        "سواء كنت تبحث عن تطوير أعمالك، أو تحسين عملياتك التشغيلية، أو حلول عقارية متكاملة، فريق First Advance مستعد لبناء الحل المناسب لأهدافك.",
       labels: {
         whatsapp: "واتساب",
         email: "البريد الإلكتروني",
@@ -302,7 +288,7 @@ const COPY = {
       copyright: "جميع الحقوق محفوظة.",
     },
   },
-  en: isolateEnglishCopy({
+  en: {
     location: "Jeddah, Kingdom of Saudi Arabia",
     nav: {
       links: [
@@ -375,7 +361,7 @@ const COPY = {
         "To be the first partner for organizations seeking business development, higher operational efficiency, and integrated solutions that create sustainable value.",
       missionLabel: "Our Mission",
       mission:
-        "To provide professional services grounded in quality, innovation, and practical expertise, building long-term partnerships with clients and delivering measurable outcomes.",
+        "To provide professional services grounded in quality, innovation, and practical expertise, building long term partnerships with clients and delivering measurable outcomes.",
     },
     services: {
       kicker: "Our Services",
@@ -402,7 +388,7 @@ const COPY = {
           n: "02",
           label: "Practice 02",
           title: "Operational Services",
-          desc: "Disciplined operations management, project coordination, continuous performance improvement, and day-to-day operational support.",
+          desc: "Disciplined operations management, project coordination, continuous performance improvement, and daily operational support.",
           items: [
             "Operations Management",
             "Project Coordination",
@@ -424,7 +410,7 @@ const COPY = {
             "Investment Coordination",
             "Integrated Real Estate Solutions",
           ],
-          alt: "Mixed-use commercial real estate development",
+          alt: "Mixed use commercial real estate development",
         },
       ],
     },
@@ -433,13 +419,13 @@ const COPY = {
       title: "A trusted choice",
       titleAccent: "for business, operations, and real estate management.",
       quote:
-        "We build long-term relationships with our clients, and measure our success by theirs, not by the size of our projects.",
+        "We build long term relationships with our clients, and measure our success by theirs, not by the size of our projects.",
       items: [
         "Practical expertise in business development, management, and operations.",
         "Integrated solutions under one roof.",
-        "High-quality execution and professional standards.",
+        "High quality execution and professional standards.",
         "Flexible solutions shaped around each client’s needs.",
-        "Long-term partnerships built on trust and results.",
+        "Long term partnerships built on trust and results.",
         "A clear focus on sustainability and real growth.",
       ],
     },
@@ -451,8 +437,8 @@ const COPY = {
       sectors: [
         { name: "Corporate Sector", tag: "Corporate Tower" },
         { name: "Real Estate Sector", tag: "Commercial Development" },
-        { name: "Investment Sector", tag: "Financial District · KAFD" },
-        { name: "Commercial Sector", tag: "Retail & Commercial" },
+        { name: "Investment Sector", tag: "Financial District, KAFD" },
+        { name: "Commercial Sector", tag: "Retail and Commercial" },
         { name: "Services Sector", tag: "Infrastructure" },
         { name: "Entrepreneurs and Startups", tag: "Modern Office Campus" },
       ],
@@ -461,7 +447,7 @@ const COPY = {
       kicker: "Our Approach",
       title: "From understanding to execution to continuous development.",
       intro:
-        "A unified four-stage methodology governs every engagement, regardless of its size or sector.",
+        "A unified four stage methodology governs every engagement, regardless of its size or sector.",
       steps: [
         {
           n: "01",
@@ -480,7 +466,7 @@ const COPY = {
         },
         {
           n: "04",
-          t: "Follow-up and Development",
+          t: "Follow Up and Development",
           d: "We measure results and improve performance continuously to support sustainability and growth.",
         },
       ],
@@ -499,13 +485,13 @@ const COPY = {
       },
       featured: "Most Requested",
       request: "Request This Package",
-      note: "* All packages are based on tailored consulting engagements. Pricing is defined after a free diagnostic session with the First Advance team.",
+      note: "All packages are based on tailored consulting engagements. Pricing is defined after a free diagnostic session with the First Advance team.",
       packs: [
         {
           roman: "I",
           title: "Essential Package",
           audience: "Small and emerging businesses",
-          desc: "Core solutions to support the business and improve day-to-day performance.",
+          desc: "Core solutions to support the business and improve daily performance.",
           includes: [
             "Diagnostic consultation",
             "Basic administrative support",
@@ -521,7 +507,7 @@ const COPY = {
           includes: [
             "Strategic planning",
             "Ongoing operations management",
-            "Periodic performance follow-up",
+            "Periodic performance follow up",
           ],
           duration: "6 months",
           featured: true,
@@ -532,11 +518,11 @@ const COPY = {
           audience: "Large organizations and strategic projects",
           desc: "Comprehensive solutions and advanced management for large organizations and strategic projects.",
           includes: [
-            "Integrated management (business · operations · real estate)",
+            "Integrated management (business, operations, real estate)",
             "Dedicated team",
-            "Governance and executive follow-up",
+            "Governance and executive follow up",
           ],
-          duration: "12+ months",
+          duration: "12 months or more",
         },
       ],
     },
@@ -565,10 +551,24 @@ const COPY = {
       home: "Home",
       copyright: "All rights reserved.",
     },
-  }),
+  },
 } as const;
 
 type Copy = (typeof COPY)[Language];
+type LocalizedSectionProps = { t: Copy; language: Language };
+
+function mobileEnglishFlow(language: Language) {
+  return language === "en" ? "max-md:[direction:ltr] max-md:text-left" : "";
+}
+
+function mobileEnglishMenuFlow(language: Language) {
+  return language === "en" ? "max-lg:[direction:ltr] max-lg:text-left" : "";
+}
+
+function ActionArrow({ language, className }: { language: Language; className?: string }) {
+  const Icon = language === "en" ? ArrowUpRight : ArrowUpLeft;
+  return <Icon className={className} />;
+}
 
 function Index() {
   const [language, setLanguage] = useState<Language>("ar");
@@ -576,27 +576,27 @@ function Index() {
 
   return (
     <main
-      dir="rtl"
+      dir={language === "en" ? "ltr" : "rtl"}
       lang={language}
       className="bg-canvas text-ink font-sans overflow-x-hidden antialiased"
     >
       <Nav t={t} language={language} setLanguage={setLanguage} />
-      <Hero t={t} />
-      <Intro t={t} />
-      <About t={t} />
-      <Principles t={t} />
-      <ServicesShowcase t={t} />
-      <WhyUs t={t} />
-      <Industries t={t} />
-      <Process t={t} />
-      <Packages t={t} />
-      <Contact t={t} />
-      <Footer t={t} />
+      <Hero t={t} language={language} />
+      <Intro t={t} language={language} />
+      <About t={t} language={language} />
+      <Principles t={t} language={language} />
+      <ServicesShowcase t={t} language={language} />
+      <WhyUs t={t} language={language} />
+      <Industries t={t} language={language} />
+      <Process t={t} language={language} />
+      <Packages t={t} language={language} />
+      <Contact t={t} language={language} />
+      <Footer t={t} language={language} />
     </main>
   );
 }
 
-/* ─── NAV ──────────────────────────────────────────────────── */
+/* Nav */
 function Nav({
   t,
   language,
@@ -608,11 +608,14 @@ function Nav({
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const links = t.nav.links;
+  const englishMobileMenu = mobileEnglishMenuFlow(language);
 
   return (
     <header className="fixed top-0 inset-x-0 z-50">
       <div className="absolute inset-0 bg-navy-deep/85 backdrop-blur-xl border-b border-paper/10" />
-      <div className="relative container-x flex h-[4.5rem] items-center justify-between text-paper md:h-[5.5rem] lg:h-24">
+      <div
+        className={`relative container-x flex h-[4.5rem] items-center justify-between text-paper md:h-[5.5rem] lg:h-24 ${englishMobileMenu}`}
+      >
         <a
           href="#top"
           className="flex min-h-11 shrink-0 items-center"
@@ -657,7 +660,7 @@ function Nav({
       </div>
       <div
         id="mobile-nav"
-        className={`lg:hidden absolute inset-x-3 top-[4.5rem] max-h-[calc(100svh-5.25rem)] overflow-y-auto border border-paper/10 bg-navy-deep/96 shadow-[0_22px_70px_-30px_rgba(0,0,0,0.85)] backdrop-blur-xl text-paper transition md:inset-x-4 md:top-[5.5rem] ${
+        className={`lg:hidden absolute inset-x-3 top-[4.5rem] max-h-[calc(100svh-5.25rem)] overflow-y-auto border border-paper/10 bg-navy-deep/96 shadow-[0_22px_70px_-30px_rgba(0,0,0,0.85)] backdrop-blur-xl text-paper transition md:inset-x-4 md:top-[5.5rem] ${englishMobileMenu} ${
           isOpen
             ? "opacity-100 translate-y-0 pointer-events-auto"
             : "opacity-0 -translate-y-2 pointer-events-none"
@@ -727,8 +730,10 @@ function LanguageSwitch({
   );
 }
 
-/* ─── HERO — full-bleed Riyadh skyline ─────────────────────── */
-function Hero({ t }: { t: Copy }) {
+/* Hero, full bleed Riyadh skyline */
+function Hero({ t, language }: LocalizedSectionProps) {
+  const englishMobile = mobileEnglishFlow(language);
+
   return (
     <section
       id="top"
@@ -737,7 +742,7 @@ function Hero({ t }: { t: Copy }) {
       {/* Background image */}
       <img
         src={heroKafd}
-        alt="Riyadh skyline — Kingdom Centre and KAFD towers at dusk"
+        alt="Riyadh skyline, Kingdom Centre and KAFD towers at dusk"
         loading="eager"
         className="absolute inset-0 w-full h-full object-cover object-[58%_center] md:object-center"
       />
@@ -752,7 +757,11 @@ function Hero({ t }: { t: Copy }) {
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,oklch(0.10_0.028_168/0.55)_100%)]" />
 
       {/* Centered content */}
-      <div className="relative z-10 min-h-[calc(100svh-4.5rem)] md:min-h-screen flex flex-col items-center justify-center px-6 text-center pt-24 pb-12 md:pb-40">
+      <div
+        className={`relative z-10 min-h-[calc(100svh-4.5rem)] md:min-h-screen flex flex-col items-center justify-center px-6 text-center pt-24 pb-12 md:pb-40 ${
+          language === "en" ? "max-md:items-start max-md:text-left max-md:[direction:ltr]" : ""
+        }`}
+      >
         <img
           src={LOGO}
           alt="First Advance"
@@ -760,7 +769,11 @@ function Hero({ t }: { t: Copy }) {
           className="w-[142px] sm:w-[170px] md:w-[215px] h-auto mb-6 md:mb-10 object-contain drop-shadow-[0_12px_32px_rgba(0,0,0,0.58)]"
         />
 
-        <div className="flex items-center justify-center gap-3 text-accent-gold text-[10px] md:text-[11px] mb-5 md:mb-8 max-w-full">
+        <div
+          className={`flex items-center justify-center gap-3 text-accent-gold text-[10px] md:text-[11px] mb-5 md:mb-8 max-w-full ${
+            language === "en" ? "max-md:justify-start" : ""
+          }`}
+        >
           <span className="hidden sm:block w-10 h-px bg-accent-gold" />
           <span>{t.location}</span>
           <span className="hidden sm:block w-10 h-px bg-accent-gold" />
@@ -781,12 +794,16 @@ function Hero({ t }: { t: Copy }) {
           {t.hero.body}
         </p>
 
-        <div className="mt-7 md:mt-12 flex flex-col sm:flex-row w-full max-w-[342px] sm:max-w-none sm:w-auto gap-3 justify-center">
+        <div
+          className={`mt-7 md:mt-12 flex flex-col sm:flex-row w-full max-w-[342px] sm:max-w-none sm:w-auto gap-3 justify-center ${
+            language === "en" ? "max-md:[direction:ltr]" : ""
+          }`}
+        >
           <a
             href="#contact"
             className="inline-flex min-h-[3.25rem] md:min-h-12 items-center justify-center gap-3 bg-accent-gold text-navy-deep px-8 py-4 text-[13px] font-semibold hover:brightness-95 transition"
           >
-            {t.hero.primaryCta} <ArrowUpLeft className="w-4 h-4" />
+            {t.hero.primaryCta} <ActionArrow language={language} className="w-4 h-4" />
           </a>
           <a
             href="#services"
@@ -799,19 +816,26 @@ function Hero({ t }: { t: Copy }) {
 
       {/* Capabilities ledger */}
       <div className="relative md:absolute md:bottom-0 md:inset-x-0 border-t border-paper/15 bg-[oklch(0.12_0.028_168/0.72)] backdrop-blur-md z-10">
-        <div className="container-x grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x md:divide-x-reverse divide-paper/10">
+        <div
+          className={`container-x grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-paper/10 ${
+            language === "ar" ? "md:divide-x-reverse" : ""
+          }`}
+        >
           {t.hero.ledger.map((c) => (
             <a
               key={c.k}
               href="#services"
-              className="px-5 py-3.5 md:px-10 md:py-6 flex items-center gap-4 md:gap-6 group hover:bg-paper/[0.05] transition"
+              className={`px-5 py-3.5 md:px-10 md:py-6 flex items-center gap-4 md:gap-6 group hover:bg-paper/[0.05] transition ${englishMobile}`}
             >
               <span className="text-[11px] text-accent-gold">{c.k}</span>
-              <div className="flex-1 text-right">
+              <div className={`flex-1 ${language === "en" ? "text-left" : "text-right"}`}>
                 <div className="text-paper font-semibold text-[14px] md:text-[14.5px]">{c.t}</div>
                 <div className="mt-0.5 md:mt-1 text-[12px] leading-[1.55] text-paper/65">{c.d}</div>
               </div>
-              <ArrowUpLeft className="w-4 h-4 text-paper/40 group-hover:text-accent-gold transition" />
+              <ActionArrow
+                language={language}
+                className="w-4 h-4 text-paper/40 group-hover:text-accent-gold transition"
+              />
             </a>
           ))}
         </div>
@@ -820,15 +844,20 @@ function Hero({ t }: { t: Copy }) {
   );
 }
 
-/* ─── INTRO — quiet editorial preface ──────────────────────── */
-function Intro({ t }: { t: Copy }) {
+/* Intro, quiet editorial preface */
+function Intro({ t, language }: LocalizedSectionProps) {
+  const englishMobile = mobileEnglishFlow(language);
+
   return (
     <section className="bg-canvas border-b border-rule">
-      <div className="container-x py-12 md:py-28 grid md:grid-cols-12 gap-10 items-end">
+      <div className="container-x py-10 md:py-28 grid md:grid-cols-12 gap-10 items-end">
         <div className="md:col-span-2 hidden md:flex items-center">
           <span className="block h-px w-full max-w-24 bg-accent-gold/55" />
         </div>
-        <p className="md:col-span-10 font-serif text-[clamp(1.28rem,6.4vw,1.55rem)] md:text-[clamp(1.35rem,2.2vw,1.9rem)] leading-[1.62] md:leading-[1.55] text-navy-deep">
+        <p
+          className={`md:col-span-10 font-serif text-[clamp(1.24rem,6.1vw,1.48rem)] md:text-[clamp(1.35rem,2.2vw,1.9rem)] leading-[1.62] md:leading-[1.55] text-navy-deep max-md:border max-md:border-rule max-md:bg-paper/70 max-md:px-5 max-md:py-6 ${englishMobile}`}
+        >
+          <span aria-hidden className="mb-5 block h-px w-16 bg-accent-gold md:hidden" />
           {t.intro.lead}
           <span className="text-muted-ink">{t.intro.muted}</span>
           {t.intro.tail}
@@ -838,22 +867,26 @@ function Intro({ t }: { t: Copy }) {
   );
 }
 
-/* ─── ABOUT — luxury boardroom ─────────────────────────────── */
-function About({ t }: { t: Copy }) {
+/* About, luxury boardroom */
+function About({ t, language }: LocalizedSectionProps) {
+  const englishMobile = mobileEnglishFlow(language);
+
   return (
     <section id="about" className="relative bg-stone overflow-hidden">
       <div className="container-x py-12 md:py-32 grid md:grid-cols-12 gap-8 md:gap-16">
-        <div className="md:col-span-6 md:pt-10 relative z-10">
+        <div
+          className={`md:col-span-6 md:pt-10 relative z-10 max-md:border max-md:border-rule max-md:bg-paper/65 max-md:p-5 ${englishMobile}`}
+        >
           <SectionKicker label={t.about.kicker} />
-          <h2 className="mt-4 md:mt-5 text-[clamp(1.48rem,7vw,1.9rem)] md:text-[clamp(1.6rem,2.5vw,2.15rem)] leading-[1.32] md:leading-[1.35] font-semibold text-navy-deep">
+          <h2 className="mt-3.5 md:mt-5 text-[clamp(1.46rem,6.8vw,1.84rem)] md:text-[clamp(1.6rem,2.5vw,2.15rem)] leading-[1.32] md:leading-[1.35] font-semibold text-navy-deep">
             {t.about.title}
           </h2>
-          <div className="mt-6 md:mt-8 space-y-4 md:space-y-5 text-[14.5px] md:text-[15.5px] leading-[1.9] md:leading-[2] text-ink/80 max-w-lg">
+          <div className="mt-5 md:mt-8 space-y-3.5 md:space-y-5 text-[14.5px] md:text-[15.5px] leading-[1.85] md:leading-[2] text-ink/80 max-w-lg">
             {t.about.paragraphs.map((paragraph) => (
               <p key={paragraph}>{paragraph}</p>
             ))}
           </div>
-          <div className="mt-8 md:mt-10 grid grid-cols-3 gap-4 md:gap-6 max-w-md border-t border-rule pt-6 md:pt-8">
+          <div className="mt-6 md:mt-10 grid grid-cols-3 gap-4 md:gap-6 max-w-md border-t border-rule pt-5 md:pt-8">
             {t.about.stats.map((stat) => (
               <Stat key={stat.n} n={stat.n} t={stat.t} />
             ))}
@@ -869,7 +902,9 @@ function About({ t }: { t: Copy }) {
               className="absolute inset-0 w-full h-full object-cover object-[48%_center] md:object-center"
             />
           </div>
-          <div className="absolute bottom-0 right-0 bg-navy-deep text-paper px-5 md:px-7 py-4 md:py-6 max-w-[285px] md:max-w-[300px] shadow-[0_20px_60px_-20px_rgba(0,0,0,0.5)]">
+          <div
+            className={`absolute bottom-0 right-0 bg-navy-deep text-paper px-5 md:px-7 py-4 md:py-6 max-w-[285px] md:max-w-[300px] shadow-[0_20px_60px_-20px_rgba(0,0,0,0.5)] ${englishMobile}`}
+          >
             <div className="text-[10px] text-accent-gold mb-2">{t.about.badgeLabel}</div>
             <div className="text-[13px] md:text-[13.5px] leading-[1.7]">{t.about.badgeText}</div>
           </div>
@@ -888,8 +923,10 @@ function Stat({ n, t }: { n: string; t: string }) {
   );
 }
 
-/* ─── PRINCIPLES — Vision/Mission on dark forest band ─────── */
-function Principles({ t }: { t: Copy }) {
+/* Principles, vision and mission on dark forest band */
+function Principles({ t, language }: LocalizedSectionProps) {
+  const englishMobile = mobileEnglishFlow(language);
+
   return (
     <section className="relative bg-navy-deep text-paper overflow-hidden">
       <div aria-hidden className="absolute inset-0 opacity-20">
@@ -902,34 +939,34 @@ function Principles({ t }: { t: Copy }) {
       </div>
       <div className="absolute inset-0 bg-gradient-to-b from-navy-deep via-navy-deep/95 to-navy-deep" />
 
-      <div className="relative container-x py-12 md:py-32">
-        <div className="max-w-2xl">
+      <div className="relative container-x py-10 md:py-32">
+        <div className={`max-w-2xl ${englishMobile}`}>
           <SectionKicker label={t.principles.kicker} light />
-          <h2 className="mt-4 text-[clamp(1.45rem,6.8vw,1.85rem)] md:text-[clamp(1.5rem,2.2vw,1.9rem)] leading-[1.35] md:leading-[1.4] font-semibold text-paper">
+          <h2 className="mt-3.5 text-[clamp(1.42rem,6.6vw,1.78rem)] md:text-[clamp(1.5rem,2.2vw,1.9rem)] leading-[1.34] md:leading-[1.4] font-semibold text-paper">
             {t.principles.title}
           </h2>
         </div>
 
-        <div className="mt-8 md:mt-16 grid md:grid-cols-2 gap-px bg-paper/10 border border-paper/10">
-          <div className="bg-navy-deep p-6 md:p-12 relative">
-            <div className="absolute top-5 left-5 md:top-6 md:left-6 font-serif text-[4rem] md:text-[5rem] leading-none text-accent-gold/25 select-none">
+        <div className="mt-6 md:mt-16 grid md:grid-cols-2 gap-px bg-paper/10 border border-paper/10">
+          <div className={`bg-navy-deep p-6 md:p-12 relative overflow-hidden ${englishMobile}`}>
+            <div className="absolute top-5 left-5 md:top-6 md:left-6 font-serif text-[4rem] md:text-[5rem] leading-none text-accent-gold/25 select-none max-md:top-auto max-md:bottom-[-0.75rem] max-md:left-4 max-md:z-0 max-md:text-[6.5rem] max-md:text-accent-gold/10">
               I
             </div>
-            <div className="text-accent-gold text-[11px] mb-5 md:mb-6">
+            <div className="relative z-10 text-accent-gold text-[11px] mb-4 md:mb-6">
               {t.principles.visionLabel}
             </div>
-            <p className="text-[clamp(1rem,4.8vw,1.12rem)] md:text-[clamp(1.05rem,1.4vw,1.25rem)] leading-[1.78] md:leading-[1.85] text-paper max-w-md">
+            <p className="relative z-10 text-[clamp(1rem,4.8vw,1.12rem)] md:text-[clamp(1.05rem,1.4vw,1.25rem)] leading-[1.76] md:leading-[1.85] text-paper max-w-md">
               {t.principles.vision}
             </p>
           </div>
-          <div className="bg-navy-deep p-6 md:p-12 relative">
-            <div className="absolute top-5 left-5 md:top-6 md:left-6 font-serif text-[4rem] md:text-[5rem] leading-none text-accent-gold/25 select-none">
+          <div className={`bg-navy-deep p-6 md:p-12 relative overflow-hidden ${englishMobile}`}>
+            <div className="absolute top-5 left-5 md:top-6 md:left-6 font-serif text-[4rem] md:text-[5rem] leading-none text-accent-gold/25 select-none max-md:top-auto max-md:bottom-[-0.75rem] max-md:left-4 max-md:z-0 max-md:text-[6.5rem] max-md:text-accent-gold/10">
               II
             </div>
-            <div className="text-accent-gold text-[11px] mb-5 md:mb-6">
+            <div className="relative z-10 text-accent-gold text-[11px] mb-4 md:mb-6">
               {t.principles.missionLabel}
             </div>
-            <p className="text-[clamp(1rem,4.8vw,1.12rem)] md:text-[clamp(1.05rem,1.4vw,1.25rem)] leading-[1.78] md:leading-[1.85] text-paper max-w-md">
+            <p className="relative z-10 text-[clamp(1rem,4.8vw,1.12rem)] md:text-[clamp(1.05rem,1.4vw,1.25rem)] leading-[1.76] md:leading-[1.85] text-paper max-w-md">
               {t.principles.mission}
             </p>
           </div>
@@ -939,8 +976,9 @@ function Principles({ t }: { t: Copy }) {
   );
 }
 
-/* ─── SERVICES — three chapters with real architecture ─────── */
-function ServicesShowcase({ t }: { t: Copy }) {
+/* Services, three chapters with real architecture */
+function ServicesShowcase({ t, language }: LocalizedSectionProps) {
+  const englishMobile = mobileEnglishFlow(language);
   const serviceImages = [
     {
       img: corporateTower,
@@ -959,15 +997,17 @@ function ServicesShowcase({ t }: { t: Copy }) {
 
   return (
     <section id="services" className="bg-canvas border-t border-rule">
-      <div className="container-x pt-12 md:pt-32 pb-7 md:pb-10">
-        <div className="grid md:grid-cols-12 gap-6 md:gap-10 items-end">
-          <div className="md:col-span-7">
+      <div className="container-x pt-10 md:pt-32 pb-6 md:pb-10">
+        <div className="grid md:grid-cols-12 gap-5 md:gap-10 items-end">
+          <div className={`md:col-span-7 ${englishMobile}`}>
             <SectionKicker label={t.services.kicker} />
-            <h2 className="mt-4 text-[clamp(1.48rem,7vw,1.9rem)] md:text-[clamp(1.6rem,2.5vw,2.15rem)] leading-[1.32] md:leading-[1.35] font-semibold text-navy-deep">
+            <h2 className="mt-3.5 text-[clamp(1.46rem,6.8vw,1.84rem)] md:text-[clamp(1.6rem,2.5vw,2.15rem)] leading-[1.32] md:leading-[1.35] font-semibold text-navy-deep">
               {t.services.title}
             </h2>
           </div>
-          <p className="md:col-span-4 md:col-start-9 text-[14px] md:text-[14.5px] leading-[1.85] md:leading-[1.95] text-ink/70">
+          <p
+            className={`md:col-span-4 md:col-start-9 text-[14px] md:text-[14.5px] leading-[1.8] md:leading-[1.95] text-ink/70 max-md:border-t max-md:border-rule max-md:pt-4 ${englishMobile}`}
+          >
             {t.services.intro}
           </p>
         </div>
@@ -978,7 +1018,7 @@ function ServicesShowcase({ t }: { t: Copy }) {
           <article
             key={s.n}
             id={`service-${s.n}`}
-            className="group relative grid md:grid-cols-12 gap-0 bg-paper border border-rule overflow-hidden"
+            className={`group relative grid md:grid-cols-12 gap-0 bg-paper border border-rule overflow-hidden ${englishMobile}`}
           >
             <div className="md:col-span-1 flex md:flex-col items-center justify-between md:justify-start py-3.5 md:pt-8 md:pb-8 px-5 md:px-4 bg-navy-deep text-paper">
               <span className="text-[13px] text-accent-gold">{s.n}</span>
@@ -1024,29 +1064,34 @@ function ServicesShowcase({ t }: { t: Copy }) {
   );
 }
 
-/* ─── WHY US — editorial manifesto on warm stone ──────────── */
-function WhyUs({ t }: { t: Copy }) {
+/* Why us, editorial manifesto on warm stone */
+function WhyUs({ t, language }: LocalizedSectionProps) {
+  const englishMobile = mobileEnglishFlow(language);
   const items = t.why.items;
   return (
     <section id="why" className="bg-stone border-t border-rule">
-      <div className="container-x py-12 md:py-32 grid md:grid-cols-12 gap-8 md:gap-16">
-        <div className="md:col-span-5 md:sticky md:top-24 self-start">
+      <div className="container-x py-10 md:py-32 grid md:grid-cols-12 gap-6 md:gap-16">
+        <div
+          className={`md:col-span-5 md:sticky md:top-24 self-start max-md:border max-md:border-rule max-md:bg-paper/70 max-md:p-5 ${englishMobile}`}
+        >
           <SectionKicker label={t.why.kicker} />
-          <h2 className="mt-4 md:mt-5 text-[clamp(1.5rem,7vw,1.95rem)] md:text-[clamp(1.7rem,2.6vw,2.2rem)] leading-[1.28] md:leading-[1.3] font-semibold text-navy-deep">
+          <h2 className="mt-3.5 md:mt-5 text-[clamp(1.46rem,6.8vw,1.86rem)] md:text-[clamp(1.7rem,2.6vw,2.2rem)] leading-[1.28] md:leading-[1.3] font-semibold text-navy-deep">
             {t.why.title}
             <span className="block text-accent-gold">{t.why.titleAccent}</span>
           </h2>
-          <div className="mt-6 md:mt-8 border-t border-rule-strong pt-5 md:pt-6 max-w-md">
-            <p className="font-serif text-[15.5px] md:text-[17px] leading-[1.8] md:leading-[1.85] text-ink/85 italic">
+          <div className="mt-5 md:mt-8 border-t border-rule-strong pt-4 md:pt-6 max-w-md">
+            <p className="font-serif text-[15px] md:text-[17px] leading-[1.76] md:leading-[1.85] text-ink/85 italic">
               {t.why.quote}
             </p>
           </div>
         </div>
-        <ol className="md:col-span-7 border-t border-rule-strong">
+        <ol
+          className={`md:col-span-7 border-t border-rule-strong max-md:border max-md:border-rule max-md:bg-canvas max-md:px-5 ${englishMobile}`}
+        >
           {items.map((t, i) => (
             <li
               key={t}
-              className="grid grid-cols-12 gap-3 md:gap-4 items-baseline py-[1.125rem] md:py-6 border-b border-rule"
+              className="grid grid-cols-12 gap-3 md:gap-4 items-baseline py-4 md:py-6 border-b border-rule"
             >
               <span className="col-span-2 font-serif text-[1.65rem] md:text-[2rem] leading-none text-accent-gold">
                 {String(i + 1).padStart(2, "0")}
@@ -1062,8 +1107,9 @@ function WhyUs({ t }: { t: Copy }) {
   );
 }
 
-/* ─── INDUSTRIES — Saudi architecture grid ─────────────────── */
-function Industries({ t }: { t: Copy }) {
+/* Industries, Saudi architecture grid */
+function Industries({ t, language }: LocalizedSectionProps) {
+  const englishMobile = mobileEnglishFlow(language);
   const sectorImages = [
     sectorBusiness,
     sectorRealEstate,
@@ -1079,60 +1125,83 @@ function Industries({ t }: { t: Copy }) {
   return (
     <section
       id="industries"
-      className="bg-navy-deep text-paper py-12 md:py-32 border-t border-paper/10"
+      className="bg-navy-deep text-paper py-10 md:py-32 border-t border-paper/10"
     >
       <div className="container-x">
-        <div className="grid md:grid-cols-12 gap-6 md:gap-10 items-end mb-9 md:mb-14">
-          <div className="md:col-span-7">
+        <div className="grid md:grid-cols-12 gap-5 md:gap-10 items-end mb-8 md:mb-14">
+          <div className={`md:col-span-7 ${englishMobile}`}>
             <SectionKicker label={t.industries.kicker} light />
-            <h2 className="mt-4 text-[clamp(1.48rem,7vw,1.9rem)] md:text-[clamp(1.6rem,2.5vw,2.15rem)] leading-[1.32] md:leading-[1.35] font-semibold text-paper">
+            <h2 className="mt-3.5 text-[clamp(1.46rem,6.8vw,1.84rem)] md:text-[clamp(1.6rem,2.5vw,2.15rem)] leading-[1.32] md:leading-[1.35] font-semibold text-paper">
               {t.industries.title}
             </h2>
           </div>
-          <p className="md:col-span-4 md:col-start-9 text-[14px] md:text-[14.5px] leading-[1.85] md:leading-[1.95] text-paper/65">
+          <p
+            className={`md:col-span-4 md:col-start-9 text-[14px] md:text-[14.5px] leading-[1.8] md:leading-[1.95] text-paper/65 max-md:border-t max-md:border-paper/10 max-md:pt-4 ${englishMobile}`}
+          >
             {t.industries.intro}
           </p>
         </div>
       </div>
       <div className="relative">
         <div className="container-x grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-5">
-          {sectors.map((s, i) => (
-            <article
-              key={s.name}
-              className="relative aspect-[4/3] min-h-[220px] sm:min-h-[240px] md:min-h-[260px] overflow-hidden group border border-paper/10"
-            >
-              <img
-                src={s.img}
-                alt={s.tag}
-                className="absolute inset-0 w-full h-full object-cover object-[50%_center] transition-transform duration-[1400ms] group-hover:scale-[1.05]"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-navy-deep via-navy-deep/40 to-transparent" />
-              <div className="absolute inset-0 border border-transparent group-hover:border-accent-gold/60 transition" />
-              <div className="relative h-full flex flex-col justify-between p-5 md:p-7">
-                <span className="text-[11px] text-accent-gold">
-                  {String(i + 1).padStart(2, "0")} / 06
-                </span>
-                <div>
-                  <div className="text-[15.5px] md:text-[18px] font-semibold leading-tight text-paper">
-                    {s.name}
+          {sectors.map((s, i) => {
+            const sectorPosition = String(i + 1).padStart(2, "0");
+            const sectorCount =
+              language === "en" ? `${sectorPosition} of 06` : `${sectorPosition} من 06`;
+
+            return (
+              <article
+                key={s.name}
+                className={`relative aspect-[4/3] min-h-[220px] sm:min-h-[240px] md:min-h-[260px] overflow-hidden group border border-paper/10 ${englishMobile}`}
+              >
+                <img
+                  src={s.img}
+                  alt={s.tag}
+                  className="absolute inset-0 w-full h-full object-cover object-[50%_center] transition-transform duration-[1400ms] group-hover:scale-[1.05]"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-navy-deep via-navy-deep/40 to-transparent" />
+                <div className="absolute inset-0 border border-transparent group-hover:border-accent-gold/60 transition" />
+                <div className="relative h-full flex flex-col justify-between p-5 md:p-7">
+                  <span className="text-[11px] text-accent-gold">{sectorCount}</span>
+                  <div>
+                    <div className="text-[15.5px] md:text-[18px] font-semibold leading-tight text-paper">
+                      {s.name}
+                    </div>
+                    <div className="mt-1.5 text-[12px] text-paper/60">{s.tag}</div>
                   </div>
-                  <div className="mt-1.5 text-[12px] text-paper/60">{s.tag}</div>
                 </div>
-              </div>
-            </article>
-          ))}
+              </article>
+            );
+          })}
         </div>
       </div>
     </section>
   );
 }
 
-/* ─── PROCESS — subtle architectural background ────────────── */
-function Process({ t }: { t: Copy }) {
+/* Process, subtle architectural background */
+function Process({ t, language }: LocalizedSectionProps) {
+  const englishMobile = mobileEnglishFlow(language);
+  const mobileTimeline =
+    language === "en"
+      ? "max-md:border-l max-md:border-r-0 max-md:pl-5 max-md:pr-0"
+      : "max-md:border-r max-md:pr-5";
+  const mobileMarker =
+    language === "en"
+      ? "md:hidden absolute left-[-1.42rem] top-7 w-2.5 h-2.5 bg-accent-gold ring-4 ring-canvas"
+      : "md:hidden absolute right-[-1.42rem] top-7 w-2.5 h-2.5 bg-accent-gold ring-4 ring-canvas";
+  const centerRail =
+    language === "en"
+      ? "hidden md:block absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-px bg-rule"
+      : "hidden md:block absolute right-1/2 translate-x-1/2 top-0 bottom-0 w-px bg-rule";
+  const centerMarker =
+    language === "en"
+      ? "hidden md:block absolute left-1/2 -translate-x-1/2 top-10 w-3 h-3 bg-accent-gold ring-4 ring-canvas z-10"
+      : "hidden md:block absolute right-1/2 translate-x-1/2 top-10 w-3 h-3 bg-accent-gold ring-4 ring-canvas z-10";
   const steps = t.process.steps;
   return (
     <section id="process" className="relative bg-canvas border-t border-rule overflow-hidden">
-      {/* subtle architectural detail — very faint */}
+      {/* subtle architectural detail, very faint */}
       <div aria-hidden className="absolute inset-0 opacity-[0.08]">
         <img
           src={processBg}
@@ -1146,44 +1215,50 @@ function Process({ t }: { t: Copy }) {
         className="absolute inset-0 bg-gradient-to-b from-canvas via-canvas/85 to-canvas"
       />
 
-      <div className="relative container-x py-12 md:py-32">
-        <div className="grid md:grid-cols-12 gap-6 md:gap-10 items-end mb-8 md:mb-16">
+      <div className="relative container-x py-10 md:py-32">
+        <div
+          className={`grid md:grid-cols-12 gap-5 md:gap-10 items-end mb-6 md:mb-16 max-md:border max-md:border-rule max-md:bg-paper/70 max-md:p-5 ${englishMobile}`}
+        >
           <div className="md:col-span-6">
             <SectionKicker label={t.process.kicker} />
-            <h2 className="mt-4 text-[clamp(1.48rem,7vw,1.9rem)] md:text-[clamp(1.6rem,2.5vw,2.15rem)] leading-[1.32] md:leading-[1.35] font-semibold text-navy-deep">
+            <h2 className="mt-3.5 text-[clamp(1.46rem,6.8vw,1.84rem)] md:text-[clamp(1.6rem,2.5vw,2.15rem)] leading-[1.32] md:leading-[1.35] font-semibold text-navy-deep">
               {t.process.title}
             </h2>
           </div>
-          <p className="md:col-span-4 md:col-start-9 text-[14px] md:text-[14.5px] leading-[1.85] md:leading-[1.95] text-ink/70">
+          <p className="md:col-span-4 md:col-start-9 text-[14px] md:text-[14.5px] leading-[1.8] md:leading-[1.95] text-ink/70 max-md:border-t max-md:border-rule max-md:pt-4">
             {t.process.intro}
           </p>
         </div>
 
         <div className="relative">
-          <div
-            aria-hidden
-            className="hidden md:block absolute right-1/2 top-0 bottom-0 w-px bg-rule"
-          />
-          <ol className="space-y-0 max-md:border-r max-md:border-rule max-md:pr-5">
+          <div aria-hidden className={centerRail} />
+          <ol className={`space-y-0 max-md:border-rule ${mobileTimeline} ${englishMobile}`}>
             {steps.map((s, i) => {
               const rightSide = i % 2 === 0;
+              const itemPlacement =
+                language === "en"
+                  ? rightSide
+                    ? "md:pr-16 md:col-start-1"
+                    : "md:pl-16 md:col-start-2"
+                  : rightSide
+                    ? "md:pr-16 md:col-start-1"
+                    : "md:pl-16 md:col-start-2";
+              const itemAlignment =
+                language === "en" && rightSide
+                  ? "md:ml-auto"
+                  : language === "ar" && rightSide
+                    ? "md:mr-auto"
+                    : "";
               return (
                 <li key={s.n} className="relative grid md:grid-cols-2 items-stretch">
-                  <span
-                    aria-hidden
-                    className="md:hidden absolute right-[-1.42rem] top-7 w-2.5 h-2.5 bg-accent-gold ring-4 ring-canvas"
-                  />
-                  <span
-                    aria-hidden
-                    className="hidden md:block absolute right-1/2 translate-x-1/2 top-10 w-3 h-3 bg-accent-gold ring-4 ring-canvas z-10"
-                  />
-                  <div
-                    className={`py-6 md:py-14 ${
-                      rightSide ? "md:pr-16 md:col-start-1" : "md:pl-16 md:col-start-2"
-                    }`}
-                  >
-                    <div className={`max-w-md ${rightSide ? "md:mr-auto" : ""}`} dir="rtl">
-                      <div className="flex items-baseline gap-3 md:gap-4 mb-3 md:mb-4">
+                  <span aria-hidden className={mobileMarker} />
+                  <span aria-hidden className={centerMarker} />
+                  <div className={`py-5 md:py-14 ${itemPlacement}`}>
+                    <div
+                      className={`max-w-md ${itemAlignment} ${englishMobile}`}
+                      dir={language === "en" ? "ltr" : "rtl"}
+                    >
+                      <div className="flex items-baseline gap-3 md:gap-4 mb-2.5 md:mb-4">
                         <span className="font-serif text-[2.35rem] md:text-[3rem] leading-none text-accent-gold">
                           {s.n}
                         </span>
@@ -1207,8 +1282,9 @@ function Process({ t }: { t: Copy }) {
   );
 }
 
-/* ─── PACKAGES — dark executive comparison ledger ─────────── */
-function Packages({ t }: { t: Copy }) {
+/* Packages, dark executive comparison ledger */
+function Packages({ t, language }: LocalizedSectionProps) {
+  const englishMobile = mobileEnglishFlow(language);
   const packs = t.packages.packs;
 
   return (
@@ -1229,15 +1305,17 @@ function Packages({ t }: { t: Copy }) {
         className="absolute inset-0 bg-gradient-to-b from-navy-deep via-navy-deep/95 to-navy-deep"
       />
 
-      <div className="relative container-x py-12 md:py-32">
-        <div className="grid md:grid-cols-12 gap-6 md:gap-10 items-end mb-9 md:mb-14">
-          <div className="md:col-span-6">
+      <div className="relative container-x py-10 md:py-32">
+        <div className="grid md:grid-cols-12 gap-5 md:gap-10 items-end mb-7 md:mb-14">
+          <div className={`md:col-span-6 ${englishMobile}`}>
             <SectionKicker label={t.packages.kicker} light />
-            <h2 className="mt-4 text-[clamp(1.48rem,7vw,1.9rem)] md:text-[clamp(1.6rem,2.5vw,2.15rem)] leading-[1.32] md:leading-[1.35] font-semibold text-paper">
+            <h2 className="mt-3.5 text-[clamp(1.46rem,6.8vw,1.84rem)] md:text-[clamp(1.6rem,2.5vw,2.15rem)] leading-[1.32] md:leading-[1.35] font-semibold text-paper">
               {t.packages.title}
             </h2>
           </div>
-          <p className="md:col-span-5 md:col-start-8 text-[14px] md:text-[14.5px] leading-[1.85] md:leading-[1.95] text-paper/70">
+          <p
+            className={`md:col-span-5 md:col-start-8 text-[14px] md:text-[14.5px] leading-[1.8] md:leading-[1.95] text-paper/70 max-md:border-t max-md:border-paper/10 max-md:pt-4 ${englishMobile}`}
+          >
             {t.packages.intro}
           </p>
         </div>
@@ -1253,16 +1331,16 @@ function Packages({ t }: { t: Copy }) {
           {packs.map((p) => (
             <div
               key={p.roman}
-              className={`grid grid-cols-1 md:grid-cols-[1.1fr_1fr_1fr_1fr] gap-4 md:gap-8 py-6 md:py-10 max-md:px-5 border-b border-paper/10 max-md:border max-md:border-paper/10 ${
+              className={`relative grid grid-cols-1 md:grid-cols-[1.1fr_1fr_1fr_1fr] gap-4 md:gap-8 py-5 md:py-10 max-md:overflow-hidden max-md:px-5 border-b border-paper/10 max-md:border max-md:border-paper/10 ${
                 p.featured ? "bg-paper/[0.04]" : ""
-              }`}
+              } ${englishMobile}`}
             >
-              <div className="md:pr-6">
-                <div className="flex items-baseline gap-4">
-                  <span className="font-serif text-[2.45rem] md:text-[3rem] leading-none text-accent-gold">
+              <div className="relative z-10 md:pr-6">
+                <div className="relative flex items-baseline gap-4 max-md:min-h-[3.2rem] max-md:pl-16">
+                  <span className="font-serif text-[2.45rem] md:text-[3rem] leading-none text-accent-gold max-md:absolute max-md:left-0 max-md:top-[-0.35rem] max-md:text-[5.4rem] max-md:text-accent-gold/12">
                     {p.roman}
                   </span>
-                  <div>
+                  <div className="relative z-10">
                     {p.featured && (
                       <div className="text-[10px] text-accent-gold mb-1">{t.packages.featured}</div>
                     )}
@@ -1275,7 +1353,7 @@ function Packages({ t }: { t: Copy }) {
                   {p.desc}
                 </p>
               </div>
-              <div className="md:pt-1">
+              <div className="relative z-10 md:pt-1">
                 <div className="md:hidden text-[10px] text-accent-gold/80 mb-1.5">
                   {t.packages.headers.audience}
                 </div>
@@ -1283,7 +1361,7 @@ function Packages({ t }: { t: Copy }) {
                   {p.audience}
                 </div>
               </div>
-              <div className="md:pt-1">
+              <div className="relative z-10 md:pt-1">
                 <div className="md:hidden text-[10px] text-accent-gold/80 mb-1.5">
                   {t.packages.headers.content}
                 </div>
@@ -1299,7 +1377,7 @@ function Packages({ t }: { t: Copy }) {
                   ))}
                 </ul>
               </div>
-              <div className="md:pt-1 flex flex-col justify-between gap-4">
+              <div className="relative z-10 md:pt-1 flex flex-col justify-between gap-4">
                 <div>
                   <div className="md:hidden text-[10px] text-accent-gold/80 mb-1.5">
                     {t.packages.headers.durationShort}
@@ -1310,14 +1388,16 @@ function Packages({ t }: { t: Copy }) {
                   href="#contact"
                   className="inline-flex min-h-11 items-center justify-center gap-2 text-[13px] font-semibold text-paper border-b border-paper hover:text-accent-gold hover:border-accent-gold transition self-start max-md:w-full max-md:border max-md:border-paper/25 max-md:px-4 max-md:py-3"
                 >
-                  {t.packages.request} <ArrowUpLeft className="w-3.5 h-3.5" />
+                  {t.packages.request} <ActionArrow language={language} className="w-3.5 h-3.5" />
                 </a>
               </div>
             </div>
           ))}
         </div>
 
-        <p className="mt-6 md:mt-8 text-[12px] md:text-[12.5px] text-paper/50 max-w-2xl leading-[1.85] md:leading-[1.9]">
+        <p
+          className={`mt-6 md:mt-8 text-[12px] md:text-[12.5px] text-paper/50 max-w-2xl leading-[1.85] md:leading-[1.9] ${englishMobile}`}
+        >
           {t.packages.note}
         </p>
       </div>
@@ -1325,8 +1405,14 @@ function Packages({ t }: { t: Copy }) {
   );
 }
 
-/* ─── CONTACT — sunset skyline ─────────────────────────────── */
-function Contact({ t }: { t: Copy }) {
+/* Contact, sunset skyline */
+function Contact({ t, language }: LocalizedSectionProps) {
+  const englishMobile = mobileEnglishFlow(language);
+  const imageCaptionClass =
+    language === "en"
+      ? "absolute bottom-7 right-5 left-5 md:bottom-10 md:left-10 md:right-auto max-w-md [direction:ltr] text-left"
+      : "absolute bottom-7 right-5 left-5 md:bottom-10 md:right-10 md:left-auto max-w-md";
+
   return (
     <section id="contact" className="relative bg-navy-deep text-paper overflow-hidden">
       <div className="grid lg:grid-cols-12 min-h-[80vh]">
@@ -1338,7 +1424,7 @@ function Contact({ t }: { t: Copy }) {
             className="absolute inset-0 w-full h-full object-cover object-[50%_center]"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-navy-deep/86 via-navy-deep/35 to-transparent lg:bg-gradient-to-l lg:from-navy-deep/80 lg:via-navy-deep/30 lg:to-transparent" />
-          <div className="absolute bottom-7 right-5 left-5 md:bottom-10 md:right-10 md:left-auto max-w-md">
+          <div className={`${imageCaptionClass} ${englishMobile}`}>
             <div className="text-accent-gold text-[11px] mb-3 md:mb-4">{t.contact.imageLabel}</div>
             <h2 className="text-[clamp(1.55rem,7.2vw,2.05rem)] md:text-[clamp(1.8rem,3vw,2.6rem)] font-semibold leading-[1.18] md:leading-[1.2]">
               {t.contact.title}
@@ -1346,7 +1432,9 @@ function Contact({ t }: { t: Copy }) {
             </h2>
           </div>
         </div>
-        <div className="lg:col-span-6 bg-navy px-5 md:px-14 py-12 lg:py-20 flex flex-col justify-center">
+        <div
+          className={`lg:col-span-6 bg-navy px-5 md:px-14 py-12 lg:py-20 flex flex-col justify-center ${englishMobile}`}
+        >
           <SectionKicker label={t.contact.kicker} light />
           <p className="mt-4 md:mt-5 max-w-md text-[14px] md:text-[15px] leading-[1.85] md:leading-[2] text-paper/75">
             {t.contact.intro}
@@ -1358,24 +1446,28 @@ function Contact({ t }: { t: Copy }) {
               label={t.contact.labels.whatsapp}
               value={WHATSAPP_DISPLAY}
               href={WHATSAPP_LINK}
+              language={language}
             />
             <ContactRow
               icon={<Mail className="w-4 h-4" />}
               label={t.contact.labels.email}
               value={EMAIL}
               href={`mailto:${EMAIL}`}
+              language={language}
             />
             <ContactRow
               icon={<Phone className="w-4 h-4" />}
               label={t.contact.labels.phone}
               value={WHATSAPP_DISPLAY}
               href={`tel:${WHATSAPP_DISPLAY.replace(/\s/g, "")}`}
+              language={language}
             />
             <ContactRow
               icon={<MapPin className="w-4 h-4" />}
               label={t.contact.labels.location}
               value={t.location}
               href="#"
+              language={language}
             />
           </div>
 
@@ -1386,7 +1478,7 @@ function Contact({ t }: { t: Copy }) {
               rel="noreferrer"
               className="inline-flex min-h-[3.25rem] md:min-h-12 w-full sm:w-auto items-center justify-center gap-3 bg-accent-gold text-navy-deep px-7 py-3.5 text-[13px] font-semibold hover:brightness-95 transition"
             >
-              {t.contact.whatsappCta} <ArrowUpLeft className="w-4 h-4" />
+              {t.contact.whatsappCta} <ActionArrow language={language} className="w-4 h-4" />
             </a>
             <a
               href={`mailto:${EMAIL}`}
@@ -1406,20 +1498,24 @@ function ContactRow({
   label,
   value,
   href,
+  language,
 }: {
   icon: React.ReactNode;
   label: string;
   value: string;
   href: string;
+  language: Language;
 }) {
+  const englishMobile = mobileEnglishFlow(language);
   const valueDirection = /[\u0600-\u06FF]/.test(value) ? "rtl" : "ltr";
+  const arrowAlign = language === "en" ? "text-right" : "text-left";
 
   return (
     <a
       href={href}
       target={href.startsWith("http") ? "_blank" : undefined}
       rel="noreferrer"
-      className="grid max-md:min-h-[4.25rem] grid-cols-[1.5rem_1fr_1rem] sm:grid-cols-12 gap-x-3 sm:gap-x-4 gap-y-1 items-center py-4 md:py-5 group"
+      className={`grid max-md:min-h-[4.25rem] grid-cols-[1.5rem_1fr_1rem] sm:grid-cols-12 gap-x-3 sm:gap-x-4 gap-y-1 items-center py-4 md:py-5 group ${englishMobile}`}
     >
       <div className="row-span-2 sm:row-span-1 sm:col-span-1 text-accent-gold">{icon}</div>
       <div className="col-start-2 sm:col-start-auto sm:col-span-4 text-[11px] text-paper/50">
@@ -1431,17 +1527,23 @@ function ContactRow({
       >
         {value}
       </div>
-      <div className="row-span-2 col-start-3 row-start-1 sm:row-span-1 sm:col-start-auto sm:col-span-1 text-paper/40 group-hover:text-accent-gold transition-colors text-left">
-        <ArrowUpLeft className="w-4 h-4 inline" />
+      <div
+        className={`row-span-2 col-start-3 row-start-1 sm:row-span-1 sm:col-start-auto sm:col-span-1 text-paper/40 group-hover:text-accent-gold transition-colors ${arrowAlign}`}
+      >
+        <ActionArrow language={language} className="w-4 h-4 inline" />
       </div>
     </a>
   );
 }
 
-/* ─── FOOTER ─────────────────────────────────────────────── */
-function Footer({ t }: { t: Copy }) {
+/* Footer */
+function Footer({ t, language }: LocalizedSectionProps) {
+  const englishMobile = mobileEnglishFlow(language);
+
   return (
-    <footer className="bg-[oklch(0.15_0.025_168)] text-paper/75 pt-12 md:pt-20 pb-8 md:pb-10 border-t border-paper/10">
+    <footer
+      className={`bg-[oklch(0.15_0.025_168)] text-paper/75 pt-12 md:pt-20 pb-8 md:pb-10 border-t border-paper/10 ${englishMobile}`}
+    >
       <div className="container-x grid md:grid-cols-12 gap-8 md:gap-10 pb-10 md:pb-14 border-b border-paper/10">
         <div className="md:col-span-4">
           <div className="flex items-center">
@@ -1565,7 +1667,7 @@ function Footer({ t }: { t: Copy }) {
   );
 }
 
-/* ─── Shared kicker ─────────────────────────────────────── */
+/* Shared kicker */
 function SectionKicker({ label, light = false }: { label: string; light?: boolean }) {
   return (
     <div

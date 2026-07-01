@@ -78,14 +78,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "First Advance — Integrated Business Solutions" },
+      { title: "First Advance, Integrated Business Solutions" },
       {
         name: "description",
         content:
-          "First Advance (مؤسسة المتقدم الأول) — a Saudi consulting house delivering administrative, operational and licensed real-estate services.",
+          "First Advance (مؤسسة المتقدم الأول), a Saudi consulting house delivering administrative, operational and licensed real-estate services.",
       },
       { name: "author", content: "First Advance" },
-      { property: "og:title", content: "First Advance — Integrated Business Solutions" },
+      { property: "og:title", content: "First Advance, Integrated Business Solutions" },
       {
         property: "og:description",
         content: "Administrative, operational and licensed real-estate services under one roof.",
