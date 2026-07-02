@@ -724,9 +724,10 @@ function Nav({
           <a
             href="#contact"
             aria-label={t.nav.ctaLabel}
-            className="inline-flex min-h-11 items-center justify-center gap-2 border border-accent-gold text-accent-gold px-4 py-2 text-[12px] hover:bg-accent-gold hover:text-navy-deep transition"
+            className="inline-flex min-h-11 items-center justify-center gap-2 border border-accent-gold/70 bg-transparent text-accent-gold px-4 py-2 text-[12px] font-medium hover:bg-accent-gold/[0.07] hover:shadow-[0_0_24px_-10px_var(--color-accent-gold)] transition duration-[250ms]"
           >
             <BrandChatIcon className="h-4 w-4" />
+            <span>{t.contact.labels.chat}</span>
           </a>
         </div>
         <button
@@ -762,10 +763,11 @@ function Nav({
           <a
             href="#contact"
             aria-label={t.nav.ctaLabel}
-            className="flex min-h-[3.25rem] items-center justify-center px-5 py-3.5 text-[14px] text-accent-gold hover:bg-paper/[0.04] transition"
+            className="flex min-h-[3.25rem] items-center justify-center gap-2 bg-transparent px-5 py-3.5 text-[14px] text-accent-gold hover:bg-accent-gold/[0.07] hover:shadow-[0_0_24px_-10px_var(--color-accent-gold)] transition duration-[250ms]"
             onClick={() => setIsOpen(false)}
           >
             <BrandChatIcon className="h-5 w-5" />
+            <span>{t.contact.labels.chat}</span>
           </a>
           <div className="min-h-[3.5rem] px-5 py-3.5 flex items-center justify-between gap-4">
             <span className="text-[13px] text-paper/65">{t.nav.languageLabel}</span>
@@ -888,9 +890,10 @@ function Hero({ t, language }: LocalizedSectionProps) {
           <a
             href="#contact"
             aria-label={t.hero.primaryCtaLabel}
-            className="inline-flex min-h-[3.25rem] md:min-h-12 items-center justify-center gap-3 bg-accent-gold text-navy-deep px-8 py-4 text-[13px] font-semibold hover:brightness-95 transition"
+            className="inline-flex min-h-[3.25rem] md:min-h-12 items-center justify-center gap-3 border border-accent-gold/70 bg-transparent text-accent-gold px-8 py-4 text-[13px] font-medium hover:bg-accent-gold/[0.07] hover:shadow-[0_0_24px_-10px_var(--color-accent-gold)] transition duration-[250ms]"
           >
             <BrandChatIcon className="h-5 w-5" />
+            <span>{t.contact.labels.chat}</span>
           </a>
           <a
             href="#services"
@@ -1540,9 +1543,10 @@ function Packages({ t, language }: LocalizedSectionProps) {
                 <a
                   href="#contact"
                   aria-label={t.packages.requestLabel}
-                  className="inline-flex min-h-11 items-center justify-center gap-2 text-[13px] font-semibold text-paper border-b border-paper hover:text-accent-gold hover:border-accent-gold transition self-start max-md:w-full max-md:border max-md:border-paper/25 max-md:px-4 max-md:py-2.5"
+                  className="inline-flex min-h-11 items-center justify-center gap-2 border border-accent-gold/60 bg-transparent px-5 py-2.5 text-[13px] font-medium text-accent-gold hover:bg-accent-gold/[0.07] hover:shadow-[0_0_24px_-10px_var(--color-accent-gold)] transition duration-[250ms] self-start max-md:w-full max-md:px-4"
                 >
                   <BrandChatIcon className="h-4 w-4 text-accent-gold" />
+                  <span>{t.contact.labels.chat}</span>
                 </a>
               </div>
             </div>
@@ -1610,9 +1614,10 @@ function Contact({ t, language }: LocalizedSectionProps) {
               aria-label={t.contact.chatCtaLabel}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex min-h-[3.25rem] md:min-h-12 w-full sm:w-auto items-center justify-center gap-3 bg-accent-gold text-navy-deep px-7 py-3.5 text-[13px] font-semibold hover:brightness-95 transition"
+              className="inline-flex min-h-[3.25rem] md:min-h-12 w-full sm:w-auto items-center justify-center gap-3 border border-accent-gold/70 bg-transparent text-accent-gold px-7 py-3.5 text-[13px] font-medium hover:bg-accent-gold/[0.07] hover:shadow-[0_0_24px_-10px_var(--color-accent-gold)] transition duration-[250ms]"
             >
               <BrandChatIcon className="h-5 w-5" />
+              <span>{t.contact.labels.chat}</span>
             </a>
             <a
               href={`mailto:${EMAIL}`}
