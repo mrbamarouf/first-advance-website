@@ -104,9 +104,8 @@ const COPY = {
       ],
     },
     intro: {
-      lead: "نحن نوفر لك الوقت والجهد. ",
-      muted: "بدلًا من البحث عن - مساعد - إداري - متخصص - استشاري، ",
-      tail: "لدينا كل ذلك تحت سقف واحد من الفكرة إلى التسليم.",
+      main: ["كل ما تحتاجه لإنجاز أعمالك...", "تحت سقف واحد، من الفكرة إلى التسليم."],
+      roles: "مساعد • إداري • متخصص • استشاري",
     },
     about: {
       kicker: "مقدمة",
@@ -182,7 +181,10 @@ const COPY = {
       kicker: "ما يميزنا",
       title: "ما يميزنا",
       titleAccent: "",
-      quote: "نحن نوفر لك الوقت والجهد.",
+      quote: {
+        main: ["كل ما تحتاجه لإنجاز أعمالك...", "تحت سقف واحد، من الفكرة إلى التسليم."],
+        roles: "مساعد • إداري • متخصص • استشاري",
+      },
       items: [
         "تكامل الخدمات.",
         "حلول إدارية وعقارية تحت سقف واحد.",
@@ -306,8 +308,10 @@ const COPY = {
       title: "شكراً لكم",
       titleAccent: "",
       kicker: "Contact Us Via",
-      intro:
-        "بدلًا من البحث عن - مساعد - إداري - متخصص - استشاري، لدينا كل ذلك تحت سقف واحد من الفكرة إلى التسليم.",
+      statement: {
+        main: ["كل ما تحتاجه لإنجاز أعمالك...", "تحت سقف واحد، من الفكرة إلى التسليم."],
+        roles: "مساعد • إداري • متخصص • استشاري",
+      },
       labels: {
         chat: "واتساب",
         email: "البريد الإلكتروني",
@@ -369,9 +373,8 @@ const COPY = {
       ],
     },
     intro: {
-      lead: "We Save Your Time And Energy. ",
-      muted: "Instead of searching for an assistant, administrator, specialist, or consultant - ",
-      tail: "we bring all of that under one roof, with one unified challenge: from concept to delivery",
+      main: ["Everything your business needs...", "Under one roof, from concept to delivery."],
+      roles: "Administrative • Specialist • Consultant • Assistant",
     },
     about: {
       kicker: "Introduction",
@@ -447,7 +450,10 @@ const COPY = {
       kicker: "What Sets Us Apart",
       title: "What Sets Us Apart",
       titleAccent: "",
-      quote: "We Save Your Time And Energy.",
+      quote: {
+        main: ["Everything your business needs...", "Under one roof, from concept to delivery."],
+        roles: "Administrative • Specialist • Consultant • Assistant",
+      },
       items: [
         "Integrated services.",
         "Administrative and real estate solutions under one roof.",
@@ -578,8 +584,10 @@ const COPY = {
       title: "Thank You",
       titleAccent: "",
       kicker: "Contact Us Via",
-      intro:
-        "Instead of searching for an assistant, administrator, specialist, or consultant - we bring all of that under one roof, with one unified challenge: from concept to delivery",
+      statement: {
+        main: ["Everything your business needs...", "Under one roof, from concept to delivery."],
+        roles: "Administrative • Specialist • Consultant • Assistant",
+      },
       labels: {
         chat: "WhatsApp",
         email: "Email Us",
@@ -953,11 +961,14 @@ function Intro({ t, language }: LocalizedSectionProps) {
           <div className="relative z-10 mx-auto max-w-3xl">
             <span aria-hidden className="mx-auto mb-5 block h-px w-20 bg-accent-gold md:mb-7" />
             <p className="font-serif text-[clamp(1.22rem,5.7vw,1.5rem)] leading-[1.55] text-navy-deep md:text-[clamp(1.35rem,2.2vw,1.9rem)] md:leading-[1.55]">
-              <span className="block font-semibold text-navy-deep">{t.intro.lead}</span>
-              <span className="mt-3 block text-ink/78 md:mt-4">
-                {t.intro.muted}
-                {t.intro.tail}
-              </span>
+              {t.intro.main.map((line) => (
+                <span key={line} className="block font-semibold text-navy-deep">
+                  {line}
+                </span>
+              ))}
+            </p>
+            <p className="mt-4 text-[12px] font-medium leading-[1.8] text-accent-gold md:mt-5 md:text-[13px]">
+              {t.intro.roles}
             </p>
           </div>
         </div>
@@ -1164,7 +1175,14 @@ function WhyUs({ t, language }: LocalizedSectionProps) {
           </h2>
           <div className="mt-4 md:mt-8 border-t border-rule-strong max-md:border-paper/10 pt-4 md:pt-6 max-w-md">
             <p className="font-serif text-[14.5px] md:text-[17px] leading-[1.64] md:leading-[1.85] text-ink/85 max-md:text-paper/80 italic">
-              {t.why.quote}
+              {t.why.quote.main.map((line) => (
+                <span key={line} className="block">
+                  {line}
+                </span>
+              ))}
+            </p>
+            <p className="mt-3 text-[11.5px] font-medium leading-[1.8] text-accent-gold md:mt-4 md:text-[12.5px]">
+              {t.why.quote.roles}
             </p>
           </div>
         </div>
@@ -1586,9 +1604,18 @@ function Contact({ t, language }: LocalizedSectionProps) {
             {t.contact.title}
             <span className="block text-accent-gold">{t.contact.titleAccent}</span>
           </h2>
-          <p className="mt-4 md:mt-6 max-w-md border-t border-paper/10 pt-4 text-[13.8px] md:text-[15px] leading-[1.72] md:leading-[2] text-paper/75">
-            {t.contact.intro}
-          </p>
+          <div className="mt-4 md:mt-6 max-w-md border-t border-paper/10 pt-4">
+            <p className="font-serif text-[17px] leading-[1.75] text-paper/85 md:text-[20px] md:leading-[1.75]">
+              {t.contact.statement.main.map((line) => (
+                <span key={line} className="block">
+                  {line}
+                </span>
+              ))}
+            </p>
+            <p className="mt-3 text-[11.5px] font-medium leading-[1.8] text-accent-gold md:mt-4 md:text-[12.5px]">
+              {t.contact.statement.roles}
+            </p>
+          </div>
 
           <div className="mt-5 md:mt-10 divide-y divide-paper/10 border-y border-paper/10">
             <ContactRow
