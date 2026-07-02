@@ -202,8 +202,8 @@ const COPY = {
       items: ["الاحترافية", "الابتكار", "المرونة", "الشفافية", "الالتزام", "التعاون"],
     },
     industries: {
-      kicker: "جمهورنا المستهدف",
-      title: "جمهورنا المستهدف",
+      kicker: "الفئات المستهدفة",
+      title: "القطاعات التي نخدمها",
       intro: "",
       sectors: [
         { name: "المنشآت الصغيرة", tag: "" },
@@ -474,8 +474,8 @@ const COPY = {
       ],
     },
     industries: {
-      kicker: "Our Target Audience",
-      title: "Our Target Audience",
+      kicker: "Target Segments",
+      title: "Sectors We Serve",
       intro: "",
       sectors: [
         { name: "Small Businesses", tag: "" },
