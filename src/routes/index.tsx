@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   ArrowUpLeft,
   ArrowUpRight,
@@ -19,7 +19,6 @@ import {
   X,
 } from "lucide-react";
 import logoImage from "@/assets/first-advance-logo-light-transparent.png";
-import desktopIntroVideo from "@/assets/desktop-intro.mp4";
 
 /* Premium Saudi architecture photography */
 import heroKafd from "@/assets/hero-riyadh-panorama.jpg";
@@ -59,15 +58,6 @@ export const Route = createFileRoute("/")({
       {
         property: "og:description",
         content: PAGE_META.ar.ogDescription,
-      },
-    ],
-    links: [
-      {
-        rel: "preload",
-        href: desktopIntroVideo,
-        as: "video",
-        type: "video/mp4",
-        media: "(min-width: 1024px)",
       },
     ],
   }),
@@ -678,7 +668,6 @@ function Index() {
       lang={language}
       className="bg-canvas text-ink font-sans overflow-x-hidden antialiased"
     >
-      <DesktopIntroOverlay />
       <Nav t={t} language={language} setLanguage={setLanguage} />
       <Hero t={t} language={language} />
       <Intro t={t} language={language} />
@@ -693,66 +682,6 @@ function Index() {
       <Contact t={t} language={language} />
       <Footer t={t} language={language} />
     </main>
-  );
-}
-
-function DesktopIntroOverlay() {
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const [isVisible, setIsVisible] = useState(true);
-  const [isLeaving, setIsLeaving] = useState(false);
-
-  useEffect(() => {
-    const desktopMedia = window.matchMedia("(min-width: 1024px)");
-    const syncDesktopIntro = () => setIsVisible(desktopMedia.matches);
-
-    syncDesktopIntro();
-    desktopMedia.addEventListener("change", syncDesktopIntro);
-
-    return () => desktopMedia.removeEventListener("change", syncDesktopIntro);
-  }, []);
-
-  useEffect(() => {
-    if (!isVisible) return;
-
-    const video = videoRef.current;
-    if (!video) return;
-
-    video.currentTime = 0;
-    const playback = video.play();
-    if (playback) {
-      playback.catch(() => setIsLeaving(true));
-    }
-  }, [isVisible]);
-
-  useEffect(() => {
-    if (!isLeaving) return;
-
-    const removeIntro = window.setTimeout(() => setIsVisible(false), 700);
-    return () => window.clearTimeout(removeIntro);
-  }, [isLeaving]);
-
-  if (!isVisible) return null;
-
-  return (
-    <div
-      aria-hidden="true"
-      className={`fixed inset-0 z-[100] hidden overflow-hidden bg-navy-deep transition-opacity duration-700 ease-out lg:block ${
-        isLeaving ? "pointer-events-none opacity-0" : "opacity-100"
-      }`}
-    >
-      <video
-        ref={videoRef}
-        className="h-full w-full object-cover object-center"
-        muted
-        playsInline
-        autoPlay
-        preload="auto"
-        onEnded={() => setIsLeaving(true)}
-        onError={() => setIsLeaving(true)}
-      >
-        <source src={desktopIntroVideo} type="video/mp4" media="(min-width: 1024px)" />
-      </video>
-    </div>
   );
 }
 
