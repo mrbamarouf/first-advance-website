@@ -8,7 +8,7 @@ brand
 Saudi business owners, executives, investors, real estate stakeholders, and operations leaders evaluating First Advance as a trusted partner for business, operational, and real estate services.
 
 ## Product Purpose
-Present First Advance as a premium Saudi corporate services company. The site should communicate trust, practical capability, integrated service coverage, and a clear path to contact through WhatsApp, email, or direct inquiry.
+Present First Advance as a premium Saudi corporate services company. The site should communicate trust, practical capability, integrated service coverage, and a clear path to contact through direct messaging, email, or direct inquiry.
 
 ## Brand Personality
 Calm, trustworthy, and executive. The experience should feel like a high-end Saudi corporate office: practical, organized, restrained, and ready for live publication.

@@ -11,7 +11,6 @@ import {
   Layers,
   Mail,
   Menu,
-  MessageCircle,
   RefreshCcw,
   SearchCheck,
   ShieldCheck,
@@ -66,8 +65,8 @@ export const Route = createFileRoute("/")({
 });
 
 const LOGO = logoImage;
-const WHATSAPP_DISPLAY = "+966 556 882 169";
-const WHATSAPP_LINK = "https://wa.me/966556882169";
+const CHAT_DISPLAY = "+966 556 882 169";
+const CHAT_LINK = "https://wa.me/966556882169";
 const EMAIL = "info@aras.com.sa";
 type Language = "ar" | "en";
 
@@ -84,7 +83,7 @@ const COPY = {
         { href: "#process", label: "أسلوب العمل" },
         { href: "#packages", label: "عروضنا" },
       ],
-      cta: "Whats App",
+      ctaLabel: "فتح التواصل",
       languageLabel: "اللغة",
       languageAria: "تغيير اللغة",
       openMenu: "فتح القائمة",
@@ -96,7 +95,7 @@ const COPY = {
       subtitleHighlight: "First Advance",
       subtitleSuffix: "",
       body: "مؤسسة المتقدم الأول لخدمات الأعمال هي منشأة سعودية متخصصة في تقديم حلول الأعمال والخدمات الإدارية والتشغيلية، إلى جانب تقديم الخدمات العقارية المرخصة، بهدف تمكين الأفراد وقطاع الأعمال من الوصول إلى حلول متكاملة تساهم في رفع الكفاءة وتحقيق النمو المستدام.",
-      primaryCta: "Whats App",
+      primaryCtaLabel: "فتح التواصل",
       secondaryCta: "خدماتنا",
       ledger: [
         { k: "01", t: "القطاع العقاري", d: "الوساطة والتسويق العقاري." },
@@ -263,7 +262,7 @@ const COPY = {
         durationShort: "التواصل",
       },
       featured: "",
-      request: "Whats App",
+      requestLabel: "فتح التواصل",
       note: "يتم تحديد سعر الباقة المختارة بعد دراسة وتحليل المنشأة",
       packs: [
         {
@@ -310,10 +309,10 @@ const COPY = {
       intro:
         "بدلًا من البحث عن - مساعد - إداري - متخصص - استشاري، لدينا كل ذلك تحت سقف واحد من الفكرة إلى التسليم.",
       labels: {
-        whatsapp: "Whats App",
+        chat: "",
         email: "Our Only Email",
       },
-      whatsappCta: "Whats App",
+      chatCtaLabel: "فتح التواصل",
       emailCta: "Our Only Email",
     },
     footer: {
@@ -337,7 +336,7 @@ const COPY = {
         { href: "#process", label: "Work Approach" },
         { href: "#packages", label: "Packages" },
       ],
-      cta: "Whats App",
+      ctaLabel: "Open contact",
       languageLabel: "Language",
       languageAria: "Change language",
       openMenu: "Open menu",
@@ -349,7 +348,7 @@ const COPY = {
       subtitleHighlight: "First Advance",
       subtitleSuffix: "",
       body: "Al-Mutakadem Al-Awwal Business Services is a Saudi company specializing in providing business solutions, administrative and operational services, and licensed real estate services. Our aim is to empower individuals and businesses by providing integrated solutions that contribute to increased efficiency and sustainable growth.",
-      primaryCta: "Whats App",
+      primaryCtaLabel: "Open contact",
       secondaryCta: "Services",
       ledger: [
         {
@@ -535,7 +534,7 @@ const COPY = {
         durationShort: "Contact",
       },
       featured: "",
-      request: "Whats App",
+      requestLabel: "Open contact",
       note: "The pricing of each selected package is customized following a careful analysis of your business and operational needs.",
       packs: [
         {
@@ -582,10 +581,10 @@ const COPY = {
       intro:
         "Instead of searching for an assistant, administrator, specialist, or consultant - we bring all of that under one roof, with one unified challenge: from concept to delivery",
       labels: {
-        whatsapp: "Whats App",
+        chat: "",
         email: "Our Only Email",
       },
-      whatsappCta: "Whats App",
+      chatCtaLabel: "Open contact",
       emailCta: "Our Only Email",
     },
     footer: {
@@ -613,6 +612,32 @@ function mobileEnglishMenuFlow(language: Language) {
 function ActionArrow({ language, className }: { language: Language; className?: string }) {
   const Icon = language === "en" ? ArrowUpRight : ArrowUpLeft;
   return <Icon className={className} />;
+}
+
+function BrandChatIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 32 32"
+      aria-hidden="true"
+      focusable="false"
+      className={className}
+    >
+      <g
+        fill="var(--color-accent-gold)"
+        stroke="var(--color-navy-deep)"
+        strokeLinejoin="round"
+        strokeWidth="0.55"
+        paintOrder="stroke fill"
+      >
+        <path d="M19.11 17.46c-.31-.16-1.85-.91-2.14-1.02-.29-.1-.5-.16-.71.16-.21.31-.82 1.02-1 1.23-.18.21-.37.24-.68.08-.31-.16-1.32-.49-2.52-1.56-.93-.83-1.56-1.86-1.74-2.17-.18-.31-.02-.48.14-.64.14-.14.31-.37.47-.55.16-.18.21-.31.31-.52.1-.21.05-.39-.03-.55-.08-.16-.71-1.7-.97-2.33-.25-.61-.51-.53-.71-.54h-.6c-.21 0-.55.08-.84.39-.29.31-1.1 1.08-1.1 2.63s1.13 3.05 1.29 3.26c.16.21 2.23 3.4 5.4 4.77.75.33 1.34.52 1.8.67.76.24 1.45.21 1.99.13.61-.09 1.85-.76 2.12-1.49.26-.73.26-1.36.18-1.49-.08-.13-.29-.21-.6-.37Z" />
+        <path
+          fillRule="evenodd"
+          clipRule="evenodd"
+          d="M16.02 3C8.85 3 3.03 8.8 3.03 15.94c0 2.48.71 4.8 1.93 6.77L3 29l6.45-1.9a13 13 0 0 0 6.57 1.77c7.17 0 12.99-5.8 12.99-12.94C29.01 8.8 23.19 3 16.02 3Zm0 23.68c-2.25 0-4.35-.66-6.11-1.8l-.44-.28-3.82 1.12 1.13-3.72-.29-.46a10.67 10.67 0 0 1-1.65-5.61c0-5.93 5.02-10.75 11.18-10.75 6.16 0 11.18 4.82 11.18 10.75 0 5.93-5.02 10.75-11.18 10.75Z"
+        />
+      </g>
+    </svg>
+  );
 }
 
 function Index() {
@@ -698,9 +723,10 @@ function Nav({
           />
           <a
             href="#contact"
-            className="inline-flex min-h-11 items-center gap-2 border border-accent-gold text-accent-gold px-4 py-2 text-[12px] hover:bg-accent-gold hover:text-navy-deep transition"
+            aria-label={t.nav.ctaLabel}
+            className="inline-flex min-h-11 items-center justify-center gap-2 border border-accent-gold text-accent-gold px-4 py-2 text-[12px] hover:bg-accent-gold hover:text-navy-deep transition"
           >
-            {t.nav.cta}
+            <BrandChatIcon className="h-4 w-4" />
           </a>
         </div>
         <button
@@ -735,10 +761,11 @@ function Nav({
           ))}
           <a
             href="#contact"
-            className="min-h-[3.25rem] px-5 py-3.5 text-[14px] text-accent-gold hover:bg-paper/[0.04] transition"
+            aria-label={t.nav.ctaLabel}
+            className="flex min-h-[3.25rem] items-center justify-center px-5 py-3.5 text-[14px] text-accent-gold hover:bg-paper/[0.04] transition"
             onClick={() => setIsOpen(false)}
           >
-            {t.nav.cta}
+            <BrandChatIcon className="h-5 w-5" />
           </a>
           <div className="min-h-[3.5rem] px-5 py-3.5 flex items-center justify-between gap-4">
             <span className="text-[13px] text-paper/65">{t.nav.languageLabel}</span>
@@ -860,9 +887,10 @@ function Hero({ t, language }: LocalizedSectionProps) {
         >
           <a
             href="#contact"
+            aria-label={t.hero.primaryCtaLabel}
             className="inline-flex min-h-[3.25rem] md:min-h-12 items-center justify-center gap-3 bg-accent-gold text-navy-deep px-8 py-4 text-[13px] font-semibold hover:brightness-95 transition"
           >
-            {t.hero.primaryCta} <ActionArrow language={language} className="w-4 h-4" />
+            <BrandChatIcon className="h-5 w-5" />
           </a>
           <a
             href="#services"
@@ -1511,9 +1539,10 @@ function Packages({ t, language }: LocalizedSectionProps) {
                 )}
                 <a
                   href="#contact"
+                  aria-label={t.packages.requestLabel}
                   className="inline-flex min-h-11 items-center justify-center gap-2 text-[13px] font-semibold text-paper border-b border-paper hover:text-accent-gold hover:border-accent-gold transition self-start max-md:w-full max-md:border max-md:border-paper/25 max-md:px-4 max-md:py-2.5"
                 >
-                  {t.packages.request} <ActionArrow language={language} className="w-3.5 h-3.5" />
+                  <BrandChatIcon className="h-4 w-4 text-accent-gold" />
                 </a>
               </div>
             </div>
@@ -1559,11 +1588,12 @@ function Contact({ t, language }: LocalizedSectionProps) {
 
           <div className="mt-5 md:mt-10 divide-y divide-paper/10 border-y border-paper/10">
             <ContactRow
-              icon={<MessageCircle className="w-4 h-4" />}
-              label={t.contact.labels.whatsapp}
-              value={WHATSAPP_DISPLAY}
-              href={WHATSAPP_LINK}
+              icon={<BrandChatIcon className="w-4 h-4" />}
+              label={t.contact.labels.chat}
+              value={CHAT_DISPLAY}
+              href={CHAT_LINK}
               language={language}
+              showArrow={false}
             />
             <ContactRow
               icon={<Mail className="w-4 h-4" />}
@@ -1576,12 +1606,13 @@ function Contact({ t, language }: LocalizedSectionProps) {
 
           <div className="mt-6 md:mt-10 flex flex-col sm:flex-row gap-3">
             <a
-              href={WHATSAPP_LINK}
+              href={CHAT_LINK}
+              aria-label={t.contact.chatCtaLabel}
               target="_blank"
               rel="noreferrer"
               className="inline-flex min-h-[3.25rem] md:min-h-12 w-full sm:w-auto items-center justify-center gap-3 bg-accent-gold text-navy-deep px-7 py-3.5 text-[13px] font-semibold hover:brightness-95 transition"
             >
-              {t.contact.whatsappCta} <ActionArrow language={language} className="w-4 h-4" />
+              <BrandChatIcon className="h-5 w-5" />
             </a>
             <a
               href={`mailto:${EMAIL}`}
@@ -1602,12 +1633,14 @@ function ContactRow({
   value,
   href,
   language,
+  showArrow = true,
 }: {
   icon: React.ReactNode;
   label: string;
   value: string;
   href: string;
   language: Language;
+  showArrow?: boolean;
 }) {
   const englishMobile = mobileEnglishFlow(language);
   const valueDirection = /[\u0600-\u06FF]/.test(value) ? "rtl" : "ltr";
@@ -1633,7 +1666,7 @@ function ContactRow({
       <div
         className={`row-span-2 col-start-3 row-start-1 sm:row-span-1 sm:col-start-auto sm:col-span-1 text-paper/40 group-hover:text-accent-gold transition-colors ${arrowAlign}`}
       >
-        <ActionArrow language={language} className="w-4 h-4 inline" />
+        {showArrow && <ActionArrow language={language} className="w-4 h-4 inline" />}
       </div>
     </a>
   );
@@ -1746,8 +1779,8 @@ function Footer({ t, language }: LocalizedSectionProps) {
           <div className="text-[10px] text-accent-gold mb-4">{t.footer.contactTitle}</div>
           <ul className="space-y-1 md:space-y-2.5 text-[13.5px]">
             <li className="flex max-lg:min-h-11 gap-2 items-center">
-              <MessageCircle className="w-3.5 h-3.5 text-accent-gold" />
-              <span dir="ltr">{WHATSAPP_DISPLAY}</span>
+              <BrandChatIcon className="w-3.5 h-3.5 text-accent-gold" />
+              <span dir="ltr">{CHAT_DISPLAY}</span>
             </li>
             <li className="flex max-lg:min-h-11 gap-2 items-center">
               <Mail className="w-3.5 h-3.5 text-accent-gold" />
