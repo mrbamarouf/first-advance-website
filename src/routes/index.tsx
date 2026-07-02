@@ -92,7 +92,7 @@ const COPY = {
     hero: {
       title: "حلول أعمال متكاملة وشراكات تصنع النجاح",
       subtitlePrefix: "",
-      subtitleHighlight: "First Advance",
+      subtitleHighlight: "",
       subtitleSuffix: "",
       body: "مؤسسة المتقدم الأول لخدمات الأعمال هي منشأة سعودية متخصصة في تقديم حلول الأعمال والخدمات الإدارية والتشغيلية، إلى جانب تقديم الخدمات العقارية المرخصة، بهدف تمكين الأفراد وقطاع الأعمال من الوصول إلى حلول متكاملة تساهم في رفع الكفاءة وتحقيق النمو المستدام.",
       primaryCtaLabel: "فتح التواصل",
@@ -345,7 +345,7 @@ const COPY = {
     hero: {
       title: "Integrated business solutions and partnerships that create success",
       subtitlePrefix: "",
-      subtitleHighlight: "First Advance",
+      subtitleHighlight: "",
       subtitleSuffix: "",
       body: "Al-Mutakadem Al-Awwal Business Services is a Saudi company specializing in providing business solutions, administrative and operational services, and licensed real estate services. Our aim is to empower individuals and businesses by providing integrated solutions that contribute to increased efficiency and sustainable growth.",
       primaryCtaLabel: "Open contact",
