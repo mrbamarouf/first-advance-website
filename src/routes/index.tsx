@@ -310,10 +310,10 @@ const COPY = {
         "بدلًا من البحث عن - مساعد - إداري - متخصص - استشاري، لدينا كل ذلك تحت سقف واحد من الفكرة إلى التسليم.",
       labels: {
         chat: "",
-        email: "Our Only Email",
+        email: "البريد الإلكتروني",
       },
       chatCtaLabel: "فتح التواصل",
-      emailCta: "Our Only Email",
+      emailCta: "البريد الإلكتروني",
     },
     footer: {
       desc: "حلول أعمال متكاملة وشراكات تصنع النجاح",
@@ -582,10 +582,10 @@ const COPY = {
         "Instead of searching for an assistant, administrator, specialist, or consultant - we bring all of that under one roof, with one unified challenge: from concept to delivery",
       labels: {
         chat: "",
-        email: "Our Only Email",
+        email: "Email Us",
       },
       chatCtaLabel: "Open contact",
-      emailCta: "Our Only Email",
+      emailCta: "Email Us",
     },
     footer: {
       desc: "Integrated business solutions and partnerships that create success",
