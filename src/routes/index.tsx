@@ -309,7 +309,7 @@ const COPY = {
       intro:
         "بدلًا من البحث عن - مساعد - إداري - متخصص - استشاري، لدينا كل ذلك تحت سقف واحد من الفكرة إلى التسليم.",
       labels: {
-        chat: "",
+        chat: "واتساب",
         email: "البريد الإلكتروني",
       },
       chatCtaLabel: "فتح التواصل",
@@ -581,7 +581,7 @@ const COPY = {
       intro:
         "Instead of searching for an assistant, administrator, specialist, or consultant - we bring all of that under one roof, with one unified challenge: from concept to delivery",
       labels: {
-        chat: "",
+        chat: "WhatsApp",
         email: "Email Us",
       },
       chatCtaLabel: "Open contact",
