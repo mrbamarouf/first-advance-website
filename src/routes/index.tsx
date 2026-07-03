@@ -1593,8 +1593,9 @@ function Contact({ t, language }: LocalizedSectionProps) {
             src={ctaSunset}
             alt={t.contact.imageAlt}
             loading="lazy"
-            className="absolute inset-0 w-full h-full object-cover object-[50%_center]"
+            className="absolute inset-0 w-full h-full object-cover object-[34%_34%] md:object-[34%_44%] lg:object-[44%_center]"
           />
+          <div aria-hidden className="absolute inset-0 bg-navy-deep/60" />
         </div>
         <div
           className={`lg:col-span-6 bg-navy px-5 md:px-14 py-12 lg:py-20 flex flex-col justify-center max-md:py-9 ${englishMobile}`}
