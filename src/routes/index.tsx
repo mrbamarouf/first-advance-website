@@ -26,7 +26,7 @@ import boardroom from "@/assets/plate-boardroom.jpg";
 import corporateTower from "@/assets/plate-corporate-tower.jpg";
 import operationsCenter from "@/assets/plate-operations.jpg";
 import realEstate from "@/assets/plate-realestate.jpg";
-import ctaSunset from "@/assets/cta-jeddah-sunset.jpg";
+import ctaSunset from "@/assets/contact-jeddah-waterfront.png";
 import sectorBusiness from "@/assets/sector-business.jpg";
 import sectorRealEstate from "@/assets/sector-realestate.jpg";
 import sectorInvestment from "@/assets/sector-investment.jpg";
@@ -1584,6 +1584,10 @@ function Packages({ t, language }: LocalizedSectionProps) {
 /* Contact, sunset skyline */
 function Contact({ t, language }: LocalizedSectionProps) {
   const englishMobile = mobileEnglishFlow(language);
+  const desktopImageBlend =
+    language === "en"
+      ? "linear-gradient(270deg, var(--color-navy) 0%, oklch(0.26 0.032 168 / 0.82) 4%, oklch(0.26 0.032 168 / 0.36) 10%, transparent 15%)"
+      : "linear-gradient(90deg, var(--color-navy) 0%, oklch(0.26 0.032 168 / 0.82) 4%, oklch(0.26 0.032 168 / 0.36) 10%, transparent 15%)";
 
   return (
     <section id="contact" className="relative bg-navy-deep text-paper overflow-hidden">
@@ -1593,9 +1597,22 @@ function Contact({ t, language }: LocalizedSectionProps) {
             src={ctaSunset}
             alt={t.contact.imageAlt}
             loading="lazy"
-            className="absolute inset-0 w-full h-full object-cover object-[34%_34%] md:object-[34%_44%] lg:object-[44%_center]"
+            className="absolute inset-0 w-full h-full object-cover object-[38%_center] md:object-[42%_35%] lg:object-[42%_center]"
           />
-          <div aria-hidden className="absolute inset-0 bg-navy-deep/60" />
+          <div aria-hidden className="absolute inset-0 bg-navy-deep/25" />
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0 hidden lg:block"
+            style={{ background: desktopImageBlend }}
+          />
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-x-0 bottom-0 h-28 lg:hidden"
+            style={{
+              background:
+                "linear-gradient(180deg, transparent 0%, oklch(0.26 0.032 168 / 0.34) 62%, var(--color-navy) 100%)",
+            }}
+          />
         </div>
         <div
           className={`lg:col-span-6 bg-navy px-5 md:px-14 py-12 lg:py-20 flex flex-col justify-center max-md:py-9 ${englishMobile}`}
