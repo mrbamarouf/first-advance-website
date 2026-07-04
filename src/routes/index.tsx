@@ -313,7 +313,7 @@ const COPY = {
         roles: "مساعد • إداري • متخصص • استشاري",
       },
       labels: {
-        chat: "واتساب",
+        chat: "الهاتف",
         email: "البريد الإلكتروني",
       },
       chatCtaLabel: "فتح التواصل",
@@ -589,7 +589,7 @@ const COPY = {
         roles: "Administrative • Specialist • Consultant • Assistant",
       },
       labels: {
-        chat: "WhatsApp",
+        chat: "Phone",
         email: "Email Us",
       },
       chatCtaLabel: "Open contact",
