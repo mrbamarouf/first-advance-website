@@ -27,7 +27,7 @@ import corporateTower from "@/assets/plate-corporate-tower.jpg";
 import operationsCenter from "@/assets/plate-operations.png";
 import realEstate from "@/assets/plate-realestate.jpg";
 import ctaSunset from "@/assets/contact-jeddah-waterfront.png";
-import sectorBusiness from "@/assets/sector-business.jpg";
+import sectorBusiness from "@/assets/sector-business.png";
 import sectorRealEstate from "@/assets/sector-realestate.jpg";
 import sectorInvestment from "@/assets/sector-investment.jpg";
 
