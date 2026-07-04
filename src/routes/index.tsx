@@ -271,7 +271,7 @@ const COPY = {
       packs: [
         {
           title: "باقة أساسية",
-          audience: "Package No.1",
+          audience: "الباقة الأولى",
           desc: "",
           includes: [
             "ربع سنوي - سنوي",
@@ -282,7 +282,7 @@ const COPY = {
         },
         {
           title: "باقة متقدمة",
-          audience: "Package No.2",
+          audience: "الباقة الثانية",
           desc: "",
           includes: [
             "سنوي - الشهادات الدورية",
@@ -294,7 +294,7 @@ const COPY = {
         },
         {
           title: "باقة احترافية",
-          audience: "Package No.3",
+          audience: "الباقة الثالثة",
           desc: "",
           includes: [
             "سنوي - تقديم المشورة التفصيلية",
@@ -309,7 +309,7 @@ const COPY = {
       imageAlt: "أفق جدة عند الغروب على الكورنيش",
       title: "شكراً لكم",
       titleAccent: "",
-      kicker: "Contact Us Via",
+      kicker: "تواصل معنا",
       statement: {
         main: ["كل ما تحتاجه لإنجاز أعمالك...", "تحت سقف واحد، من الفكرة إلى التسليم."],
         roles: "مساعد • إداري • متخصص • استشاري",
@@ -327,7 +327,7 @@ const COPY = {
       desc: "حلول أعمال متكاملة وشراكات تصنع النجاح",
       linksTitle: "روابط",
       serviceTitle: "خدماتنا",
-      contactTitle: "Contact Us Via",
+      contactTitle: "تواصل معنا",
       home: "الرئيسية",
       copyright: "جميع الحقوق محفوظة.",
     },
