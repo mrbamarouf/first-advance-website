@@ -1586,8 +1586,8 @@ function Contact({ t, language }: LocalizedSectionProps) {
   const englishMobile = mobileEnglishFlow(language);
   const desktopImageBlend =
     language === "en"
-      ? "linear-gradient(270deg, var(--color-navy) 0%, oklch(0.26 0.032 168 / 0.82) 4%, oklch(0.26 0.032 168 / 0.36) 10%, transparent 15%)"
-      : "linear-gradient(90deg, var(--color-navy) 0%, oklch(0.26 0.032 168 / 0.82) 4%, oklch(0.26 0.032 168 / 0.36) 10%, transparent 15%)";
+      ? "linear-gradient(270deg, var(--color-navy) 0%, oklch(0.26 0.032 168 / 0.72) 3%, oklch(0.26 0.032 168 / 0.28) 8%, transparent 14%)"
+      : "linear-gradient(90deg, var(--color-navy) 0%, oklch(0.26 0.032 168 / 0.72) 3%, oklch(0.26 0.032 168 / 0.28) 8%, transparent 14%)";
 
   return (
     <section id="contact" className="relative bg-navy-deep text-paper overflow-hidden">
@@ -1597,9 +1597,9 @@ function Contact({ t, language }: LocalizedSectionProps) {
             src={ctaSunset}
             alt={t.contact.imageAlt}
             loading="lazy"
-            className="absolute inset-0 w-full h-full object-cover object-[38%_center] md:object-[42%_35%] lg:object-[42%_center]"
+            className="absolute inset-0 w-full h-full object-cover object-[36%_center] md:object-[38%_35%] lg:object-[34%_center]"
           />
-          <div aria-hidden className="absolute inset-0 bg-navy-deep/25" />
+          <div aria-hidden className="absolute inset-0 bg-navy-deep/20" />
           <div
             aria-hidden
             className="pointer-events-none absolute inset-0 hidden lg:block"
