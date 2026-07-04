@@ -24,7 +24,7 @@ import logoImage from "@/assets/first-advance-logo-light-transparent.png";
 import heroKafd from "@/assets/hero-riyadh-panorama.jpg";
 import boardroom from "@/assets/plate-boardroom.jpg";
 import corporateTower from "@/assets/plate-corporate-tower.jpg";
-import operationsCenter from "@/assets/plate-operations.jpg";
+import operationsCenter from "@/assets/plate-operations.png";
 import realEstate from "@/assets/plate-realestate.jpg";
 import ctaSunset from "@/assets/contact-jeddah-waterfront.png";
 import sectorBusiness from "@/assets/sector-business.jpg";
@@ -1061,6 +1061,7 @@ function ServicesShowcase({ t, language }: LocalizedSectionProps) {
     },
     {
       img: operationsCenter,
+      imageClass: "object-[50%_48%] md:object-[54%_center] lg:object-[49%_center]",
     },
     {
       img: realEstate,
@@ -1069,6 +1070,7 @@ function ServicesShowcase({ t, language }: LocalizedSectionProps) {
   const services = t.services.cards.map((service, index) => ({
     ...service,
     img: serviceImages[index].img,
+    imageClass: serviceImages[index].imageClass,
   }));
 
   return (
@@ -1130,7 +1132,9 @@ function ServicesShowcase({ t, language }: LocalizedSectionProps) {
                 src={s.img}
                 alt={s.alt}
                 loading="lazy"
-                className="absolute inset-0 w-full h-full object-cover object-[52%_center] md:object-center transition-transform duration-[1400ms] group-hover:scale-[1.03]"
+                className={`absolute inset-0 w-full h-full object-cover ${
+                  s.imageClass ?? "object-[52%_center] md:object-center"
+                } transition-transform duration-[1400ms] group-hover:scale-[1.03]`}
               />
               <div className="absolute inset-0 bg-gradient-to-l from-navy-deep/15 to-transparent" />
             </div>
