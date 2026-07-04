@@ -65,9 +65,9 @@ export const Route = createFileRoute("/")({
 });
 
 const LOGO = logoImage;
-const CHAT_DISPLAY = "+966 556 882 169";
-const CHAT_LINK = "https://wa.me/966556882169";
-const EMAIL = "info@aras.com.sa";
+const CHAT_DISPLAY = "+966 53 564 7000";
+const CHAT_LINK = "tel:+966535647000";
+const EMAIL = "info@firstreal.com.sa";
 type Language = "ar" | "en";
 
 const COPY = {
@@ -1661,8 +1661,8 @@ function Contact({ t, language }: LocalizedSectionProps) {
             <a
               href={CHAT_LINK}
               aria-label={t.contact.chatCtaLabel}
-              target="_blank"
-              rel="noreferrer"
+              target={CHAT_LINK.startsWith("http") ? "_blank" : undefined}
+              rel={CHAT_LINK.startsWith("http") ? "noreferrer" : undefined}
               className="inline-flex min-h-[3.25rem] md:min-h-12 w-full sm:w-auto items-center justify-center gap-3 border border-accent-gold/70 bg-transparent text-accent-gold px-7 py-3.5 text-[13px] font-medium hover:bg-accent-gold/[0.07] hover:shadow-[0_0_24px_-10px_var(--color-accent-gold)] transition duration-[250ms]"
             >
               <BrandChatIcon className="h-5 w-5" />
@@ -1714,6 +1714,7 @@ function ContactRow({
       <div
         className="col-start-2 sm:col-start-auto sm:col-span-6 min-w-0 break-words text-paper font-semibold text-[14px] md:text-[15px] group-hover:text-accent-gold transition-colors"
         dir={valueDirection}
+        style={{ unicodeBidi: "isolate" }}
       >
         {value}
       </div>
@@ -1834,11 +1835,15 @@ function Footer({ t, language }: LocalizedSectionProps) {
           <ul className="space-y-1 md:space-y-2.5 text-[13.5px]">
             <li className="flex max-lg:min-h-11 gap-2 items-center">
               <BrandChatIcon className="w-3.5 h-3.5 text-accent-gold" />
-              <span dir="ltr">{CHAT_DISPLAY}</span>
+              <span dir="ltr" style={{ unicodeBidi: "isolate" }}>
+                {CHAT_DISPLAY}
+              </span>
             </li>
             <li className="flex max-lg:min-h-11 gap-2 items-center">
               <Mail className="w-3.5 h-3.5 text-accent-gold" />
-              <span dir="ltr">{EMAIL}</span>
+              <span dir="ltr" style={{ unicodeBidi: "isolate" }}>
+                {EMAIL}
+              </span>
             </li>
           </ul>
         </div>
