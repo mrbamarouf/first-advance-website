@@ -1061,7 +1061,7 @@ function ServicesShowcase({ t, language }: LocalizedSectionProps) {
     },
     {
       img: operationsCenter,
-      imageClass: "object-[50%_48%] md:object-[54%_center] lg:object-[49%_center]",
+      imageClass: "object-[50%_48%] md:object-[63%_center] lg:object-[49%_center]",
     },
     {
       img: realEstate,
