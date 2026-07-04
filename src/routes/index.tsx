@@ -906,12 +906,14 @@ function Hero({ t, language }: LocalizedSectionProps) {
           }`}
         >
           <a
-            href="#contact"
+            href={WHATSAPP_LINK}
             aria-label={t.hero.primaryCtaLabel}
+            target="_blank"
+            rel="noreferrer"
             className="inline-flex min-h-[3.25rem] md:min-h-12 items-center justify-center gap-3 border border-accent-gold/70 bg-transparent text-accent-gold px-8 py-4 text-[13px] font-medium hover:bg-accent-gold/[0.07] hover:shadow-[0_0_24px_-10px_var(--color-accent-gold)] transition duration-[250ms]"
           >
             <BrandChatIcon className="h-5 w-5" />
-            <span>{t.contact.labels.chat}</span>
+            <span>{t.contact.whatsappCta}</span>
           </a>
           <a
             href="#services"
@@ -1573,12 +1575,14 @@ function Packages({ t, language }: LocalizedSectionProps) {
                   </div>
                 )}
                 <a
-                  href="#contact"
+                  href={WHATSAPP_LINK}
                   aria-label={t.packages.requestLabel}
+                  target="_blank"
+                  rel="noreferrer"
                   className="inline-flex min-h-11 items-center justify-center gap-2 border border-accent-gold/60 bg-transparent px-5 py-2.5 text-[13px] font-medium text-accent-gold hover:bg-accent-gold/[0.07] hover:shadow-[0_0_24px_-10px_var(--color-accent-gold)] transition duration-[250ms] self-start max-md:w-full max-md:px-4"
                 >
                   <BrandChatIcon className="h-4 w-4 text-accent-gold" />
-                  <span>{t.contact.labels.chat}</span>
+                  <span>{t.contact.whatsappCta}</span>
                 </a>
               </div>
             </div>
@@ -1651,7 +1655,7 @@ function Contact({ t, language }: LocalizedSectionProps) {
 
           <div className="mt-5 md:mt-10 divide-y divide-paper/10 border-y border-paper/10">
             <ContactRow
-              icon={<BrandChatIcon className="w-4 h-4" />}
+              icon={<PhoneCall className="w-4 h-4" />}
               label={t.contact.labels.chat}
               value={PHONE_DISPLAY}
               href={PHONE_LINK}
@@ -1856,7 +1860,7 @@ function Footer({ t, language }: LocalizedSectionProps) {
           <ul className="space-y-1 md:space-y-2.5 text-[13.5px]">
             <li>
               <a href={PHONE_LINK} className="flex max-lg:min-h-11 gap-2 items-center">
-                <BrandChatIcon className="w-3.5 h-3.5 text-accent-gold" />
+                <PhoneCall className="w-3.5 h-3.5 text-accent-gold" />
                 <span dir="ltr" style={{ unicodeBidi: "isolate" }}>
                   {PHONE_DISPLAY}
                 </span>
