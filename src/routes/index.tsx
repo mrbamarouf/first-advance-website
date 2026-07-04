@@ -1704,7 +1704,7 @@ function ContactRow({
     <a
       href={href}
       target={href.startsWith("http") ? "_blank" : undefined}
-      rel="noreferrer"
+      rel={href.startsWith("http") ? "noreferrer" : undefined}
       className={`grid max-md:min-h-[4.25rem] grid-cols-[1.5rem_1fr_1rem] sm:grid-cols-12 gap-x-3 sm:gap-x-4 gap-y-1 items-center py-4 md:py-5 group ${englishMobile}`}
     >
       <div className="row-span-2 sm:row-span-1 sm:col-span-1 text-accent-gold">{icon}</div>
@@ -1833,17 +1833,21 @@ function Footer({ t, language }: LocalizedSectionProps) {
         <div className="md:col-span-3 max-md:border-t max-md:border-paper/10 max-md:pt-5">
           <div className="text-[10px] text-accent-gold mb-4">{t.footer.contactTitle}</div>
           <ul className="space-y-1 md:space-y-2.5 text-[13.5px]">
-            <li className="flex max-lg:min-h-11 gap-2 items-center">
-              <BrandChatIcon className="w-3.5 h-3.5 text-accent-gold" />
-              <span dir="ltr" style={{ unicodeBidi: "isolate" }}>
-                {CHAT_DISPLAY}
-              </span>
+            <li>
+              <a href={CHAT_LINK} className="flex max-lg:min-h-11 gap-2 items-center">
+                <BrandChatIcon className="w-3.5 h-3.5 text-accent-gold" />
+                <span dir="ltr" style={{ unicodeBidi: "isolate" }}>
+                  {CHAT_DISPLAY}
+                </span>
+              </a>
             </li>
-            <li className="flex max-lg:min-h-11 gap-2 items-center">
-              <Mail className="w-3.5 h-3.5 text-accent-gold" />
-              <span dir="ltr" style={{ unicodeBidi: "isolate" }}>
-                {EMAIL}
-              </span>
+            <li>
+              <a href={`mailto:${EMAIL}`} className="flex max-lg:min-h-11 gap-2 items-center">
+                <Mail className="w-3.5 h-3.5 text-accent-gold" />
+                <span dir="ltr" style={{ unicodeBidi: "isolate" }}>
+                  {EMAIL}
+                </span>
+              </a>
             </li>
           </ul>
         </div>
