@@ -11,6 +11,7 @@ import {
   Layers,
   Mail,
   Menu,
+  PhoneCall,
   RefreshCcw,
   SearchCheck,
   ShieldCheck,
@@ -65,8 +66,9 @@ export const Route = createFileRoute("/")({
 });
 
 const LOGO = logoImage;
-const CHAT_DISPLAY = "+966 53 564 7000";
-const CHAT_LINK = "tel:+966535647000";
+const PHONE_DISPLAY = "+966 53 564 7000";
+const PHONE_LINK = "tel:+966535647000";
+const WHATSAPP_LINK = "https://wa.me/966535647000";
 const EMAIL = "info@firstreal.com.sa";
 type Language = "ar" | "en";
 
@@ -316,6 +318,8 @@ const COPY = {
         chat: "الهاتف",
         email: "البريد الإلكتروني",
       },
+      whatsappCta: "تواصل",
+      callCta: "اتصال",
       chatCtaLabel: "فتح التواصل",
       emailCta: "البريد الإلكتروني",
     },
@@ -592,6 +596,8 @@ const COPY = {
         chat: "Phone",
         email: "Email Us",
       },
+      whatsappCta: "Contact",
+      callCta: "Call",
       chatCtaLabel: "Open contact",
       emailCta: "Email Us",
     },
@@ -730,12 +736,14 @@ function Nav({
             ariaLabel={t.nav.languageAria}
           />
           <a
-            href="#contact"
+            href={WHATSAPP_LINK}
             aria-label={t.nav.ctaLabel}
+            target="_blank"
+            rel="noreferrer"
             className="inline-flex min-h-11 items-center justify-center gap-2 border border-accent-gold/70 bg-transparent text-accent-gold px-4 py-2 text-[12px] font-medium hover:bg-accent-gold/[0.07] hover:shadow-[0_0_24px_-10px_var(--color-accent-gold)] transition duration-[250ms]"
           >
             <BrandChatIcon className="h-4 w-4" />
-            <span>{t.contact.labels.chat}</span>
+            <span>{t.contact.whatsappCta}</span>
           </a>
         </div>
         <button
@@ -769,13 +777,15 @@ function Nav({
             </a>
           ))}
           <a
-            href="#contact"
+            href={WHATSAPP_LINK}
             aria-label={t.nav.ctaLabel}
+            target="_blank"
+            rel="noreferrer"
             className="flex min-h-[3.25rem] items-center justify-center gap-2 bg-transparent px-5 py-3.5 text-[14px] text-accent-gold hover:bg-accent-gold/[0.07] hover:shadow-[0_0_24px_-10px_var(--color-accent-gold)] transition duration-[250ms]"
             onClick={() => setIsOpen(false)}
           >
             <BrandChatIcon className="h-5 w-5" />
-            <span>{t.contact.labels.chat}</span>
+            <span>{t.contact.whatsappCta}</span>
           </a>
           <div className="min-h-[3.5rem] px-5 py-3.5 flex items-center justify-between gap-4">
             <span className="text-[13px] text-paper/65">{t.nav.languageLabel}</span>
@@ -1643,8 +1653,8 @@ function Contact({ t, language }: LocalizedSectionProps) {
             <ContactRow
               icon={<BrandChatIcon className="w-4 h-4" />}
               label={t.contact.labels.chat}
-              value={CHAT_DISPLAY}
-              href={CHAT_LINK}
+              value={PHONE_DISPLAY}
+              href={PHONE_LINK}
               language={language}
               showArrow={false}
             />
@@ -1657,23 +1667,34 @@ function Contact({ t, language }: LocalizedSectionProps) {
             />
           </div>
 
-          <div className="mt-6 md:mt-10 flex flex-col sm:flex-row gap-3">
-            <a
-              href={CHAT_LINK}
-              aria-label={t.contact.chatCtaLabel}
-              target={CHAT_LINK.startsWith("http") ? "_blank" : undefined}
-              rel={CHAT_LINK.startsWith("http") ? "noreferrer" : undefined}
-              className="inline-flex min-h-[3.25rem] md:min-h-12 w-full sm:w-auto items-center justify-center gap-3 border border-accent-gold/70 bg-transparent text-accent-gold px-7 py-3.5 text-[13px] font-medium hover:bg-accent-gold/[0.07] hover:shadow-[0_0_24px_-10px_var(--color-accent-gold)] transition duration-[250ms]"
-            >
-              <BrandChatIcon className="h-5 w-5" />
-              <span>{t.contact.labels.chat}</span>
-            </a>
-            <a
-              href={`mailto:${EMAIL}`}
-              className="inline-flex min-h-[3.25rem] md:min-h-12 w-full sm:w-auto items-center justify-center gap-3 border border-paper/25 text-paper px-7 py-3.5 text-[13px] font-medium hover:bg-paper/10 transition"
-            >
-              {t.contact.emailCta}
-            </a>
+          <div className="mt-6 md:mt-10 flex flex-col gap-3">
+            <div className="flex flex-col sm:flex-row gap-3">
+              <a
+                href={WHATSAPP_LINK}
+                aria-label={t.contact.chatCtaLabel}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex min-h-[3.25rem] md:min-h-12 w-full sm:w-auto items-center justify-center gap-3 border border-accent-gold/70 bg-transparent text-accent-gold px-7 py-3.5 text-[13px] font-medium hover:bg-accent-gold/[0.07] hover:shadow-[0_0_24px_-10px_var(--color-accent-gold)] transition duration-[250ms]"
+              >
+                <BrandChatIcon className="h-5 w-5" />
+                <span>{t.contact.whatsappCta}</span>
+              </a>
+              <a
+                href={`mailto:${EMAIL}`}
+                className="inline-flex min-h-[3.25rem] md:min-h-12 w-full sm:w-auto items-center justify-center gap-3 border border-paper/25 text-paper px-7 py-3.5 text-[13px] font-medium hover:bg-paper/10 transition"
+              >
+                {t.contact.emailCta}
+              </a>
+            </div>
+            <div className="flex">
+              <a
+                href={PHONE_LINK}
+                className="inline-flex min-h-[3.25rem] md:min-h-12 w-full sm:w-auto items-center justify-center gap-3 border border-accent-gold/70 bg-transparent text-accent-gold px-7 py-3.5 text-[13px] font-medium hover:bg-accent-gold/[0.07] hover:shadow-[0_0_24px_-10px_var(--color-accent-gold)] transition duration-[250ms]"
+              >
+                <PhoneCall className="h-5 w-5" />
+                <span>{t.contact.callCta}</span>
+              </a>
+            </div>
           </div>
         </div>
       </div>
@@ -1834,10 +1855,10 @@ function Footer({ t, language }: LocalizedSectionProps) {
           <div className="text-[10px] text-accent-gold mb-4">{t.footer.contactTitle}</div>
           <ul className="space-y-1 md:space-y-2.5 text-[13.5px]">
             <li>
-              <a href={CHAT_LINK} className="flex max-lg:min-h-11 gap-2 items-center">
+              <a href={PHONE_LINK} className="flex max-lg:min-h-11 gap-2 items-center">
                 <BrandChatIcon className="w-3.5 h-3.5 text-accent-gold" />
                 <span dir="ltr" style={{ unicodeBidi: "isolate" }}>
-                  {CHAT_DISPLAY}
+                  {PHONE_DISPLAY}
                 </span>
               </a>
             </li>
