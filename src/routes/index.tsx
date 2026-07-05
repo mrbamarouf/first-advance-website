@@ -1680,25 +1680,6 @@ function Contact({ t, language }: LocalizedSectionProps) {
             />
           </div>
 
-          <div className="mt-6 md:mt-10 flex flex-col sm:flex-row gap-3">
-            <a
-              href={WHATSAPP_LINK}
-              aria-label={t.contact.chatCtaLabel}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex min-h-[3.25rem] md:min-h-12 w-full sm:w-auto items-center justify-center gap-3 border border-accent-gold/70 bg-transparent text-accent-gold px-7 py-3.5 text-[13px] font-medium hover:bg-accent-gold/[0.07] hover:shadow-[0_0_24px_-10px_var(--color-accent-gold)] transition duration-[250ms]"
-            >
-              <BrandChatIcon className="h-5 w-5" />
-              <span>{t.contact.whatsappCta}</span>
-            </a>
-            <a
-              href={PHONE_LINK}
-              className="inline-flex min-h-[3.25rem] md:min-h-12 w-full sm:w-auto items-center justify-center gap-3 border border-accent-gold/70 bg-transparent text-accent-gold px-7 py-3.5 text-[13px] font-medium hover:bg-accent-gold/[0.07] hover:shadow-[0_0_24px_-10px_var(--color-accent-gold)] transition duration-[250ms]"
-            >
-              <PhoneCall className="h-5 w-5" />
-              <span>{t.contact.callCta}</span>
-            </a>
-          </div>
         </div>
       </div>
     </section>
