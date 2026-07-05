@@ -866,9 +866,7 @@ function Hero({ t, language }: LocalizedSectionProps) {
 
       {/* Centered content */}
       <div
-        className={`relative z-10 min-h-[calc(100svh-4.5rem)] md:min-h-screen flex flex-col items-center justify-center px-6 text-center pt-24 pb-12 md:pb-40 ${
-          language === "en" ? "max-md:items-start max-md:text-left max-md:[direction:ltr]" : ""
-        }`}
+        className="relative z-10 min-h-[calc(100svh-4.5rem)] md:min-h-screen flex flex-col items-center justify-center px-6 text-center pt-24 pb-12 md:pb-40"
       >
         <img
           src={LOGO}
@@ -878,9 +876,7 @@ function Hero({ t, language }: LocalizedSectionProps) {
         />
 
         <div
-          className={`flex items-center justify-center gap-3 text-accent-gold text-[10px] md:text-[11px] mb-5 md:mb-8 max-w-full ${
-            language === "en" ? "max-md:justify-start" : ""
-          }`}
+          className="flex items-center justify-center gap-3 text-accent-gold text-[10px] md:text-[11px] mb-5 md:mb-8 max-w-full"
         >
           <span className="hidden sm:block w-10 h-px bg-accent-gold" />
           <span>{t.location}</span>
