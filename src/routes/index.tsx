@@ -866,7 +866,9 @@ function Hero({ t, language }: LocalizedSectionProps) {
 
       {/* Centered content */}
       <div
-        className="relative z-10 min-h-[calc(100svh-4.5rem)] md:min-h-screen flex flex-col items-center justify-center px-6 text-center pt-24 pb-12 md:pb-40"
+        className={`relative z-10 min-h-[calc(100svh-4.5rem)] md:min-h-screen flex flex-col items-center justify-center px-6 text-center pt-24 pb-12 md:pb-40 ${
+          language === "en" ? "max-md:translate-y-[clamp(55px,calc(15.8svh-78px),70px)]" : ""
+        }`}
       >
         <img
           src={LOGO}
