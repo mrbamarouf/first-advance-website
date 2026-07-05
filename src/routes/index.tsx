@@ -316,6 +316,7 @@ const COPY = {
       },
       labels: {
         chat: "الهاتف",
+        whatsapp: "واتساب",
         email: "البريد الإلكتروني",
       },
       whatsappCta: "تواصل",
@@ -594,6 +595,7 @@ const COPY = {
       },
       labels: {
         chat: "Phone",
+        whatsapp: "WhatsApp",
         email: "Email Us",
       },
       whatsappCta: "Contact",
@@ -1661,6 +1663,13 @@ function Contact({ t, language }: LocalizedSectionProps) {
               href={PHONE_LINK}
               language={language}
               showArrow={false}
+            />
+            <ContactRow
+              icon={<BrandChatIcon className="w-4 h-4" />}
+              label={t.contact.labels.whatsapp}
+              value={PHONE_DISPLAY}
+              href={WHATSAPP_LINK}
+              language={language}
             />
             <ContactRow
               icon={<Mail className="w-4 h-4" />}
