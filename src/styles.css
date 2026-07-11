@@ -187,6 +187,10 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .site-intro-overlay {
+    display: none !important;
+  }
+
   *,
   *::before,
   *::after {

@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   ArrowUpLeft,
   ArrowUpRight,
@@ -47,6 +47,10 @@ const PAGE_META = {
   },
 } as const;
 
+const INTRO_VIDEO = "/media/first-advance-intro.mp4";
+const INTRO_EXIT_MS = 750;
+const INTRO_FALLBACK_MS = 9000;
+
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
@@ -71,6 +75,8 @@ const PHONE_LINK = "tel:+966535647000";
 const WHATSAPP_LINK = "https://wa.me/966535647000";
 const EMAIL = "info@firstreal.com.sa";
 type Language = "ar" | "en";
+type IntroState = "active" | "exiting" | "done";
+let introHasPlayedThisPageLoad = false;
 
 const COPY = {
   ar: {
@@ -676,6 +682,7 @@ function Index() {
       lang={language}
       className="bg-canvas text-ink font-sans overflow-x-hidden antialiased"
     >
+      <WebsiteIntro />
       <Nav t={t} language={language} setLanguage={setLanguage} />
       <Hero t={t} language={language} />
       <Intro t={t} language={language} />
@@ -690,6 +697,85 @@ function Index() {
       <Contact t={t} language={language} />
       <Footer t={t} language={language} />
     </main>
+  );
+}
+
+function WebsiteIntro() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [introState, setIntroState] = useState<IntroState>("active");
+
+  useEffect(() => {
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (introHasPlayedThisPageLoad || prefersReducedMotion) {
+      setIntroState("done");
+      return;
+    }
+
+    introHasPlayedThisPageLoad = true;
+
+    const video = videoRef.current;
+    const previousOverflow = document.documentElement.style.overflow;
+    let hasFinished = false;
+    let exitTimer: number | undefined;
+
+    document.documentElement.style.overflow = "hidden";
+
+    const finishIntro = () => {
+      if (hasFinished) return;
+      hasFinished = true;
+      setIntroState("exiting");
+      exitTimer = window.setTimeout(() => {
+        setIntroState("done");
+      }, INTRO_EXIT_MS);
+    };
+
+    const fallbackTimer = window.setTimeout(finishIntro, INTRO_FALLBACK_MS);
+
+    video?.addEventListener("ended", finishIntro);
+    video?.addEventListener("error", finishIntro);
+
+    const playPromise = video?.play();
+    playPromise?.catch(() => {
+      window.setTimeout(finishIntro, 300);
+    });
+
+    return () => {
+      window.clearTimeout(fallbackTimer);
+      if (exitTimer) window.clearTimeout(exitTimer);
+      video?.removeEventListener("ended", finishIntro);
+      video?.removeEventListener("error", finishIntro);
+      document.documentElement.style.overflow = previousOverflow;
+    };
+  }, []);
+
+  useEffect(() => {
+    if (introState === "done") {
+      document.documentElement.style.overflow = "";
+    }
+  }, [introState]);
+
+  if (introState === "done") return null;
+
+  return (
+    <div
+      aria-hidden="true"
+      className={`site-intro-overlay fixed inset-0 z-[120] flex h-[100svh] w-screen items-center justify-center overflow-hidden bg-[oklch(0.12_0.028_168)] transition-opacity duration-[750ms] ease-out ${
+        introState === "exiting" ? "opacity-0 pointer-events-none" : "opacity-100"
+      }`}
+    >
+      <video
+        ref={videoRef}
+        className="h-full w-full object-contain lg:object-cover"
+        autoPlay
+        muted
+        playsInline
+        preload="auto"
+        disablePictureInPicture
+      >
+        <source src={INTRO_VIDEO} type="video/mp4" />
+      </video>
+    </div>
   );
 }
 
