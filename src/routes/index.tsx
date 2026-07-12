@@ -969,8 +969,6 @@ function WebsiteIntro() {
               draggable={false}
             />
           </div>
-          <div className="site-desktop-intro-name mt-7 font-medium text-paper/86">First Advance</div>
-          <div className="site-desktop-intro-tagline mt-3 text-paper/72">Integrated Business Solutions</div>
         </div>
       </div>
       <video
