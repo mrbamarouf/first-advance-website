@@ -48,11 +48,13 @@ const PAGE_META = {
 } as const;
 
 const INTRO_VIDEO = "/media/first-advance-intro.mp4";
+const DESKTOP_INTRO_VIDEO = "/media/first-advance-desktop-intro.mp4";
 const INTRO_EXIT_MS = 750;
 const INTRO_FALLBACK_MS = 9000;
 const MOBILE_INTRO_PLAY_MS = 5000;
 const MOBILE_INTRO_FALLBACK_MS = 6500;
 const MOBILE_INTRO_QUERY = "(max-width: 767px)";
+const DESKTOP_INTRO_QUERY = "(min-width: 1024px)";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -721,6 +723,7 @@ function WebsiteIntro() {
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const isMobileIntro = window.matchMedia(MOBILE_INTRO_QUERY).matches;
+    const isDesktopIntro = window.matchMedia(DESKTOP_INTRO_QUERY).matches;
 
     if (introHasPlayedThisPageLoad || prefersReducedMotion) {
       setIntroState("done");
@@ -763,6 +766,11 @@ function WebsiteIntro() {
 
     video?.addEventListener("ended", finishIntro);
     video?.addEventListener("error", finishIntro);
+
+    if (video) {
+      video.src = isDesktopIntro ? DESKTOP_INTRO_VIDEO : INTRO_VIDEO;
+      video.load();
+    }
 
     const playPromise = video?.play();
     playPromise?.catch(() => {
@@ -821,15 +829,13 @@ function WebsiteIntro() {
       </div>
       <video
         ref={videoRef}
-        className="hidden h-full w-full object-contain md:block lg:object-cover"
+        className="hidden h-full w-full object-contain md:block"
         autoPlay
         muted
         playsInline
         preload="auto"
         disablePictureInPicture
-      >
-        <source src={INTRO_VIDEO} type="video/mp4" />
-      </video>
+      />
     </div>
   );
 }
