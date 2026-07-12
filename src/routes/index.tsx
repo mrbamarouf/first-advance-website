@@ -48,10 +48,10 @@ const PAGE_META = {
 } as const;
 
 const INTRO_VIDEO = "/media/first-advance-intro.mp4";
-const DESKTOP_INTRO_VIDEO = "/media/first-advance-desktop-intro.mp4";
 const INTRO_EXIT_MS = 750;
 const INTRO_FALLBACK_MS = 9000;
-const DESKTOP_INTRO_FALLBACK_MS = 20000;
+const DESKTOP_INTRO_PLAY_MS = 4500;
+const DESKTOP_INTRO_FALLBACK_MS = 6500;
 const MOBILE_INTRO_PLAY_MS = 5200;
 const MOBILE_INTRO_FALLBACK_MS = 7000;
 const MOBILE_INTRO_QUERY = "(max-width: 767px)";
@@ -82,6 +82,10 @@ const INTRO_CRITICAL_CSS = `
     .site-intro-video {
       display: none !important;
     }
+
+    .site-desktop-intro-stage {
+      display: none !important;
+    }
   }
 
   @media (min-width: 768px) {
@@ -94,22 +98,19 @@ const INTRO_CRITICAL_CSS = `
     }
   }
 
+  @media (max-width: 1023px) {
+    .site-desktop-intro-stage {
+      display: none !important;
+    }
+  }
+
   @media (min-width: 1024px) {
     .site-intro-video {
-      position: fixed;
-      inset: 0;
-      z-index: 121;
-      height: 100dvh;
-      width: 100vw;
-      opacity: 0;
-      object-fit: contain;
-      object-position: center center;
-      overflow: hidden;
-      transition: opacity 220ms cubic-bezier(0.22, 1, 0.36, 1);
+      display: none !important;
     }
 
-    .site-intro-video--ready {
-      opacity: 1;
+    .site-desktop-intro-stage {
+      display: flex !important;
     }
   }
 `;
@@ -126,15 +127,6 @@ export const Route = createFileRoute("/")({
       {
         property: "og:description",
         content: PAGE_META.ar.ogDescription,
-      },
-    ],
-    links: [
-      {
-        rel: "preload",
-        as: "video",
-        href: DESKTOP_INTRO_VIDEO,
-        type: "video/mp4",
-        media: "(min-width: 1024px)",
       },
     ],
   }),
@@ -163,6 +155,21 @@ const MOBILE_INTRO_PARTICLES = [
   { left: "66%", top: "31%", size: "1.5px", opacity: 0.26, delay: "860ms", travel: "-25px" },
   { left: "18%", top: "48%", size: "1px", opacity: 0.22, delay: "1480ms", travel: "-18px" },
   { left: "82%", top: "62%", size: "1px", opacity: 0.24, delay: "640ms", travel: "-23px" },
+] as const;
+
+const DESKTOP_INTRO_PARTICLES = [
+  { left: "12%", top: "24%", size: "2px", opacity: 0.34, delay: "0ms", travelX: "18px", travelY: "-22px" },
+  { left: "23%", top: "68%", size: "1.5px", opacity: 0.26, delay: "160ms", travelX: "-14px", travelY: "-28px" },
+  { left: "36%", top: "18%", size: "1px", opacity: 0.22, delay: "320ms", travelX: "16px", travelY: "-18px" },
+  { left: "48%", top: "76%", size: "2px", opacity: 0.3, delay: "120ms", travelX: "-18px", travelY: "-24px" },
+  { left: "61%", top: "28%", size: "1.5px", opacity: 0.28, delay: "420ms", travelX: "13px", travelY: "-20px" },
+  { left: "72%", top: "62%", size: "2px", opacity: 0.32, delay: "260ms", travelX: "-12px", travelY: "-30px" },
+  { left: "84%", top: "36%", size: "1px", opacity: 0.2, delay: "520ms", travelX: "10px", travelY: "-16px" },
+  { left: "18%", top: "43%", size: "1px", opacity: 0.24, delay: "680ms", travelX: "-10px", travelY: "-18px" },
+  { left: "53%", top: "12%", size: "1.5px", opacity: 0.24, delay: "760ms", travelX: "12px", travelY: "-20px" },
+  { left: "79%", top: "81%", size: "1.5px", opacity: 0.26, delay: "580ms", travelX: "-16px", travelY: "-26px" },
+  { left: "31%", top: "87%", size: "1px", opacity: 0.2, delay: "900ms", travelX: "11px", travelY: "-22px" },
+  { left: "91%", top: "51%", size: "2px", opacity: 0.3, delay: "240ms", travelX: "-15px", travelY: "-24px" },
 ] as const;
 
 const COPY = {
@@ -790,7 +797,6 @@ function Index() {
 function WebsiteIntro() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [introState, setIntroState] = useState<IntroState>("active");
-  const [isDesktopVideoReady, setIsDesktopVideoReady] = useState(false);
 
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -804,14 +810,9 @@ function WebsiteIntro() {
 
     introHasPlayedThisPageLoad = true;
 
-    const video = videoRef.current;
     const previousOverflow = document.documentElement.style.overflow;
     let hasFinished = false;
-    let hasStarted = false;
-    let hasRevealedDesktopVideo = false;
-    let hasCanPlayThrough = false;
     let exitTimer: number | undefined;
-    let desktopReadyPoller: number | undefined;
 
     document.documentElement.style.overflow = "hidden";
 
@@ -844,81 +845,38 @@ function WebsiteIntro() {
       };
     }
 
-    const revealDesktopVideo = () => {
-      if (!isDesktopIntro || hasRevealedDesktopVideo || hasFinished) return;
-      hasRevealedDesktopVideo = true;
-      setIsDesktopVideoReady(true);
-    };
+    if (isDesktopIntro) {
+      const desktopIntroTimer = window.setTimeout(finishIntro, DESKTOP_INTRO_PLAY_MS);
+
+      return () => {
+        window.clearTimeout(fallbackTimer);
+        window.clearTimeout(desktopIntroTimer);
+        if (exitTimer) window.clearTimeout(exitTimer);
+        document.documentElement.style.overflow = previousOverflow;
+      };
+    }
+
+    const video = videoRef.current;
+    let hasStarted = false;
 
     const startPlayback = () => {
       if (!video || hasStarted || hasFinished) return;
       hasStarted = true;
 
-      if (desktopReadyPoller) {
-        window.clearInterval(desktopReadyPoller);
-      }
-
-      const playPromise = video.play();
-      playPromise
-        .then(() => {
-          if (!isDesktopIntro) return;
-          if (video.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA && video.currentTime > 0) {
-            revealDesktopVideo();
-          }
-        })
-        .catch(() => {
-          window.setTimeout(finishIntro, 300);
-        });
-    };
-
-    const handleDesktopReady = () => {
-      if (!video) return;
-      const buffer = video.buffered;
-      const bufferedEnd = buffer.length > 0 ? buffer.end(buffer.length - 1) : 0;
-      const duration = Number.isFinite(video.duration) ? video.duration : 0;
-      const hasPlayableLead =
-        hasCanPlayThrough ||
-        video.readyState >= HTMLMediaElement.HAVE_ENOUGH_DATA ||
-        (duration > 0 && bufferedEnd >= duration - 0.05);
-
-      if (hasPlayableLead) {
-        startPlayback();
-      }
-    };
-
-    const handleCanPlayThrough = () => {
-      hasCanPlayThrough = true;
-      handleDesktopReady();
+      video.play().catch(() => {
+        window.setTimeout(finishIntro, 300);
+      });
     };
 
     video?.addEventListener("ended", finishIntro);
     video?.addEventListener("error", finishIntro);
-    video?.addEventListener("playing", revealDesktopVideo);
-    video?.addEventListener("timeupdate", revealDesktopVideo);
-
-    if (isDesktopIntro) {
-      video?.addEventListener("loadeddata", handleDesktopReady);
-      video?.addEventListener("canplay", handleDesktopReady);
-      video?.addEventListener("canplaythrough", handleCanPlayThrough);
-      video?.addEventListener("progress", handleDesktopReady);
-      desktopReadyPoller = window.setInterval(handleDesktopReady, 150);
-      handleDesktopReady();
-    } else {
-      startPlayback();
-    }
+    startPlayback();
 
     return () => {
       window.clearTimeout(fallbackTimer);
       if (exitTimer) window.clearTimeout(exitTimer);
-      if (desktopReadyPoller) window.clearInterval(desktopReadyPoller);
       video?.removeEventListener("ended", finishIntro);
       video?.removeEventListener("error", finishIntro);
-      video?.removeEventListener("playing", revealDesktopVideo);
-      video?.removeEventListener("timeupdate", revealDesktopVideo);
-      video?.removeEventListener("loadeddata", handleDesktopReady);
-      video?.removeEventListener("canplay", handleDesktopReady);
-      video?.removeEventListener("canplaythrough", handleCanPlayThrough);
-      video?.removeEventListener("progress", handleDesktopReady);
       document.documentElement.style.overflow = previousOverflow;
     };
   }, []);
@@ -979,17 +937,50 @@ function WebsiteIntro() {
           />
         </div>
       </div>
+      <div className="site-desktop-intro-stage hidden h-full w-full items-center justify-center overflow-hidden lg:flex">
+        <div className="site-desktop-intro-field absolute inset-0" />
+        <div className="site-desktop-intro-rays absolute inset-0" />
+        <div className="site-desktop-intro-particles absolute inset-0">
+          {DESKTOP_INTRO_PARTICLES.map((particle, index) => (
+            <span
+              key={index}
+              className="site-desktop-intro-particle absolute rounded-full bg-accent-gold"
+              style={{
+                left: particle.left,
+                top: particle.top,
+                width: particle.size,
+                height: particle.size,
+                "--particle-opacity": particle.opacity,
+                "--particle-travel-x": particle.travelX,
+                "--particle-travel-y": particle.travelY,
+                animationDelay: particle.delay,
+              } as CSSProperties}
+            />
+          ))}
+        </div>
+        <div className="site-desktop-intro-sweep absolute inset-y-0" />
+        <div className="site-desktop-intro-vignette absolute inset-0" />
+        <div className="site-desktop-intro-content relative z-20 flex flex-col items-center justify-center px-10 text-center">
+          <div className="site-desktop-intro-logo-wrap">
+            <img
+              src={LOGO}
+              alt=""
+              className="site-desktop-intro-logo h-auto w-full select-none object-contain"
+              draggable={false}
+            />
+          </div>
+          <div className="site-desktop-intro-name mt-7 font-medium text-paper/86">First Advance</div>
+          <div className="site-desktop-intro-tagline mt-3 text-paper/72">Integrated Business Solutions</div>
+        </div>
+      </div>
       <video
         ref={videoRef}
-        className={`site-intro-video hidden md:block ${
-          isDesktopVideoReady ? "site-intro-video--ready" : ""
-        }`}
+        className="site-intro-video hidden md:block lg:hidden"
         muted
         playsInline
         preload="auto"
         disablePictureInPicture
       >
-        <source src={DESKTOP_INTRO_VIDEO} type="video/mp4" media="(min-width: 1024px)" />
         <source src={INTRO_VIDEO} type="video/mp4" media="(min-width: 768px) and (max-width: 1023px)" />
       </video>
     </div>

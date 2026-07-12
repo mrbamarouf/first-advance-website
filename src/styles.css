@@ -191,6 +191,125 @@
   will-change: opacity;
 }
 
+.site-desktop-intro-stage {
+  height: 100dvh;
+  width: 100vw;
+  background: #03150f;
+  contain: layout paint;
+  isolation: isolate;
+  animation: desktop-intro-stage 4.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+  will-change: opacity;
+}
+
+.site-desktop-intro-field {
+  z-index: 0;
+  background:
+    radial-gradient(ellipse at 50% 48%, oklch(0.34 0.055 168 / 0.76) 0%, transparent 36%),
+    radial-gradient(ellipse at 28% 30%, oklch(0.8 0.11 82 / 0.14) 0%, transparent 22%),
+    radial-gradient(ellipse at 74% 62%, oklch(0.38 0.065 168 / 0.32) 0%, transparent 30%),
+    linear-gradient(135deg, #010302 0%, #03150f 45%, #071c15 72%, #000 100%);
+  transform-origin: center;
+  animation: desktop-intro-field 4.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+  will-change: opacity, transform;
+}
+
+.site-desktop-intro-rays {
+  z-index: 2;
+  background:
+    linear-gradient(102deg, transparent 17%, oklch(0.78 0.12 82 / 0.16) 38%, transparent 59%),
+    linear-gradient(77deg, transparent 28%, oklch(0.44 0.08 168 / 0.22) 48%, transparent 68%),
+    radial-gradient(ellipse at 50% 50%, oklch(0.8 0.12 82 / 0.14), transparent 38%);
+  mix-blend-mode: screen;
+  opacity: 0;
+  transform: translate3d(-2.4%, 1%, 0) rotate(-2deg) scale(1.02);
+  animation: desktop-intro-rays 4.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+  will-change: opacity, transform;
+}
+
+.site-desktop-intro-particles {
+  z-index: 3;
+  pointer-events: none;
+}
+
+.site-desktop-intro-particle {
+  box-shadow: 0 0 8px oklch(0.74 0.1 78 / 0.38);
+  opacity: 0;
+  animation-name: desktop-intro-particle;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  animation-fill-mode: both;
+  animation-duration: 4.5s;
+  will-change: opacity, transform;
+}
+
+.site-desktop-intro-sweep {
+  z-index: 8;
+  left: 50%;
+  width: min(46vw, 680px);
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    oklch(0.9 0.12 82 / 0.08) 42%,
+    oklch(0.83 0.12 82 / 0.28) 50%,
+    oklch(0.78 0.1 78 / 0.08) 58%,
+    transparent 100%
+  );
+  opacity: 0;
+  transform: translate3d(-150%, 0, 0) skewX(-12deg);
+  animation: desktop-intro-sweep 4.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+  will-change: opacity, transform;
+}
+
+.site-desktop-intro-vignette {
+  z-index: 12;
+  background:
+    radial-gradient(ellipse at center, transparent 34%, oklch(0 0 0 / 0.16) 66%, oklch(0 0 0 / 0.58) 100%),
+    linear-gradient(180deg, oklch(0 0 0 / 0.48), transparent 28%, oklch(0 0 0 / 0.42));
+  pointer-events: none;
+  opacity: 0;
+  animation: desktop-intro-vignette 4.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+  will-change: opacity;
+}
+
+.site-desktop-intro-content {
+  min-height: 100dvh;
+  transform: translateZ(0);
+}
+
+.site-desktop-intro-logo-wrap {
+  width: clamp(220px, 21vw, 340px);
+  max-width: 36vw;
+  transform-origin: center;
+  opacity: 0;
+  transform: translate3d(0, 0, 0) scale(0.96);
+  animation: desktop-intro-logo-wrap 4.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+  will-change: opacity, transform;
+}
+
+.site-desktop-intro-logo {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+.site-desktop-intro-name {
+  font-size: clamp(0.92rem, 1vw, 1.08rem);
+  line-height: 1.1;
+  opacity: 0;
+  text-shadow: 0 12px 40px oklch(0 0 0 / 0.55);
+  transform: translate3d(0, 10px, 0);
+  animation: desktop-intro-name 4.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+  will-change: opacity, transform;
+}
+
+.site-desktop-intro-tagline {
+  font-size: clamp(0.78rem, 0.82vw, 0.92rem);
+  line-height: 1.45;
+  opacity: 0;
+  text-shadow: 0 10px 34px oklch(0 0 0 / 0.45);
+  transform: translate3d(0, 8px, 0);
+  animation: desktop-intro-tagline 4.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+  will-change: opacity, transform;
+}
+
 .site-mobile-intro-stage {
   height: 100dvh;
   width: 100vw;
@@ -339,6 +458,138 @@
   opacity: 0;
   animation: mobile-intro-vignette 5.2s cubic-bezier(0.22, 1, 0.36, 1) both;
   will-change: opacity;
+}
+
+@keyframes desktop-intro-stage {
+  0% {
+    opacity: 0;
+  }
+  11%,
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes desktop-intro-field {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  11% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(-0.9%, -0.6%, 0) scale(1.012);
+  }
+}
+
+@keyframes desktop-intro-rays {
+  0%,
+  11% {
+    opacity: 0;
+  }
+  22% {
+    opacity: 0.22;
+  }
+  84% {
+    opacity: 0.34;
+    transform: translate3d(1.6%, -0.8%, 0) rotate(1deg) scale(1.025);
+  }
+  100% {
+    opacity: 0.2;
+    transform: translate3d(2.4%, -1.2%, 0) rotate(1deg) scale(1.03);
+  }
+}
+
+@keyframes desktop-intro-sweep {
+  0%,
+  22% {
+    opacity: 0;
+    transform: translate3d(-150%, 0, 0) skewX(-12deg);
+  }
+  34% {
+    opacity: 0.72;
+  }
+  48% {
+    opacity: 0;
+    transform: translate3d(80%, 0, 0) skewX(-12deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(80%, 0, 0) skewX(-12deg);
+  }
+}
+
+@keyframes desktop-intro-particle {
+  0%,
+  11% {
+    opacity: 0;
+    transform: translate3d(0, 0, 0) scale(0.82);
+  }
+  34% {
+    opacity: var(--particle-opacity, 0.26);
+  }
+  84% {
+    opacity: var(--particle-opacity, 0.26);
+    transform: translate3d(var(--particle-travel-x, 12px), var(--particle-travel-y, -22px), 0) scale(1);
+  }
+  100% {
+    opacity: 0.08;
+    transform: translate3d(var(--particle-travel-x, 12px), var(--particle-travel-y, -22px), 0) scale(0.92);
+  }
+}
+
+@keyframes desktop-intro-vignette {
+  0% {
+    opacity: 0;
+  }
+  11% {
+    opacity: 0.74;
+  }
+  84%,
+  100% {
+    opacity: 0.86;
+  }
+}
+
+@keyframes desktop-intro-logo-wrap {
+  0%,
+  28% {
+    opacity: 0;
+    transform: translate3d(0, 0, 0) scale(0.96);
+  }
+  40%,
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes desktop-intro-name {
+  0%,
+  40% {
+    opacity: 0;
+    transform: translate3d(0, 10px, 0);
+  }
+  49%,
+  100% {
+    opacity: 0.92;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes desktop-intro-tagline {
+  0%,
+  51% {
+    opacity: 0;
+    transform: translate3d(0, 8px, 0);
+  }
+  60%,
+  100% {
+    opacity: 0.78;
+    transform: translate3d(0, 0, 0);
+  }
 }
 
 @keyframes mobile-intro-stage {
@@ -536,20 +787,11 @@
 
 @media (min-width: 1024px) {
   .site-intro-video {
-    position: fixed;
-    inset: 0;
-    z-index: 121;
-    height: 100dvh;
-    width: 100vw;
-    opacity: 0;
-    object-fit: contain;
-    object-position: center center;
-    overflow: hidden;
-    transition: opacity 220ms cubic-bezier(0.22, 1, 0.36, 1);
+    display: none !important;
   }
 
-  .site-intro-video--ready {
-    opacity: 1;
+  .site-desktop-intro-stage {
+    display: flex !important;
   }
 }
 
