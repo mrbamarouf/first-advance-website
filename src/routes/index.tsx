@@ -102,7 +102,7 @@ const INTRO_CRITICAL_CSS = `
       height: 100dvh;
       width: 100vw;
       opacity: 0;
-      object-fit: cover;
+      object-fit: contain;
       object-position: center center;
       overflow: hidden;
       transition: opacity 220ms cubic-bezier(0.22, 1, 0.36, 1);
@@ -868,12 +868,13 @@ function WebsiteIntro() {
       const bufferedEnd = buffer.length > 0 ? buffer.end(buffer.length - 1) : 0;
       const bufferedAhead = Math.max(0, bufferedEnd - video.currentTime);
       const duration = Number.isFinite(video.duration) ? video.duration : 0;
+      const minimumBufferedLead = duration > 0 ? Math.min(1.25, Math.max(0.75, duration * 0.25)) : 1.25;
       const hasPlayableLead =
         video.readyState >= HTMLMediaElement.HAVE_FUTURE_DATA &&
         (hasCanPlayThrough ||
           video.readyState >= HTMLMediaElement.HAVE_ENOUGH_DATA ||
           (duration > 0 && bufferedEnd >= duration - 0.15) ||
-          bufferedAhead >= 5.5);
+          bufferedAhead >= minimumBufferedLead);
 
       if (hasPlayableLead) {
         startPlayback();
