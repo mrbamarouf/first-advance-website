@@ -128,6 +128,15 @@ export const Route = createFileRoute("/")({
         content: PAGE_META.ar.ogDescription,
       },
     ],
+    links: [
+      {
+        rel: "preload",
+        as: "video",
+        href: DESKTOP_INTRO_VIDEO,
+        type: "video/mp4",
+        media: "(min-width: 1024px)",
+      },
+    ],
   }),
   component: Index,
 });
@@ -866,15 +875,11 @@ function WebsiteIntro() {
       if (!video) return;
       const buffer = video.buffered;
       const bufferedEnd = buffer.length > 0 ? buffer.end(buffer.length - 1) : 0;
-      const bufferedAhead = Math.max(0, bufferedEnd - video.currentTime);
       const duration = Number.isFinite(video.duration) ? video.duration : 0;
-      const minimumBufferedLead = duration > 0 ? Math.min(1.25, Math.max(0.75, duration * 0.25)) : 1.25;
       const hasPlayableLead =
-        video.readyState >= HTMLMediaElement.HAVE_FUTURE_DATA &&
-        (hasCanPlayThrough ||
-          video.readyState >= HTMLMediaElement.HAVE_ENOUGH_DATA ||
-          (duration > 0 && bufferedEnd >= duration - 0.15) ||
-          bufferedAhead >= minimumBufferedLead);
+        hasCanPlayThrough ||
+        video.readyState >= HTMLMediaElement.HAVE_ENOUGH_DATA ||
+        (duration > 0 && bufferedEnd >= duration - 0.05);
 
       if (hasPlayableLead) {
         startPlayback();
