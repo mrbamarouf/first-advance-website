@@ -62,22 +62,20 @@ const INTRO_CRITICAL_CSS = `
     inset: 0;
     z-index: 120;
     display: flex;
-    height: 100svh;
+    height: 100dvh;
     width: 100vw;
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    background: oklch(0.12 0.028 168);
+    background: #03150f;
   }
 
   .site-intro-video {
     height: 100%;
     width: 100%;
-    object-fit: contain;
+    object-fit: cover;
     object-position: center center;
-    background:
-      radial-gradient(circle at 50% 48%, oklch(0.18 0.036 168 / 0.94) 0%, transparent 44%),
-      linear-gradient(135deg, oklch(0.055 0.014 168) 0%, oklch(0.13 0.032 168) 52%, oklch(0.03 0.006 168) 100%);
+    background: #03150f;
   }
 
   @media (max-width: 767px) {
@@ -101,10 +99,10 @@ const INTRO_CRITICAL_CSS = `
       position: fixed;
       inset: 0;
       z-index: 121;
-      height: 100vh;
+      height: 100dvh;
       width: 100vw;
       opacity: 0;
-      object-fit: contain;
+      object-fit: cover;
       object-position: center center;
       overflow: hidden;
       transition: opacity 220ms cubic-bezier(0.22, 1, 0.36, 1);
@@ -797,6 +795,8 @@ function WebsiteIntro() {
     const previousOverflow = document.documentElement.style.overflow;
     let hasFinished = false;
     let hasStarted = false;
+    let hasRevealedDesktopVideo = false;
+    let hasCanPlayThrough = false;
     let exitTimer: number | undefined;
     let desktopReadyPoller: number | undefined;
 
@@ -831,6 +831,12 @@ function WebsiteIntro() {
       };
     }
 
+    const revealDesktopVideo = () => {
+      if (!isDesktopIntro || hasRevealedDesktopVideo || hasFinished) return;
+      hasRevealedDesktopVideo = true;
+      setIsDesktopVideoReady(true);
+    };
+
     const startPlayback = () => {
       if (!video || hasStarted || hasFinished) return;
       hasStarted = true;
@@ -839,14 +845,17 @@ function WebsiteIntro() {
         window.clearInterval(desktopReadyPoller);
       }
 
-      if (isDesktopIntro) {
-        setIsDesktopVideoReady(true);
-      }
-
       const playPromise = video.play();
-      playPromise.catch(() => {
-        window.setTimeout(finishIntro, 300);
-      });
+      playPromise
+        .then(() => {
+          if (!isDesktopIntro) return;
+          if (video.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA && video.currentTime > 0) {
+            revealDesktopVideo();
+          }
+        })
+        .catch(() => {
+          window.setTimeout(finishIntro, 300);
+        });
     };
 
     const handleDesktopReady = () => {
@@ -854,22 +863,33 @@ function WebsiteIntro() {
       const buffer = video.buffered;
       const bufferedEnd = buffer.length > 0 ? buffer.end(buffer.length - 1) : 0;
       const bufferedAhead = Math.max(0, bufferedEnd - video.currentTime);
+      const duration = Number.isFinite(video.duration) ? video.duration : 0;
       const hasPlayableLead =
         video.readyState >= HTMLMediaElement.HAVE_FUTURE_DATA &&
-        (bufferedAhead >= 2.4 || (Number.isFinite(video.duration) && bufferedEnd >= video.duration));
+        (hasCanPlayThrough ||
+          video.readyState >= HTMLMediaElement.HAVE_ENOUGH_DATA ||
+          (duration > 0 && bufferedEnd >= duration - 0.15) ||
+          bufferedAhead >= 5.5);
 
-      if (video.readyState >= HTMLMediaElement.HAVE_ENOUGH_DATA || hasPlayableLead) {
+      if (hasPlayableLead) {
         startPlayback();
       }
     };
 
+    const handleCanPlayThrough = () => {
+      hasCanPlayThrough = true;
+      handleDesktopReady();
+    };
+
     video?.addEventListener("ended", finishIntro);
     video?.addEventListener("error", finishIntro);
+    video?.addEventListener("playing", revealDesktopVideo);
+    video?.addEventListener("timeupdate", revealDesktopVideo);
 
     if (isDesktopIntro) {
       video?.addEventListener("loadeddata", handleDesktopReady);
       video?.addEventListener("canplay", handleDesktopReady);
-      video?.addEventListener("canplaythrough", handleDesktopReady);
+      video?.addEventListener("canplaythrough", handleCanPlayThrough);
       video?.addEventListener("progress", handleDesktopReady);
       desktopReadyPoller = window.setInterval(handleDesktopReady, 150);
       handleDesktopReady();
@@ -883,9 +903,11 @@ function WebsiteIntro() {
       if (desktopReadyPoller) window.clearInterval(desktopReadyPoller);
       video?.removeEventListener("ended", finishIntro);
       video?.removeEventListener("error", finishIntro);
+      video?.removeEventListener("playing", revealDesktopVideo);
+      video?.removeEventListener("timeupdate", revealDesktopVideo);
       video?.removeEventListener("loadeddata", handleDesktopReady);
       video?.removeEventListener("canplay", handleDesktopReady);
-      video?.removeEventListener("canplaythrough", handleDesktopReady);
+      video?.removeEventListener("canplaythrough", handleCanPlayThrough);
       video?.removeEventListener("progress", handleDesktopReady);
       document.documentElement.style.overflow = previousOverflow;
     };
@@ -902,7 +924,7 @@ function WebsiteIntro() {
   return (
     <div
       aria-hidden="true"
-      className={`site-intro-overlay fixed inset-0 z-[120] flex h-[100svh] w-screen items-center justify-center overflow-hidden bg-[oklch(0.12_0.028_168)] transition-opacity duration-[750ms] ease-out ${
+      className={`site-intro-overlay fixed inset-0 z-[120] flex h-[100dvh] w-screen items-center justify-center overflow-hidden bg-[#03150f] transition-opacity duration-[750ms] ease-out ${
         introState === "exiting" ? "opacity-0 pointer-events-none" : "opacity-100"
       }`}
     >
@@ -955,7 +977,7 @@ function WebsiteIntro() {
         disablePictureInPicture
       >
         <source src={DESKTOP_INTRO_VIDEO} type="video/mp4" media="(min-width: 1024px)" />
-        <source src={INTRO_VIDEO} type="video/mp4" media="(min-width: 768px)" />
+        <source src={INTRO_VIDEO} type="video/mp4" media="(min-width: 768px) and (max-width: 1023px)" />
       </video>
     </div>
   );
