@@ -51,9 +51,11 @@ const INTRO_VIDEO = "/media/first-advance-intro.mp4";
 const DESKTOP_INTRO_VIDEO = "/media/first-advance-desktop-intro.mp4";
 const INTRO_EXIT_MS = 750;
 const INTRO_FALLBACK_MS = 9000;
+const DESKTOP_INTRO_FALLBACK_MS = 20000;
 const MOBILE_INTRO_PLAY_MS = 5000;
 const MOBILE_INTRO_FALLBACK_MS = 6500;
 const MOBILE_INTRO_QUERY = "(max-width: 767px)";
+const DESKTOP_INTRO_QUERY = "(min-width: 1024px)";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -722,6 +724,7 @@ function WebsiteIntro() {
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const isMobileIntro = window.matchMedia(MOBILE_INTRO_QUERY).matches;
+    const isDesktopIntro = window.matchMedia(DESKTOP_INTRO_QUERY).matches;
 
     if (introHasPlayedThisPageLoad || prefersReducedMotion) {
       setIntroState("done");
@@ -748,7 +751,11 @@ function WebsiteIntro() {
 
     const fallbackTimer = window.setTimeout(
       finishIntro,
-      isMobileIntro ? MOBILE_INTRO_FALLBACK_MS : INTRO_FALLBACK_MS,
+      isMobileIntro
+        ? MOBILE_INTRO_FALLBACK_MS
+        : isDesktopIntro
+          ? DESKTOP_INTRO_FALLBACK_MS
+          : INTRO_FALLBACK_MS,
     );
 
     if (isMobileIntro) {
