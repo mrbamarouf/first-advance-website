@@ -52,8 +52,8 @@ const INTRO_EXIT_MS = 750;
 const INTRO_FALLBACK_MS = 9000;
 const DESKTOP_INTRO_PLAY_MS = 4500;
 const DESKTOP_INTRO_FALLBACK_MS = 6500;
-const MOBILE_INTRO_PLAY_MS = 5200;
-const MOBILE_INTRO_FALLBACK_MS = 7000;
+const MOBILE_INTRO_PLAY_MS = 4500;
+const MOBILE_INTRO_FALLBACK_MS = 6500;
 const MOBILE_INTRO_QUERY = "(max-width: 767px)";
 const DESKTOP_INTRO_QUERY = "(min-width: 1024px)";
 const INTRO_CRITICAL_CSS = `
@@ -143,18 +143,18 @@ type IntroState = "active" | "exiting" | "done";
 let introHasPlayedThisPageLoad = false;
 
 const MOBILE_INTRO_PARTICLES = [
-  { left: "9%", top: "22%", size: "2px", opacity: 0.36, delay: "0ms", travel: "-34px" },
-  { left: "78%", top: "18%", size: "1.5px", opacity: 0.28, delay: "360ms", travel: "-26px" },
-  { left: "22%", top: "35%", size: "1.5px", opacity: 0.24, delay: "740ms", travel: "-30px" },
-  { left: "86%", top: "42%", size: "2px", opacity: 0.32, delay: "180ms", travel: "-24px" },
-  { left: "14%", top: "68%", size: "1.5px", opacity: 0.24, delay: "1120ms", travel: "-28px" },
-  { left: "72%", top: "72%", size: "2px", opacity: 0.34, delay: "520ms", travel: "-32px" },
-  { left: "42%", top: "20%", size: "1px", opacity: 0.22, delay: "920ms", travel: "-22px" },
-  { left: "58%", top: "83%", size: "1.5px", opacity: 0.24, delay: "120ms", travel: "-26px" },
-  { left: "30%", top: "14%", size: "1px", opacity: 0.2, delay: "1320ms", travel: "-20px" },
-  { left: "66%", top: "31%", size: "1.5px", opacity: 0.26, delay: "860ms", travel: "-25px" },
-  { left: "18%", top: "48%", size: "1px", opacity: 0.22, delay: "1480ms", travel: "-18px" },
-  { left: "82%", top: "62%", size: "1px", opacity: 0.24, delay: "640ms", travel: "-23px" },
+  { left: "12%", top: "20%", size: "2px", opacity: 0.34, delay: "0ms", travelX: "10px", travelY: "-22px" },
+  { left: "78%", top: "17%", size: "1.5px", opacity: 0.26, delay: "180ms", travelX: "-10px", travelY: "-24px" },
+  { left: "24%", top: "36%", size: "1px", opacity: 0.22, delay: "340ms", travelX: "9px", travelY: "-18px" },
+  { left: "86%", top: "43%", size: "2px", opacity: 0.3, delay: "120ms", travelX: "-9px", travelY: "-22px" },
+  { left: "14%", top: "68%", size: "1.5px", opacity: 0.24, delay: "620ms", travelX: "8px", travelY: "-26px" },
+  { left: "72%", top: "74%", size: "2px", opacity: 0.32, delay: "420ms", travelX: "-11px", travelY: "-28px" },
+  { left: "43%", top: "18%", size: "1px", opacity: 0.2, delay: "760ms", travelX: "7px", travelY: "-18px" },
+  { left: "58%", top: "86%", size: "1.5px", opacity: 0.24, delay: "260ms", travelX: "-8px", travelY: "-23px" },
+  { left: "30%", top: "12%", size: "1px", opacity: 0.2, delay: "900ms", travelX: "6px", travelY: "-16px" },
+  { left: "66%", top: "31%", size: "1.5px", opacity: 0.26, delay: "560ms", travelX: "-7px", travelY: "-20px" },
+  { left: "18%", top: "49%", size: "1px", opacity: 0.22, delay: "1040ms", travelX: "8px", travelY: "-18px" },
+  { left: "84%", top: "62%", size: "1px", opacity: 0.24, delay: "680ms", travelX: "-7px", travelY: "-19px" },
 ] as const;
 
 const DESKTOP_INTRO_PARTICLES = [
@@ -898,12 +898,9 @@ function WebsiteIntro() {
     >
       <style dangerouslySetInnerHTML={{ __html: INTRO_CRITICAL_CSS }} />
       <div className="site-mobile-intro-stage relative flex h-full w-full items-center justify-center overflow-hidden md:hidden">
-        <div className="site-mobile-intro-cosmos absolute inset-0" />
-        <div className="site-mobile-intro-stars site-mobile-intro-stars--far absolute inset-0" />
-        <div className="site-mobile-intro-stars site-mobile-intro-stars--near absolute inset-0" />
+        <div className="site-mobile-intro-field absolute inset-0" />
         <div className="site-mobile-intro-rays absolute inset-0" />
-        <div className="site-mobile-intro-glow absolute inset-0" />
-        <div className="site-mobile-intro-dust absolute inset-0">
+        <div className="site-mobile-intro-particles absolute inset-0">
           {MOBILE_INTRO_PARTICLES.map((particle, index) => (
             <span
               key={index}
@@ -915,26 +912,23 @@ function WebsiteIntro() {
                 height: particle.size,
                 "--particle-opacity": particle.opacity,
                 animationDelay: particle.delay,
-                "--particle-travel": particle.travel,
+                "--particle-travel-x": particle.travelX,
+                "--particle-travel-y": particle.travelY,
               } as CSSProperties}
             />
           ))}
         </div>
+        <div className="site-mobile-intro-sweep absolute inset-y-0" />
         <div className="site-mobile-intro-vignette absolute inset-0" />
-        <div className="site-mobile-intro-logo-wrap relative z-20 h-auto w-[min(70vw,260px)] max-w-[260px]">
-          <img
-            src={LOGO}
-            alt=""
-            className="site-mobile-intro-logo relative z-10 h-auto w-full select-none object-contain"
-            draggable={false}
-          />
-          <span
-            className="site-mobile-intro-logo-shimmer absolute inset-0 z-20 pointer-events-none"
-            style={{
-              WebkitMaskImage: `url(${LOGO})`,
-              maskImage: `url(${LOGO})`,
-            }}
-          />
+        <div className="site-mobile-intro-content relative z-20 flex h-full w-full items-center justify-center px-8 text-center">
+          <div className="site-mobile-intro-logo-wrap">
+            <img
+              src={LOGO}
+              alt=""
+              className="site-mobile-intro-logo h-auto w-full select-none object-contain"
+              draggable={false}
+            />
+          </div>
         </div>
       </div>
       <div className="site-desktop-intro-stage hidden h-full w-full items-center justify-center overflow-hidden lg:flex">
