@@ -794,7 +794,6 @@ function WebsiteIntro() {
 
     video?.addEventListener("ended", finishIntro);
     video?.addEventListener("error", finishIntro);
-    video?.load();
 
     if (isDesktopIntro) {
       video?.addEventListener("canplaythrough", handleDesktopReady);
