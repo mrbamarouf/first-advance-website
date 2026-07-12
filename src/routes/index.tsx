@@ -830,7 +830,7 @@ function WebsiteIntro() {
       </div>
       <video
         ref={videoRef}
-        className="hidden h-full w-full object-contain md:block"
+        className="site-intro-video hidden md:block"
         autoPlay
         muted
         playsInline

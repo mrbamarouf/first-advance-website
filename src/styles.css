@@ -180,6 +180,16 @@
   }
 }
 
+.site-intro-video {
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+  object-position: center center;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  will-change: transform;
+}
+
 .site-mobile-intro-stage {
   background:
     radial-gradient(circle at 50% 48%, oklch(0.22 0.04 168 / 0.94) 0%, transparent 44%),
@@ -295,6 +305,19 @@
 @media (max-width: 767px) {
   .container-x {
     padding-inline: 1.25rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .site-intro-video {
+    position: fixed;
+    inset: 0;
+    z-index: 121;
+    height: 100vh;
+    width: 100vw;
+    object-fit: cover;
+    object-position: center center;
+    overflow: hidden;
   }
 }
 
