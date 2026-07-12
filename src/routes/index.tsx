@@ -846,7 +846,14 @@ function WebsiteIntro() {
 
     const handleDesktopReady = () => {
       if (!video) return;
-      if (video.readyState >= HTMLMediaElement.HAVE_ENOUGH_DATA) {
+      const buffer = video.buffered;
+      const bufferedEnd = buffer.length > 0 ? buffer.end(buffer.length - 1) : 0;
+      const bufferedAhead = Math.max(0, bufferedEnd - video.currentTime);
+      const hasPlayableLead =
+        video.readyState >= HTMLMediaElement.HAVE_FUTURE_DATA &&
+        (bufferedAhead >= 2.4 || (Number.isFinite(video.duration) && bufferedEnd >= video.duration));
+
+      if (video.readyState >= HTMLMediaElement.HAVE_ENOUGH_DATA || hasPlayableLead) {
         startPlayback();
       }
     };
@@ -855,6 +862,8 @@ function WebsiteIntro() {
     video?.addEventListener("error", finishIntro);
 
     if (isDesktopIntro) {
+      video?.addEventListener("loadeddata", handleDesktopReady);
+      video?.addEventListener("canplay", handleDesktopReady);
       video?.addEventListener("canplaythrough", handleDesktopReady);
       video?.addEventListener("progress", handleDesktopReady);
       handleDesktopReady();
@@ -867,6 +876,8 @@ function WebsiteIntro() {
       if (exitTimer) window.clearTimeout(exitTimer);
       video?.removeEventListener("ended", finishIntro);
       video?.removeEventListener("error", finishIntro);
+      video?.removeEventListener("loadeddata", handleDesktopReady);
+      video?.removeEventListener("canplay", handleDesktopReady);
       video?.removeEventListener("canplaythrough", handleDesktopReady);
       video?.removeEventListener("progress", handleDesktopReady);
       document.documentElement.style.overflow = previousOverflow;
