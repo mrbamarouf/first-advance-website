@@ -204,6 +204,10 @@
       oklch(0.035 0.008 168) 100%
     );
   contain: layout paint;
+  animation: mobile-intro-scene 5.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+  isolation: isolate;
+  transform-origin: center;
+  will-change: opacity, transform;
 }
 
 .site-mobile-intro-stage::before,
@@ -216,27 +220,94 @@
 
 .site-mobile-intro-stage::before {
   background:
+    radial-gradient(ellipse at 50% 48%, oklch(0.74 0.12 78 / 0.16), transparent 22%),
     radial-gradient(circle at 18% 26%, oklch(0.72 0.1 78 / 0.08), transparent 24%),
     radial-gradient(circle at 82% 72%, oklch(0.72 0.1 78 / 0.06), transparent 26%);
+  animation: mobile-intro-depth 5.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+  mix-blend-mode: screen;
+  transform-origin: center;
+  will-change: opacity, transform;
 }
 
 .site-mobile-intro-stage::after {
-  background: linear-gradient(180deg, oklch(0 0 0 / 0.18), transparent 36%, oklch(0 0 0 / 0.28));
+  background:
+    radial-gradient(ellipse at 50% 49%, transparent 34%, oklch(0 0 0 / 0.1) 62%, oklch(0 0 0 / 0.42) 100%),
+    linear-gradient(180deg, oklch(0 0 0 / 0.2), transparent 36%, oklch(0 0 0 / 0.32));
+  animation: mobile-intro-vignette 5.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+  will-change: opacity, transform;
+}
+
+.site-mobile-intro-depth {
+  z-index: 1;
+  background:
+    radial-gradient(circle at 36% 24%, oklch(0.72 0.1 78 / 0.09) 0 0.09rem, transparent 0.12rem),
+    radial-gradient(circle at 66% 30%, oklch(0.72 0.1 78 / 0.07) 0 0.07rem, transparent 0.1rem),
+    radial-gradient(circle at 28% 68%, oklch(0.72 0.1 78 / 0.08) 0 0.08rem, transparent 0.11rem),
+    radial-gradient(circle at 74% 72%, oklch(0.72 0.1 78 / 0.06) 0 0.07rem, transparent 0.1rem),
+    radial-gradient(circle at 48% 82%, oklch(0.72 0.1 78 / 0.05) 0 0.06rem, transparent 0.1rem);
+  filter: blur(0.2px);
+  opacity: 0;
+  transform: translate3d(0, 10px, 0) scale(1.005);
+  animation: mobile-intro-dustfield 5.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+  will-change: opacity, transform;
+}
+
+.site-mobile-intro-rays {
+  z-index: 2;
+  background:
+    linear-gradient(102deg, transparent 8%, oklch(0.74 0.11 78 / 0.06) 34%, transparent 58%),
+    linear-gradient(74deg, transparent 24%, oklch(0.74 0.11 78 / 0.05) 50%, transparent 74%),
+    radial-gradient(ellipse at 50% 50%, oklch(0.72 0.1 78 / 0.09), transparent 34%);
+  filter: blur(18px);
+  mix-blend-mode: screen;
+  opacity: 0;
+  transform: translate3d(-2.4%, 1.6%, 0) scale(1.01);
+  animation: mobile-intro-rays 5.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+  will-change: opacity, transform;
 }
 
 .site-mobile-intro-ambient {
-  animation: mobile-intro-glow 5s cubic-bezier(0.22, 1, 0.36, 1) both;
+  z-index: 3;
+  animation: mobile-intro-glow 5.4s cubic-bezier(0.22, 1, 0.36, 1) both;
   will-change: opacity, transform, filter;
+}
+
+.site-mobile-intro-logo-wrap {
+  transform-origin: center;
+  transform: translateZ(0);
 }
 
 .site-mobile-intro-logo {
   filter: drop-shadow(0 18px 42px oklch(0 0 0 / 0.35));
   transform-origin: center;
-  animation: mobile-intro-logo 5s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: mobile-intro-logo 5.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+  will-change: opacity, transform;
+}
+
+.site-mobile-intro-logo-shimmer {
+  background: linear-gradient(
+    108deg,
+    transparent 0%,
+    transparent 38%,
+    oklch(0.9 0.11 82 / 0.02) 44%,
+    oklch(0.92 0.12 82 / 0.3) 48%,
+    oklch(0.76 0.1 78 / 0.08) 52%,
+    transparent 60%,
+    transparent 100%
+  );
+  clip-path: inset(0 0 28% 52%);
+  mask-repeat: no-repeat;
+  mask-size: contain;
+  mask-position: center;
+  mix-blend-mode: screen;
+  opacity: 0;
+  transform: translate3d(-24%, 0, 0);
+  animation: mobile-intro-logo-shimmer 5.4s cubic-bezier(0.16, 1, 0.3, 1) both;
   will-change: opacity, transform;
 }
 
 .site-mobile-intro-particle {
+  z-index: 4;
   box-shadow: 0 0 14px oklch(0.72 0.1 78 / 0.5);
   animation-name: mobile-intro-particle;
   animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
@@ -244,10 +315,100 @@
   will-change: opacity, transform;
 }
 
+@keyframes mobile-intro-scene {
+  0% {
+    opacity: 0;
+    transform: scale(1);
+  }
+  18% {
+    opacity: 1;
+  }
+  86% {
+    opacity: 1;
+    transform: scale(1.018);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1.018);
+  }
+}
+
+@keyframes mobile-intro-depth {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  26% {
+    opacity: 0.85;
+  }
+  78% {
+    opacity: 0.72;
+    transform: translate3d(-1.2%, -0.8%, 0) scale(1.018);
+  }
+  100% {
+    opacity: 0.18;
+    transform: translate3d(-1.6%, -1%, 0) scale(1.018);
+  }
+}
+
+@keyframes mobile-intro-rays {
+  0% {
+    opacity: 0;
+    transform: translate3d(-3%, 2%, 0) scale(1.01);
+  }
+  24% {
+    opacity: 0.5;
+  }
+  64% {
+    opacity: 0.34;
+    transform: translate3d(2%, -1.2%, 0) scale(1.022);
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(3%, -2%, 0) scale(1.024);
+  }
+}
+
+@keyframes mobile-intro-dustfield {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 12px, 0) scale(1);
+  }
+  22% {
+    opacity: 0.9;
+  }
+  78% {
+    opacity: 0.72;
+    transform: translate3d(0, -9px, 0) scale(1.012);
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(0, -14px, 0) scale(1.014);
+  }
+}
+
+@keyframes mobile-intro-vignette {
+  0% {
+    opacity: 0.98;
+    transform: scale(1);
+  }
+  22% {
+    opacity: 0.74;
+  }
+  74% {
+    opacity: 0.88;
+    transform: scale(1.012);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1.016);
+  }
+}
+
 @keyframes mobile-intro-logo {
   0% {
     opacity: 0;
-    transform: scale(0.96);
+    transform: scale(0.985);
   }
   20% {
     opacity: 1;
@@ -255,11 +416,30 @@
   }
   80% {
     opacity: 1;
-    transform: scale(1);
+    transform: scale(1.006);
   }
   100% {
     opacity: 0;
-    transform: scale(1);
+    transform: scale(1.006);
+  }
+}
+
+@keyframes mobile-intro-logo-shimmer {
+  0%,
+  34% {
+    opacity: 0;
+    transform: translate3d(-24%, 0, 0);
+  }
+  48% {
+    opacity: 0.62;
+  }
+  62% {
+    opacity: 0;
+    transform: translate3d(22%, 0, 0);
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(22%, 0, 0);
   }
 }
 
@@ -270,13 +450,18 @@
     filter: blur(32px);
   }
   22% {
-    opacity: 0.85;
-    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.72;
+    transform: translate(-50%, -50%) scale(0.98);
     filter: blur(42px);
   }
-  82% {
-    opacity: 0.8;
+  48% {
+    opacity: 0.9;
     transform: translate(-50%, -50%) scale(1.04);
+    filter: blur(46px);
+  }
+  82% {
+    opacity: 0.68;
+    transform: translate(-50%, -50%) scale(1.08);
     filter: blur(48px);
   }
   100% {

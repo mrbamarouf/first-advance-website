@@ -908,6 +908,8 @@ function WebsiteIntro() {
     >
       <style dangerouslySetInnerHTML={{ __html: INTRO_CRITICAL_CSS }} />
       <div className="site-mobile-intro-stage relative flex h-full w-full items-center justify-center overflow-hidden md:hidden">
+        <div className="site-mobile-intro-depth absolute inset-0" />
+        <div className="site-mobile-intro-rays absolute inset-0" />
         <div className="site-mobile-intro-ambient absolute left-1/2 top-1/2 h-[40vmin] w-[40vmin] -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent-gold/25 blur-3xl" />
         <div className="absolute inset-0">
           {MOBILE_INTRO_PARTICLES.map((particle, index) => (
@@ -926,12 +928,21 @@ function WebsiteIntro() {
             />
           ))}
         </div>
-        <img
-          src={LOGO}
-          alt=""
-          className="site-mobile-intro-logo relative z-10 h-auto w-[min(68vw,250px)] max-w-[250px] select-none object-contain"
-          draggable={false}
-        />
+        <div className="site-mobile-intro-logo-wrap relative z-10 h-auto w-[min(68vw,250px)] max-w-[250px]">
+          <img
+            src={LOGO}
+            alt=""
+            className="site-mobile-intro-logo relative z-10 h-auto w-full select-none object-contain"
+            draggable={false}
+          />
+          <span
+            className="site-mobile-intro-logo-shimmer absolute inset-0 z-20 pointer-events-none"
+            style={{
+              WebkitMaskImage: `url(${LOGO})`,
+              maskImage: `url(${LOGO})`,
+            }}
+          />
+        </div>
       </div>
       <video
         ref={videoRef}
