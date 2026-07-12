@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 import {
   ArrowUpLeft,
   ArrowUpRight,
@@ -52,8 +52,8 @@ const DESKTOP_INTRO_VIDEO = "/media/first-advance-desktop-intro.mp4";
 const INTRO_EXIT_MS = 750;
 const INTRO_FALLBACK_MS = 9000;
 const DESKTOP_INTRO_FALLBACK_MS = 20000;
-const MOBILE_INTRO_PLAY_MS = 5000;
-const MOBILE_INTRO_FALLBACK_MS = 6500;
+const MOBILE_INTRO_PLAY_MS = 5200;
+const MOBILE_INTRO_FALLBACK_MS = 7000;
 const MOBILE_INTRO_QUERY = "(max-width: 767px)";
 const DESKTOP_INTRO_QUERY = "(min-width: 1024px)";
 const INTRO_CRITICAL_CSS = `
@@ -142,14 +142,18 @@ type IntroState = "active" | "exiting" | "done";
 let introHasPlayedThisPageLoad = false;
 
 const MOBILE_INTRO_PARTICLES = [
-  { left: "12%", top: "18%", size: "3px", opacity: 0.34, delay: "0ms", duration: "5.6s" },
-  { left: "78%", top: "15%", size: "2px", opacity: 0.28, delay: "420ms", duration: "6.2s" },
-  { left: "20%", top: "34%", size: "2px", opacity: 0.22, delay: "820ms", duration: "5.8s" },
-  { left: "86%", top: "40%", size: "3px", opacity: 0.26, delay: "260ms", duration: "6s" },
-  { left: "16%", top: "67%", size: "2px", opacity: 0.22, delay: "1180ms", duration: "5.4s" },
-  { left: "72%", top: "70%", size: "2px", opacity: 0.3, delay: "620ms", duration: "6.4s" },
-  { left: "42%", top: "22%", size: "1.5px", opacity: 0.22, delay: "980ms", duration: "5.9s" },
-  { left: "58%", top: "82%", size: "2px", opacity: 0.2, delay: "140ms", duration: "6.1s" },
+  { left: "9%", top: "22%", size: "2px", opacity: 0.36, delay: "0ms", travel: "-34px" },
+  { left: "78%", top: "18%", size: "1.5px", opacity: 0.28, delay: "360ms", travel: "-26px" },
+  { left: "22%", top: "35%", size: "1.5px", opacity: 0.24, delay: "740ms", travel: "-30px" },
+  { left: "86%", top: "42%", size: "2px", opacity: 0.32, delay: "180ms", travel: "-24px" },
+  { left: "14%", top: "68%", size: "1.5px", opacity: 0.24, delay: "1120ms", travel: "-28px" },
+  { left: "72%", top: "72%", size: "2px", opacity: 0.34, delay: "520ms", travel: "-32px" },
+  { left: "42%", top: "20%", size: "1px", opacity: 0.22, delay: "920ms", travel: "-22px" },
+  { left: "58%", top: "83%", size: "1.5px", opacity: 0.24, delay: "120ms", travel: "-26px" },
+  { left: "30%", top: "14%", size: "1px", opacity: 0.2, delay: "1320ms", travel: "-20px" },
+  { left: "66%", top: "31%", size: "1.5px", opacity: 0.26, delay: "860ms", travel: "-25px" },
+  { left: "18%", top: "48%", size: "1px", opacity: 0.22, delay: "1480ms", travel: "-18px" },
+  { left: "82%", top: "62%", size: "1px", opacity: 0.24, delay: "640ms", travel: "-23px" },
 ] as const;
 
 const COPY = {
@@ -930,10 +934,12 @@ function WebsiteIntro() {
     >
       <style dangerouslySetInnerHTML={{ __html: INTRO_CRITICAL_CSS }} />
       <div className="site-mobile-intro-stage relative flex h-full w-full items-center justify-center overflow-hidden md:hidden">
-        <div className="site-mobile-intro-depth absolute inset-0" />
+        <div className="site-mobile-intro-cosmos absolute inset-0" />
+        <div className="site-mobile-intro-stars site-mobile-intro-stars--far absolute inset-0" />
+        <div className="site-mobile-intro-stars site-mobile-intro-stars--near absolute inset-0" />
         <div className="site-mobile-intro-rays absolute inset-0" />
-        <div className="site-mobile-intro-ambient absolute left-1/2 top-1/2 h-[40vmin] w-[40vmin] -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent-gold/25 blur-3xl" />
-        <div className="absolute inset-0">
+        <div className="site-mobile-intro-glow absolute inset-0" />
+        <div className="site-mobile-intro-dust absolute inset-0">
           {MOBILE_INTRO_PARTICLES.map((particle, index) => (
             <span
               key={index}
@@ -943,14 +949,15 @@ function WebsiteIntro() {
                 top: particle.top,
                 width: particle.size,
                 height: particle.size,
-                opacity: particle.opacity,
+                "--particle-opacity": particle.opacity,
                 animationDelay: particle.delay,
-                animationDuration: particle.duration,
-              }}
+                "--particle-travel": particle.travel,
+              } as CSSProperties}
             />
           ))}
         </div>
-        <div className="site-mobile-intro-logo-wrap relative z-10 h-auto w-[min(68vw,250px)] max-w-[250px]">
+        <div className="site-mobile-intro-vignette absolute inset-0" />
+        <div className="site-mobile-intro-logo-wrap relative z-20 h-auto w-[min(70vw,260px)] max-w-[260px]">
           <img
             src={LOGO}
             alt=""
