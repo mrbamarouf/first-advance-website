@@ -872,6 +872,8 @@ function WebsiteIntro() {
       video?.addEventListener("canplaythrough", handleDesktopReady);
       video?.addEventListener("progress", handleDesktopReady);
       desktopReadyPoller = window.setInterval(handleDesktopReady, 150);
+      video.preload = "auto";
+      video.load();
       handleDesktopReady();
     } else {
       startPlayback();
@@ -940,7 +942,7 @@ function WebsiteIntro() {
         }`}
         muted
         playsInline
-        preload="auto"
+        preload="metadata"
         disablePictureInPicture
       >
         <source src={DESKTOP_INTRO_VIDEO} type="video/mp4" media="(min-width: 1024px)" />
