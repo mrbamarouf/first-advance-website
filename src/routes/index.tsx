@@ -56,6 +56,65 @@ const MOBILE_INTRO_PLAY_MS = 5000;
 const MOBILE_INTRO_FALLBACK_MS = 6500;
 const MOBILE_INTRO_QUERY = "(max-width: 767px)";
 const DESKTOP_INTRO_QUERY = "(min-width: 1024px)";
+const INTRO_CRITICAL_CSS = `
+  .site-intro-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 120;
+    display: flex;
+    height: 100svh;
+    width: 100vw;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: oklch(0.12 0.028 168);
+  }
+
+  .site-intro-video {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+    object-position: center center;
+    background:
+      radial-gradient(circle at 50% 48%, oklch(0.18 0.036 168 / 0.94) 0%, transparent 44%),
+      linear-gradient(135deg, oklch(0.055 0.014 168) 0%, oklch(0.13 0.032 168) 52%, oklch(0.03 0.006 168) 100%);
+  }
+
+  @media (max-width: 767px) {
+    .site-intro-video {
+      display: none !important;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .site-mobile-intro-stage {
+      display: none !important;
+    }
+
+    .site-intro-video {
+      display: block;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .site-intro-video {
+      position: fixed;
+      inset: 0;
+      z-index: 121;
+      height: 100vh;
+      width: 100vw;
+      opacity: 0;
+      object-fit: contain;
+      object-position: center center;
+      overflow: hidden;
+      transition: opacity 220ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .site-intro-video--ready {
+      opacity: 1;
+    }
+  }
+`;
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -829,6 +888,7 @@ function WebsiteIntro() {
         introState === "exiting" ? "opacity-0 pointer-events-none" : "opacity-100"
       }`}
     >
+      <style dangerouslySetInnerHTML={{ __html: INTRO_CRITICAL_CSS }} />
       <div className="site-mobile-intro-stage relative flex h-full w-full items-center justify-center overflow-hidden md:hidden">
         <div className="site-mobile-intro-ambient absolute left-1/2 top-1/2 h-[40vmin] w-[40vmin] -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent-gold/25 blur-3xl" />
         <div className="absolute inset-0">
