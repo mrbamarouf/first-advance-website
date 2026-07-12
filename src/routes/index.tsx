@@ -50,6 +50,9 @@ const PAGE_META = {
 const INTRO_VIDEO = "/media/first-advance-intro.mp4";
 const INTRO_EXIT_MS = 750;
 const INTRO_FALLBACK_MS = 9000;
+const MOBILE_INTRO_PLAY_MS = 5000;
+const MOBILE_INTRO_FALLBACK_MS = 6500;
+const MOBILE_INTRO_QUERY = "(max-width: 767px)";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -77,6 +80,17 @@ const EMAIL = "info@firstreal.com.sa";
 type Language = "ar" | "en";
 type IntroState = "active" | "exiting" | "done";
 let introHasPlayedThisPageLoad = false;
+
+const MOBILE_INTRO_PARTICLES = [
+  { left: "12%", top: "18%", size: "3px", opacity: 0.34, delay: "0ms", duration: "5.6s" },
+  { left: "78%", top: "15%", size: "2px", opacity: 0.28, delay: "420ms", duration: "6.2s" },
+  { left: "20%", top: "34%", size: "2px", opacity: 0.22, delay: "820ms", duration: "5.8s" },
+  { left: "86%", top: "40%", size: "3px", opacity: 0.26, delay: "260ms", duration: "6s" },
+  { left: "16%", top: "67%", size: "2px", opacity: 0.22, delay: "1180ms", duration: "5.4s" },
+  { left: "72%", top: "70%", size: "2px", opacity: 0.3, delay: "620ms", duration: "6.4s" },
+  { left: "42%", top: "22%", size: "1.5px", opacity: 0.22, delay: "980ms", duration: "5.9s" },
+  { left: "58%", top: "82%", size: "2px", opacity: 0.2, delay: "140ms", duration: "6.1s" },
+] as const;
 
 const COPY = {
   ar: {
@@ -706,6 +720,7 @@ function WebsiteIntro() {
 
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const isMobileIntro = window.matchMedia(MOBILE_INTRO_QUERY).matches;
 
     if (introHasPlayedThisPageLoad || prefersReducedMotion) {
       setIntroState("done");
@@ -730,7 +745,21 @@ function WebsiteIntro() {
       }, INTRO_EXIT_MS);
     };
 
-    const fallbackTimer = window.setTimeout(finishIntro, INTRO_FALLBACK_MS);
+    const fallbackTimer = window.setTimeout(
+      finishIntro,
+      isMobileIntro ? MOBILE_INTRO_FALLBACK_MS : INTRO_FALLBACK_MS,
+    );
+
+    if (isMobileIntro) {
+      const mobileIntroTimer = window.setTimeout(finishIntro, MOBILE_INTRO_PLAY_MS);
+
+      return () => {
+        window.clearTimeout(fallbackTimer);
+        window.clearTimeout(mobileIntroTimer);
+        if (exitTimer) window.clearTimeout(exitTimer);
+        document.documentElement.style.overflow = previousOverflow;
+      };
+    }
 
     video?.addEventListener("ended", finishIntro);
     video?.addEventListener("error", finishIntro);
@@ -764,9 +793,35 @@ function WebsiteIntro() {
         introState === "exiting" ? "opacity-0 pointer-events-none" : "opacity-100"
       }`}
     >
+      <div className="site-mobile-intro-stage relative flex h-full w-full items-center justify-center overflow-hidden md:hidden">
+        <div className="site-mobile-intro-ambient absolute left-1/2 top-1/2 h-[40vmin] w-[40vmin] -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent-gold/25 blur-3xl" />
+        <div className="absolute inset-0">
+          {MOBILE_INTRO_PARTICLES.map((particle, index) => (
+            <span
+              key={index}
+              className="site-mobile-intro-particle absolute rounded-full bg-accent-gold"
+              style={{
+                left: particle.left,
+                top: particle.top,
+                width: particle.size,
+                height: particle.size,
+                opacity: particle.opacity,
+                animationDelay: particle.delay,
+                animationDuration: particle.duration,
+              }}
+            />
+          ))}
+        </div>
+        <img
+          src={LOGO}
+          alt=""
+          className="site-mobile-intro-logo relative z-10 h-auto w-[min(68vw,250px)] max-w-[250px] select-none object-contain"
+          draggable={false}
+        />
+      </div>
       <video
         ref={videoRef}
-        className="h-full w-full object-contain lg:object-cover"
+        className="hidden h-full w-full object-contain md:block lg:object-cover"
         autoPlay
         muted
         playsInline
