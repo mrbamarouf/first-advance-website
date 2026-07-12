@@ -720,6 +720,7 @@ function Index() {
 function WebsiteIntro() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [introState, setIntroState] = useState<IntroState>("active");
+  const [isDesktopVideoReady, setIsDesktopVideoReady] = useState(false);
 
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -736,6 +737,7 @@ function WebsiteIntro() {
     const video = videoRef.current;
     const previousOverflow = document.documentElement.style.overflow;
     let hasFinished = false;
+    let hasStarted = false;
     let exitTimer: number | undefined;
 
     document.documentElement.style.overflow = "hidden";
@@ -769,20 +771,46 @@ function WebsiteIntro() {
       };
     }
 
+    const startPlayback = () => {
+      if (!video || hasStarted || hasFinished) return;
+      hasStarted = true;
+
+      if (isDesktopIntro) {
+        setIsDesktopVideoReady(true);
+      }
+
+      const playPromise = video.play();
+      playPromise.catch(() => {
+        window.setTimeout(finishIntro, 300);
+      });
+    };
+
+    const handleDesktopReady = () => {
+      if (!video) return;
+      if (video.readyState >= HTMLMediaElement.HAVE_ENOUGH_DATA) {
+        startPlayback();
+      }
+    };
+
     video?.addEventListener("ended", finishIntro);
     video?.addEventListener("error", finishIntro);
     video?.load();
 
-    const playPromise = video?.play();
-    playPromise?.catch(() => {
-      window.setTimeout(finishIntro, 300);
-    });
+    if (isDesktopIntro) {
+      video?.addEventListener("canplaythrough", handleDesktopReady);
+      video?.addEventListener("progress", handleDesktopReady);
+      handleDesktopReady();
+    } else {
+      startPlayback();
+    }
 
     return () => {
       window.clearTimeout(fallbackTimer);
       if (exitTimer) window.clearTimeout(exitTimer);
       video?.removeEventListener("ended", finishIntro);
       video?.removeEventListener("error", finishIntro);
+      video?.removeEventListener("canplaythrough", handleDesktopReady);
+      video?.removeEventListener("progress", handleDesktopReady);
       document.documentElement.style.overflow = previousOverflow;
     };
   }, []);
@@ -830,8 +858,9 @@ function WebsiteIntro() {
       </div>
       <video
         ref={videoRef}
-        className="site-intro-video hidden md:block"
-        autoPlay
+        className={`site-intro-video hidden md:block ${
+          isDesktopVideoReady ? "site-intro-video--ready" : ""
+        }`}
         muted
         playsInline
         preload="auto"
