@@ -764,6 +764,7 @@ function WebsiteIntro() {
 
     video?.addEventListener("ended", finishIntro);
     video?.addEventListener("error", finishIntro);
+    video?.load();
 
     const playPromise = video?.play();
     playPromise?.catch(() => {
