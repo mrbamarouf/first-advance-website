@@ -202,7 +202,7 @@ const COPY = {
       ledger: [
         { k: "01", t: "القطاع العقاري", d: "الوساطة والتسويق العقاري." },
         { k: "02", t: "القطاع التشغيلي", d: "إدارة وتشغيل المشاريع." },
-        { k: "03", t: "قطاع خدمات الأعمال والإدارة", d: "الاستشارات الإدارية." },
+        { k: "03", t: "قطاع خدمات الأعمال والإدارة", d: "تطوير الأعمال." },
       ],
     },
     intro: {
@@ -266,7 +266,6 @@ const COPY = {
           title: "قطاع خدمات الأعمال والإدارة",
           desc: "",
           items: [
-            "الاستشارات الإدارية.",
             "تطوير الأعمال.",
             "إعداد السياسات والإجراءات.",
             "الهيكلة التنظيمية.",
@@ -473,7 +472,7 @@ const COPY = {
         {
           k: "03",
           t: "Business M.S.S",
-          d: "Management consulting.",
+          d: "Business development.",
         },
       ],
     },
@@ -538,7 +537,6 @@ const COPY = {
           title: "Business M.S.S",
           desc: "",
           items: [
-            "Management consulting.",
             "Business development.",
             "Policy and procedure development.",
             "Organizational structuring.",
